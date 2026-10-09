@@ -15,7 +15,7 @@
         "http://localhost:3250/accessibilite",
         "http://localhost:3250/plan-du-site"
       ],
-      "numberOfRuns": 1,
+      "numberOfRuns": 3,
       "settings": {
         "chromeFlags": "--headless=new --no-sandbox"
       }
