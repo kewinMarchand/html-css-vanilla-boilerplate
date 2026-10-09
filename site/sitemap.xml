@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.example.com/</loc></url>
+  <url><loc>https://www.example.com/catalogue</loc></url>
+  <url><loc>https://www.example.com/taches</loc></url>
+  <url><loc>https://www.example.com/contact</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-interieur</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-interieur/feuillages</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-interieur/feuillages/monstera</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-interieur/feuillages/fougeres</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/anthurium</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/strelitzia</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-exterieur</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-exterieur/palmiers</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-exterieur/arbustes-a-fleurs</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-exterieur/arbustes-a-fleurs/heliconia</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-exterieur/arbustes-a-fleurs/calliandra</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-aquatiques</loc></url>
+  <url><loc>https://www.example.com/catalogue/plantes-aquatiques/nenuphars</loc></url>
+  <url><loc>https://www.example.com/mentions-legales</loc></url>
+  <url><loc>https://www.example.com/donnees-personnelles</loc></url>
+  <url><loc>https://www.example.com/accessibilite</loc></url>
+  <url><loc>https://www.example.com/plan-du-site</loc></url>
+</urlset>

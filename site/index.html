@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTML CSS Vanilla Boilerplate, socle web natif sans build</title>
+    <meta
+      name="description"
+      content="Point de départ HTML, CSS et JavaScript natifs : pages statiques accessibles, carrousel au glisser, formulaire validé et tests automatisés."
+    />
+    <link rel="canonical" href="https://www.example.com/" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HTML CSS Vanilla Boilerplate" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="HTML CSS Vanilla Boilerplate, socle web natif sans build" />
+    <meta
+      property="og:description"
+      content="Point de départ HTML, CSS et JavaScript natifs : pages statiques accessibles, carrousel au glisser, formulaire validé et tests automatisés."
+    />
+    <meta property="og:url" content="https://www.example.com/" />
+    <meta property="og:image" content="https://www.example.com/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="HTML CSS Vanilla Boilerplate" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HTML CSS Vanilla Boilerplate, socle web natif sans build" />
+    <meta
+      name="twitter:description"
+      content="Point de départ HTML, CSS et JavaScript natifs : pages statiques accessibles, carrousel au glisser, formulaire validé et tests automatisés."
+    />
+    <meta name="twitter:image" content="https://www.example.com/images/og-image.jpg" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script>
+      document.documentElement.dataset.js = ''
+      try {
+        if (localStorage.getItem('a11y-mode') === 'enhanced') {
+          document.documentElement.dataset.a11yMode = 'enhanced'
+        }
+      } catch {}
+    </script>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script type="module" src="/js/core/a11yModeToggle.js"></script>
+    <script type="module" src="/js/core/categoryMenu.js"></script>
+    <script type="module" src="/js/features/carousel/carousel.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "HTML CSS Vanilla Boilerplate",
+            "url": "https://www.example.com/",
+            "inLanguage": "fr-FR"
+          },
+          {
+            "@type": "Organization",
+            "name": "Exemple SAS",
+            "url": "https://www.example.com/",
+            "email": "contact@example.com",
+            "logo": "https://www.example.com/icons/icon-512.png"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <header class="site-header" data-site-header>
+      <div class="container site-header-inner">
+        <a class="logo" href="/" data-testid="layout-logo" aria-current="page">
+          <img src="/logo-mark.svg" alt="" width="32" height="32" />
+          <span>HTML CSS Vanilla Boilerplate</span>
+        </a>
+        <nav class="main-nav" aria-label="Navigation principale">
+          <ul class="main-nav-list">
+            <li><a href="/" aria-current="page">Accueil</a></li>
+            <li class="category-menu" data-category-menu>
+              <a class="category-menu-fallback" href="/catalogue">Catalogue</a>
+              <button
+                type="button"
+                class="category-menu-toggle"
+                aria-expanded="false"
+                aria-controls="category-menu"
+                data-category-menu-toggle
+                data-testid="layout-category-menu-toggle"
+              >
+                Catalogue
+                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                  <use href="/icons/sprite.svg#chevron-down"></use>
+                </svg>
+              </button>
+              <div
+                class="category-panel"
+                id="category-menu"
+                data-category-panel
+                data-testid="layout-category-menu"
+                hidden
+              >
+                <a class="category-panel-all" href="/catalogue">Tout le catalogue</a>
+                <div class="category-columns">
+                  <ul class="category-column">
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-interieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'intérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/feuillages"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Feuillages<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/monstera"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Monstera</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/fougeres"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Fougères</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/plantes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Plantes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Anthurium</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/strelitzia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Strelitzia</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-exterieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'extérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-exterieur/palmiers"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Palmiers</a
+                          >
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-exterieur/arbustes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Arbustes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/heliconia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Heliconia</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/calliandra"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Calliandra</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-aquatiques"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes aquatiques<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-aquatiques/nenuphars"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Nénuphars</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li><a href="/taches">Tâches</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button
+          type="button"
+          class="button button-secondary mobile-menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-mobile-menu-toggle
+          data-testid="layout-mobile-menu-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#menu"></use>
+          </svg>
+          Menu
+        </button>
+        <button
+          type="button"
+          class="button button-secondary a11y-toggle"
+          aria-pressed="false"
+          data-a11y-mode-toggle
+          data-testid="a11y-mode-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#accessibility"></use>
+          </svg>
+          Accessibilité renforcée
+        </button>
+      </div>
+      <dialog
+        class="drawer mobile-menu"
+        id="mobile-menu"
+        aria-label="Menu"
+        data-mobile-menu
+        data-testid="layout-mobile-menu"
+      ></dialog>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title" data-testid="home-hero">
+        <picture class="hero-media">
+          <source
+            type="image/avif"
+            srcset="
+              /images/hero-640.avif   640w,
+              /images/hero-1280.avif 1280w,
+              /images/hero-1920.avif 1920w
+            "
+            sizes="100vw"
+          />
+          <source
+            type="image/webp"
+            srcset="
+              /images/hero-640.webp   640w,
+              /images/hero-1280.webp 1280w,
+              /images/hero-1920.webp 1920w
+            "
+            sizes="100vw"
+          />
+          <img
+            src="/images/hero-1280.webp"
+            alt=""
+            width="1920"
+            height="1080"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+        <div class="container hero-content">
+          <p class="hero-eyebrow">Sans framework, sans build</p>
+          <h1 id="hero-title">HTML CSS Vanilla Boilerplate</h1>
+          <p class="hero-lead">
+            Boilerplate HTML, CSS et JavaScript natifs, sans framework ni étape de build, outillé
+            pour la validation, les tests end-to-end et l'accessibilité.
+          </p>
+          <p class="hero-actions">
+            <a class="button button-light" href="/taches" data-testid="home-tasks-link"
+              >Voir la démo des tâches</a
+            >
+            <a class="button button-outline-light" href="/contact" data-testid="home-contact-link"
+              >Voir le formulaire</a
+            >
+          </p>
+        </div>
+      </section>
+      <section
+        class="container home-section carousel"
+        aria-labelledby="carousel-title"
+        aria-roledescription="carrousel"
+        data-carousel
+        data-testid="home-carousel"
+      >
+        <div class="carousel-header">
+          <h2 id="carousel-title">À la une</h2>
+          <div class="carousel-controls" data-carousel-controls>
+            <button
+              type="button"
+              class="button button-secondary"
+              aria-controls="carousel-track"
+              data-carousel-prev
+              data-testid="carousel-prev"
+              disabled
+            >
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#arrow-left"></use>
+              </svg>
+              Précédent
+            </button>
+            <button
+              type="button"
+              class="button button-secondary"
+              aria-controls="carousel-track"
+              data-carousel-next
+              data-testid="carousel-next"
+            >
+              Suivant
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#arrow-right"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          class="carousel-viewport"
+          id="carousel-track"
+          role="group"
+          aria-label="Diapositives"
+          tabindex="0"
+          data-carousel-viewport
+          data-testid="carousel-track"
+        >
+          <div class="carousel-container">
+            <div
+              class="carousel-slide"
+              role="group"
+              aria-roledescription="diapositive"
+              aria-label="1 sur 5"
+              data-testid="carousel-slide"
+            >
+              <figure>
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="/images/slide-1-640.avif 640w, /images/slide-1-1280.avif 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcset="/images/slide-1-640.webp 640w, /images/slide-1-1280.webp 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <img
+                    src="/images/slide-1-1280.webp"
+                    alt=""
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <figcaption>
+                  <h3>Héliconia</h3>
+                  <p>
+                    Ses bractées rouges et jaunes, en forme de pince de homard, se succèdent le long
+                    de la tige.
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+            <div
+              class="carousel-slide"
+              role="group"
+              aria-roledescription="diapositive"
+              aria-label="2 sur 5"
+              data-testid="carousel-slide"
+            >
+              <figure>
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="/images/slide-2-640.avif 640w, /images/slide-2-1280.avif 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcset="/images/slide-2-640.webp 640w, /images/slide-2-1280.webp 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <img
+                    src="/images/slide-2-1280.webp"
+                    alt=""
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <figcaption>
+                  <h3>Anthurium</h3>
+                  <p>
+                    Une spathe vernissée en forme de cœur entoure un épi dressé, le spadice, qui
+                    porte les vraies fleurs.
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+            <div
+              class="carousel-slide"
+              role="group"
+              aria-roledescription="diapositive"
+              aria-label="3 sur 5"
+              data-testid="carousel-slide"
+            >
+              <figure>
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="/images/slide-3-640.avif 640w, /images/slide-3-1280.avif 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcset="/images/slide-3-640.webp 640w, /images/slide-3-1280.webp 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <img
+                    src="/images/slide-3-1280.webp"
+                    alt=""
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <figcaption>
+                  <h3>Calliandra</h3>
+                  <p>
+                    Ses pompons de fines étamines rouges s’ouvrent en fin de journée et attirent les
+                    colibris.
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+            <div
+              class="carousel-slide"
+              role="group"
+              aria-roledescription="diapositive"
+              aria-label="4 sur 5"
+              data-testid="carousel-slide"
+            >
+              <figure>
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="/images/slide-4-640.avif 640w, /images/slide-4-1280.avif 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcset="/images/slide-4-640.webp 640w, /images/slide-4-1280.webp 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <img
+                    src="/images/slide-4-1280.webp"
+                    alt=""
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <figcaption>
+                  <h3>Strelitzia</h3>
+                  <p>
+                    Surnommée oiseau de paradis, sa fleur orange et bleue évoque la tête d’un oiseau
+                    huppé.
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+            <div
+              class="carousel-slide"
+              role="group"
+              aria-roledescription="diapositive"
+              aria-label="5 sur 5"
+              data-testid="carousel-slide"
+            >
+              <figure>
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="/images/slide-5-640.avif 640w, /images/slide-5-1280.avif 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcset="/images/slide-5-640.webp 640w, /images/slide-5-1280.webp 1280w"
+                    sizes="(width >= 1024px) 33vw, (width >= 640px) 50vw, 100vw"
+                  />
+                  <img
+                    src="/images/slide-5-1280.webp"
+                    alt=""
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <figcaption>
+                  <h3>Nénuphar</h3>
+                  <p>
+                    Ses fleurs s’ouvrent à la surface des bassins, au-dessus de larges feuilles
+                    flottantes.
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div
+          class="carousel-dots"
+          role="group"
+          aria-label="Choix de la diapositive"
+          data-carousel-dots
+        ></div>
+      </section>
+      <section
+        class="container home-section blog"
+        aria-labelledby="blog-title"
+        data-testid="home-blog"
+      >
+        <h2 id="blog-title">Derniers articles</h2>
+        <div class="blog-grid">
+          <article class="blog-card" data-testid="home-blog-card">
+            <picture class="blog-card-media">
+              <source
+                type="image/avif"
+                srcset="/images/blog-1-480.avif 480w, /images/blog-1-960.avif 960w"
+                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+              />
+              <source
+                type="image/webp"
+                srcset="/images/blog-1-480.webp 480w, /images/blog-1-960.webp 960w"
+                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+              />
+              <img
+                src="/images/blog-1-960.webp"
+                alt=""
+                width="960"
+                height="540"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <h3>Le CSS natif suffit souvent</h3>
+            <p>
+              Couches de cascade, imbrication et requêtes de conteneur couvrent aujourd'hui
+              l'essentiel de ce qu'apportait un préprocesseur.
+            </p>
+            <footer class="blog-card-meta">
+              <span class="tag">CSS</span>
+              <time datetime="2026-09-28">28 septembre 2026</time>
+            </footer>
+          </article>
+          <article class="blog-card" data-testid="home-blog-card">
+            <picture class="blog-card-media">
+              <source
+                type="image/avif"
+                srcset="/images/blog-2-480.avif 480w, /images/blog-2-960.avif 960w"
+                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+              />
+              <source
+                type="image/webp"
+                srcset="/images/blog-2-480.webp 480w, /images/blog-2-960.webp 960w"
+                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+              />
+              <img
+                src="/images/blog-2-960.webp"
+                alt=""
+                width="960"
+                height="540"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <h3>Un formulaire qui marche sans JavaScript</h3>
+            <p>
+              La validation native du navigateur sert de socle, le script n'ajoute que des messages
+              plus clairs et l'envoi sans rechargement.
+            </p>
+            <footer class="blog-card-meta">
+              <span class="tag">Formulaires</span>
+              <time datetime="2026-09-14">14 septembre 2026</time>
+            </footer>
+          </article>
+          <article class="blog-card" data-testid="home-blog-card">
+            <picture class="blog-card-media">
+              <source
+                type="image/avif"
+                srcset="/images/blog-3-480.avif 480w, /images/blog-3-960.avif 960w"
+                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+              />
+              <source
+                type="image/webp"
+                srcset="/images/blog-3-480.webp 480w, /images/blog-3-960.webp 960w"
+                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+              />
+              <img
+                src="/images/blog-3-960.webp"
+                alt=""
+                width="960"
+                height="540"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <h3>Un carrousel qui dégrade bien</h3>
+            <p>
+              Sans JavaScript, la piste défile nativement avec un défilement magnétique. Le script
+              ajoute le glisser, les boutons et la pagination.
+            </p>
+            <footer class="blog-card-meta">
+              <span class="tag">Composants</span>
+              <time datetime="2026-08-31">31 août 2026</time>
+            </footer>
+          </article>
+        </div>
+        <p class="blog-empty" data-testid="home-blog-empty">
+          Aucun article pour le moment. Revenez bientôt, la rédaction est au travail.
+        </p>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer-inner">
+        <nav aria-label="Liens légaux">
+          <ul>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+            <li><a href="/donnees-personnelles">Données personnelles</a></li>
+            <li><a href="/accessibilite">Accessibilité : non conforme</a></li>
+            <li><a href="/plan-du-site">Plan du site</a></li>
+          </ul>
+        </nav>
+        <p class="site-footer-brand">
+          <img src="/logo-mark.svg" alt="" width="20" height="20" />HTML CSS Vanilla Boilerplate
+        </p>
+        <!-- dev:styleguide -->
+      </div>
+    </footer>
+  </body>
+</html>

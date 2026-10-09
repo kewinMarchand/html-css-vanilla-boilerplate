@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Déclaration d'accessibilité · HTML CSS Vanilla Boilerplate</title>
+    <meta
+      name="description"
+      content="Déclaration d'accessibilité RGAA 4.1.2 : site non conforme, résultats des tests automatisés, mode renforcé, contact et voies de recours."
+    />
+    <link rel="canonical" href="https://www.example.com/accessibilite" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HTML CSS Vanilla Boilerplate" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Déclaration d'accessibilité · HTML CSS Vanilla Boilerplate"
+    />
+    <meta
+      property="og:description"
+      content="Déclaration d'accessibilité RGAA 4.1.2 : site non conforme, résultats des tests automatisés, mode renforcé, contact et voies de recours."
+    />
+    <meta property="og:url" content="https://www.example.com/accessibilite" />
+    <meta property="og:image" content="https://www.example.com/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="HTML CSS Vanilla Boilerplate" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Déclaration d'accessibilité · HTML CSS Vanilla Boilerplate"
+    />
+    <meta
+      name="twitter:description"
+      content="Déclaration d'accessibilité RGAA 4.1.2 : site non conforme, résultats des tests automatisés, mode renforcé, contact et voies de recours."
+    />
+    <meta name="twitter:image" content="https://www.example.com/images/og-image.jpg" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script>
+      document.documentElement.dataset.js = ''
+      try {
+        if (localStorage.getItem('a11y-mode') === 'enhanced') {
+          document.documentElement.dataset.a11yMode = 'enhanced'
+        }
+      } catch {}
+    </script>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script type="module" src="/js/core/a11yModeToggle.js"></script>
+    <script type="module" src="/js/core/categoryMenu.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Accueil",
+            "item": "https://www.example.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Déclaration d'accessibilité",
+            "item": "https://www.example.com/accessibilite"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <header class="site-header" data-site-header>
+      <div class="container site-header-inner">
+        <a class="logo" href="/" data-testid="layout-logo">
+          <img src="/logo-mark.svg" alt="" width="32" height="32" />
+          <span>HTML CSS Vanilla Boilerplate</span>
+        </a>
+        <nav class="main-nav" aria-label="Navigation principale">
+          <ul class="main-nav-list">
+            <li><a href="/">Accueil</a></li>
+            <li class="category-menu" data-category-menu>
+              <a class="category-menu-fallback" href="/catalogue">Catalogue</a>
+              <button
+                type="button"
+                class="category-menu-toggle"
+                aria-expanded="false"
+                aria-controls="category-menu"
+                data-category-menu-toggle
+                data-testid="layout-category-menu-toggle"
+              >
+                Catalogue
+                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                  <use href="/icons/sprite.svg#chevron-down"></use>
+                </svg>
+              </button>
+              <div
+                class="category-panel"
+                id="category-menu"
+                data-category-panel
+                data-testid="layout-category-menu"
+                hidden
+              >
+                <a class="category-panel-all" href="/catalogue">Tout le catalogue</a>
+                <div class="category-columns">
+                  <ul class="category-column">
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-interieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'intérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/feuillages"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Feuillages<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/monstera"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Monstera</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/fougeres"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Fougères</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/plantes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Plantes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Anthurium</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/strelitzia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Strelitzia</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-exterieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'extérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-exterieur/palmiers"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Palmiers</a
+                          >
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-exterieur/arbustes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Arbustes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/heliconia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Heliconia</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/calliandra"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Calliandra</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-aquatiques"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes aquatiques<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-aquatiques/nenuphars"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Nénuphars</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li><a href="/taches">Tâches</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button
+          type="button"
+          class="button button-secondary mobile-menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-mobile-menu-toggle
+          data-testid="layout-mobile-menu-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#menu"></use>
+          </svg>
+          Menu
+        </button>
+        <button
+          type="button"
+          class="button button-secondary a11y-toggle"
+          aria-pressed="false"
+          data-a11y-mode-toggle
+          data-testid="a11y-mode-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#accessibility"></use>
+          </svg>
+          Accessibilité renforcée
+        </button>
+      </div>
+      <dialog
+        class="drawer mobile-menu"
+        id="mobile-menu"
+        aria-label="Menu"
+        data-mobile-menu
+        data-testid="layout-mobile-menu"
+      ></dialog>
+    </header>
+    <main id="main">
+      <div class="container page prose">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
+          <ol>
+            <li><a href="/">Accueil</a></li>
+            <li><span aria-current="page">Déclaration d'accessibilité</span></li>
+          </ol>
+        </nav>
+        <h1>Déclaration d'accessibilité</h1>
+        <p>
+          Exemple SAS s'engage à rendre ses services en ligne accessibles, conformément à l'article
+          47 de la loi n° 2005-102 du 11 février 2005. Cette déclaration s'applique au site
+          https://www.example.com.
+        </p>
+        <figure class="quote">
+          <blockquote lang="en">
+            <p>
+              The power of the Web is in its universality. Access by everyone regardless of
+              disability is an essential aspect.
+            </p>
+          </blockquote>
+          <figcaption>
+            Tim Berners-Lee, inventeur du Web, cité par la
+            <cite>Web Accessibility Initiative du W3C</cite>. Traduction : la force du Web tient à
+            son universalité, l'accès de tous, quel que soit le handicap, en est un aspect
+            essentiel.
+          </figcaption>
+        </figure>
+        <section aria-labelledby="status-title">
+          <h2 id="status-title">État de conformité</h2>
+          <p data-testid="legal-compliance-status">
+            Ce site est <strong>non conforme</strong> avec le référentiel général d'amélioration de
+            l'accessibilité (<abbr title="Référentiel général d'amélioration de l'accessibilité"
+              >RGAA</abbr
+            >), version 4.1.2. Aucun audit n'a encore été réalisé.
+          </p>
+        </section>
+        <section aria-labelledby="results-title">
+          <h2 id="results-title">Résultats des tests</h2>
+          <p>
+            Les seuls résultats disponibles proviennent de tests automatisés axe-core (critères
+            <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 niveaux A et AA, sur
+            chaque page, dans les deux modes d'affichage). Ces tests ne couvrent qu'une partie des
+            critères et ne valent pas audit.
+          </p>
+        </section>
+        <section aria-labelledby="non-accessible-title">
+          <h2 id="non-accessible-title">Contenus non accessibles</h2>
+          <p>À compléter après audit.</p>
+        </section>
+        <section aria-labelledby="enhanced-title">
+          <h2 id="enhanced-title">Mode accessibilité renforcée</h2>
+          <p>
+            Le bouton « Accessibilité renforcée », dans l'en-tête de chaque page, agrandit le texte,
+            augmente les espacements, renforce les contrastes, souligne tous les liens, épaissit
+            l'indicateur de focus et coupe les animations.
+          </p>
+          <div class="faq">
+            <details>
+              <summary>Mon choix est-il conservé d'une page à l'autre ?</summary>
+              <p>
+                Oui. Il est enregistré dans le stockage local de votre navigateur, sans cookie, et
+                n'est jamais transmis.
+              </p>
+            </details>
+            <details>
+              <summary>Comment revenir à l'affichage habituel ?</summary>
+              <p>
+                Activez de nouveau le bouton « Accessibilité renforcée » : il indique son état,
+                enfoncé ou non, aux technologies d'assistance.
+              </p>
+            </details>
+            <details>
+              <summary>Le mode remplace-t-il les réglages de mon navigateur ?</summary>
+              <p>
+                Non. Il s'ajoute à eux : le zoom, la taille de police par défaut et la réduction des
+                animations du système restent respectés.
+              </p>
+            </details>
+          </div>
+        </section>
+        <section aria-labelledby="environment-title">
+          <h2 id="environment-title">Environnement de test</h2>
+          <ul>
+            <li>Chromium, piloté par Playwright, sur ordinateur et sur mobile émulé</li>
+            <li>axe-core et Lighthouse</li>
+            <li>Technologies d'assistance : à compléter après audit</li>
+          </ul>
+          <p>
+            Technologies utilisées : HTML, CSS, JavaScript. Déclaration établie le
+            <time datetime="2026-10-08">8 octobre 2026</time>.
+          </p>
+        </section>
+        <section aria-labelledby="feedback-title">
+          <h2 id="feedback-title">Retour d'information et contact</h2>
+          <p>
+            Si vous n'arrivez pas à accéder à un contenu ou à un service, contactez-nous pour être
+            orienté vers une alternative accessible ou obtenir le contenu sous une autre forme :
+          </p>
+          <address>
+            Exemple SAS, 10 rue de l'Exemple, 13100 Aix-en-Provence<br />
+            <a href="mailto:contact@example.com">contact@example.com</a>
+          </address>
+        </section>
+        <section aria-labelledby="remedies-title">
+          <h2 id="remedies-title">Voies de recours</h2>
+          <p>
+            Si vous avez signalé un défaut d'accessibilité qui vous empêche d'accéder à un contenu
+            ou à un service et que vous n'avez pas obtenu de réponse satisfaisante, vous pouvez
+            saisir le Défenseur des droits :
+          </p>
+          <ul>
+            <li>
+              par le
+              <a href="https://formulaire.defenseurdesdroits.fr/"
+                >formulaire en ligne du Défenseur des droits</a
+              >
+              ;
+            </li>
+            <li>
+              en contactant
+              <a href="https://www.defenseurdesdroits.fr/carte-des-delegues"
+                >le délégué du Défenseur des droits de votre région</a
+              >
+              ;
+            </li>
+            <li>
+              par courrier gratuit, sans affranchissement : Défenseur des droits, Libre réponse
+              71120, 75342 Paris CEDEX 07.
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer-inner">
+        <nav aria-label="Liens légaux">
+          <ul>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+            <li><a href="/donnees-personnelles">Données personnelles</a></li>
+            <li><a href="/accessibilite" aria-current="page">Accessibilité : non conforme</a></li>
+            <li><a href="/plan-du-site">Plan du site</a></li>
+          </ul>
+        </nav>
+        <p class="site-footer-brand">
+          <img src="/logo-mark.svg" alt="" width="20" height="20" />HTML CSS Vanilla Boilerplate
+        </p>
+        <!-- dev:styleguide -->
+      </div>
+    </footer>
+  </body>
+</html>

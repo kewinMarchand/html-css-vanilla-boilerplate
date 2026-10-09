@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Charte graphique · HTML CSS Vanilla Boilerplate</title>
+    <meta
+      name="description"
+      content="Charte graphique de développement : tokens, typographie, composants et états, rendus avec les vrais styles du projet."
+    />
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script>
+      document.documentElement.dataset.js = ''
+      try {
+        if (localStorage.getItem('a11y-mode') === 'enhanced') {
+          document.documentElement.dataset.a11yMode = 'enhanced'
+        }
+      } catch {}
+    </script>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script type="module" src="/js/core/a11yModeToggle.js"></script>
+    <script type="module" src="/js/core/categoryMenu.js"></script>
+    <script type="module" src="/js/domains/styleguide/ui/styleguide.js"></script>
+    <script type="module" src="/js/core/dialog.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Accueil",
+            "item": "https://www.example.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Charte graphique",
+            "item": "https://www.example.com/charte-graphique"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <header class="site-header" data-site-header>
+      <div class="container site-header-inner">
+        <a class="logo" href="/" data-testid="layout-logo">
+          <img src="/logo-mark.svg" alt="" width="32" height="32" />
+          <span>HTML CSS Vanilla Boilerplate</span>
+        </a>
+        <nav class="main-nav" aria-label="Navigation principale">
+          <ul class="main-nav-list">
+            <li><a href="/">Accueil</a></li>
+            <li class="category-menu" data-category-menu>
+              <a class="category-menu-fallback" href="/catalogue">Catalogue</a>
+              <button
+                type="button"
+                class="category-menu-toggle"
+                aria-expanded="false"
+                aria-controls="category-menu"
+                data-category-menu-toggle
+                data-testid="layout-category-menu-toggle"
+              >
+                Catalogue
+                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                  <use href="/icons/sprite.svg#chevron-down"></use>
+                </svg>
+              </button>
+              <div
+                class="category-panel"
+                id="category-menu"
+                data-category-panel
+                data-testid="layout-category-menu"
+                hidden
+              >
+                <a class="category-panel-all" href="/catalogue">Tout le catalogue</a>
+                <div class="category-columns">
+                  <ul class="category-column">
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-interieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'intérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/feuillages"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Feuillages<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/monstera"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Monstera</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/fougeres"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Fougères</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/plantes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Plantes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Anthurium</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/strelitzia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Strelitzia</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-exterieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'extérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-exterieur/palmiers"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Palmiers</a
+                          >
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-exterieur/arbustes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Arbustes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/heliconia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Heliconia</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/calliandra"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Calliandra</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-aquatiques"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes aquatiques<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-aquatiques/nenuphars"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Nénuphars</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li><a href="/taches">Tâches</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button
+          type="button"
+          class="button button-secondary mobile-menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-mobile-menu-toggle
+          data-testid="layout-mobile-menu-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#menu"></use>
+          </svg>
+          Menu
+        </button>
+        <button
+          type="button"
+          class="button button-secondary a11y-toggle"
+          aria-pressed="false"
+          data-a11y-mode-toggle
+          data-testid="a11y-mode-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#accessibility"></use>
+          </svg>
+          Accessibilité renforcée
+        </button>
+      </div>
+      <dialog
+        class="drawer mobile-menu"
+        id="mobile-menu"
+        aria-label="Menu"
+        data-mobile-menu
+        data-testid="layout-mobile-menu"
+      ></dialog>
+    </header>
+    <main id="main">
+      <div class="container page styleguide" data-styleguide>
+        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
+          <ol>
+            <li><a href="/">Accueil</a></li>
+            <li><span aria-current="page">Charte graphique</span></li>
+          </ol>
+        </nav>
+        <h1>Charte graphique</h1>
+        <p>
+          Page de développement, absente de l'image de production. Tout est rendu avec les tokens et
+          les classes du projet. Le bouton « Accessibilité renforcée » de l'en-tête permet de
+          comparer les deux modes.
+        </p>
+
+        <section aria-labelledby="sg-colors" data-testid="styleguide-colors">
+          <h2 id="sg-colors">Couleurs</h2>
+          <section class="table-wrapper" aria-labelledby="sg-colors-caption" tabindex="0">
+            <table>
+              <caption id="sg-colors-caption">
+                Tokens de couleur et contraste sur leur fond
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Aperçu</th>
+                  <th scope="col">Token</th>
+                  <th scope="col">Rôle</th>
+                  <th scope="col">Valeur calculée</th>
+                  <th scope="col">Contraste</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-color-token="--color-primary" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-primary</code></th>
+                  <td>Primaire</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-on-primary" data-color-background="--color-primary">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-on-primary</code></th>
+                  <td>Texte sur primaire</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-text" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-text</code></th>
+                  <td>Texte</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-text-muted" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-text-muted</code></th>
+                  <td>Texte secondaire</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-bg" data-color-background="--color-text">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-bg</code></th>
+                  <td>Fond</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-surface" data-color-background="--color-text">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-surface</code></th>
+                  <td>Surface</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-border-strong" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-border-strong</code></th>
+                  <td>Bordure de champ</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-success" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-success</code></th>
+                  <td>Succès</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-danger" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-danger</code></th>
+                  <td>Erreur</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-warning" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-warning</code></th>
+                  <td>Avertissement</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+                <tr data-color-token="--color-info" data-color-background="--color-bg">
+                  <td><span class="swatch" data-swatch></span></td>
+                  <th scope="row"><code>--color-info</code></th>
+                  <td>Information</td>
+                  <td><code data-color-value></code></td>
+                  <td data-color-contrast></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <section aria-labelledby="sg-type" data-testid="styleguide-typography">
+          <h2 id="sg-type">Typographie</h2>
+          <div class="sg-type-samples">
+            <p class="sg-h1" data-computed-font>Titre de niveau 1</p>
+            <p class="sg-h2" data-computed-font>Titre de niveau 2</p>
+            <p class="sg-h3" data-computed-font>Titre de niveau 3</p>
+            <p class="sg-h4" data-computed-font>Titre de niveau 4</p>
+            <p class="sg-h5" data-computed-font>Titre de niveau 5</p>
+            <p class="sg-h6" data-computed-font>Titre de niveau 6</p>
+            <p data-computed-font>Texte courant : la jardinerie tropicale ouvre ses serres.</p>
+            <p class="sg-small" data-computed-font>Petit texte : mentions et compteurs.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="sg-space" data-testid="styleguide-spacing">
+          <h2 id="sg-space">Espacements et rayons</h2>
+          <ul class="sg-scale">
+            <li data-space-token="--space-2xs">
+              <code>--space-2xs</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--space-xs">
+              <code>--space-xs</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--space-s">
+              <code>--space-s</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--space-m">
+              <code>--space-m</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--space-l">
+              <code>--space-l</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--space-xl">
+              <code>--space-xl</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--space-2xl">
+              <code>--space-2xl</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--radius">
+              <code>--radius</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+            <li data-space-token="--radius-pill">
+              <code>--radius-pill</code> <span data-space-value></span
+              ><span class="sg-bar" data-space-bar></span>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="sg-buttons" data-testid="styleguide-buttons">
+          <h2 id="sg-buttons">Boutons</h2>
+          <p class="sg-row">
+            <button type="button" class="button button-primary">Défaut</button>
+            <button type="button" class="button button-primary is-hover">Survol</button>
+            <button type="button" class="button button-primary is-focus">Focus</button>
+            <button type="button" class="button button-primary is-active">Actif</button>
+            <button type="button" class="button button-primary" disabled>Désactivé</button>
+            <button type="button" class="button button-primary" aria-busy="true">Chargement</button>
+          </p>
+          <p class="sg-row">
+            <button type="button" class="button button-secondary">Défaut</button>
+            <button type="button" class="button button-secondary is-hover">Survol</button>
+            <button type="button" class="button button-secondary is-focus">Focus</button>
+            <button type="button" class="button button-secondary is-active">Actif</button>
+            <button type="button" class="button button-secondary" disabled>Désactivé</button>
+            <button type="button" class="button button-secondary" aria-busy="true">
+              Chargement
+            </button>
+          </p>
+          <div class="sg-dark sg-row">
+            <a class="button button-light" href="/taches">Bouton plein clair</a>
+            <a class="button button-outline-light" href="/contact">Bouton contour clair</a>
+          </div>
+        </section>
+
+        <section aria-labelledby="sg-forms" data-testid="styleguide-forms">
+          <h2 id="sg-forms">Formulaires</h2>
+          <form class="sg-form" action="#" method="get">
+            <div class="field">
+              <label for="sg-text">Champ texte</label
+              ><input id="sg-text" name="texte" type="text" aria-describedby="sg-text-help" />
+              <p class="field-help" id="sg-text-help">Aide : 2 caractères minimum.</p>
+            </div>
+            <div class="field">
+              <label for="sg-email">E-mail</label
+              ><input
+                id="sg-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                aria-invalid="true"
+                aria-describedby="sg-email-error"
+                value="ada"
+              />
+              <p class="field-error" id="sg-email-error">
+                Indiquez une adresse e-mail valide, par exemple nom@domaine.fr.
+              </p>
+            </div>
+            <div class="field">
+              <label for="sg-number">Nombre</label
+              ><input id="sg-number" name="nombre" type="number" inputmode="numeric" min="0" />
+            </div>
+            <div class="field">
+              <label for="sg-disabled">Champ désactivé</label
+              ><input
+                id="sg-disabled"
+                name="desactive"
+                type="text"
+                disabled
+                value="Non modifiable"
+              />
+            </div>
+            <div class="field">
+              <label for="sg-textarea">Zone de texte</label
+              ><textarea id="sg-textarea" name="message" rows="3"></textarea>
+            </div>
+            <div class="field">
+              <label for="sg-select">Liste</label
+              ><select id="sg-select" name="liste">
+                <option>Soleil</option>
+                <option>Mi-ombre</option>
+                <option>Ombre</option>
+              </select>
+            </div>
+            <div class="check">
+              <input type="checkbox" id="sg-check" name="case" /><label for="sg-check"
+                >Case à cocher</label
+              >
+            </div>
+            <div class="switch">
+              <input type="checkbox" role="switch" id="sg-switch" name="interrupteur" /><label
+                for="sg-switch"
+                >Interrupteur</label
+              >
+            </div>
+            <fieldset>
+              <legend>Boutons radio</legend>
+              <div class="check">
+                <input type="radio" id="sg-radio-1" name="radio" checked /><label for="sg-radio-1"
+                  >Option A</label
+                >
+              </div>
+              <div class="check">
+                <input type="radio" id="sg-radio-2" name="radio" /><label for="sg-radio-2"
+                  >Option B</label
+                >
+              </div>
+            </fieldset>
+            <button type="submit" class="button button-primary">Valider</button>
+          </form>
+        </section>
+
+        <section aria-labelledby="sg-feedback" data-testid="styleguide-feedback">
+          <h2 id="sg-feedback">Retours</h2>
+          <div class="sg-stack">
+            <p class="alert alert-info">
+              Information : le catalogue est mis à jour chaque semaine.
+            </p>
+            <p class="alert alert-success">Succès : votre message a bien été envoyé.</p>
+            <p class="alert alert-warning">Avertissement : ce produit est bientôt en rupture.</p>
+            <p class="alert alert-error">Erreur : l'envoi a échoué.</p>
+            <div class="skeleton-list">
+              <span class="skeleton" aria-hidden="true"></span
+              ><span class="skeleton" aria-hidden="true"></span>
+            </div>
+            <p class="alert alert-info">Aucune tâche pour l'instant. Tout est à jour.</p>
+            <div class="alert alert-error">
+              <p>Impossible de charger les produits pour le moment.</p>
+              <button type="button" class="button button-secondary">
+                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                  <use href="/icons/sprite.svg#retry"></use>
+                </svg>
+                Réessayer
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="sg-nav" data-testid="styleguide-navigation">
+          <h2 id="sg-nav">Navigation</h2>
+          <nav class="breadcrumb" aria-label="Exemple de fil d'Ariane">
+            <ol>
+              <li><a href="/">Accueil</a></li>
+              <li><a href="/catalogue">Catalogue</a></li>
+              <li><span aria-current="page">Feuillages</span></li>
+            </ol>
+          </nav>
+          <nav class="pagination" aria-label="Exemple de pagination">
+            <ul>
+              <li><span class="pagination-link" aria-disabled="true">Précédent</span></li>
+              <li>
+                <span class="pagination-link" aria-current="page"
+                  ><span class="visually-hidden">Page </span>1</span
+                >
+              </li>
+              <li>
+                <a class="pagination-link" href="/catalogue?page=2"
+                  ><span class="visually-hidden">Page </span>2</a
+                >
+              </li>
+              <li><a class="pagination-link" href="/catalogue?page=2" rel="next">Suivant</a></li>
+            </ul>
+          </nav>
+          <ul class="chip-list">
+            <li>
+              <button type="button" class="chip">
+                <span class="visually-hidden">Retirer le filtre : </span>Mi-ombre
+                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                  <use href="/icons/sprite.svg#close"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+          <p>
+            Lien interne : <a href="/plan-du-site">plan du site</a>. Lien externe :
+            <a href="https://www.w3.org/WAI/">Web Accessibility Initiative</a>.
+          </p>
+        </section>
+
+        <section aria-labelledby="sg-media" data-testid="styleguide-media">
+          <h2 id="sg-media">Médias et cartes</h2>
+          <div class="blog-grid">
+            <article class="blog-card">
+              <picture class="blog-card-media"
+                ><source type="image/avif" srcset="/images/blog-1-480.avif" />
+                <img src="/images/blog-1-480.webp" alt="" width="480" height="270" loading="lazy"
+              /></picture>
+              <h3>Carte de blog</h3>
+              <p>Illustration, titre, extrait et date.</p>
+              <footer class="blog-card-meta">
+                <span class="tag">Exemple</span><time datetime="2026-10-08">8 octobre 2026</time>
+              </footer>
+            </article>
+          </div>
+          <h3>Carte produit, grille puis liste</h3>
+          <ul class="product-list" data-view="grille">
+            <li class="product-item" data-product-id="1">
+              <article
+                class="product-card"
+                id="produit-monstera-deliciosa"
+                data-testid="catalog-product"
+              >
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="/images/product-1-400.avif 400w, /images/product-1-800.avif 800w"
+                    sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcset="/images/product-1-400.webp 400w, /images/product-1-800.webp 800w"
+                    sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                  />
+                  <img
+                    src="/images/product-1-400.webp"
+                    alt="Monstera deliciosa"
+                    width="400"
+                    height="400"
+                    decoding="async"
+                  />
+                </picture>
+                <div class="product-body">
+                  <h2 class="product-name">Monstera deliciosa</h2>
+                  <p class="product-price" data-testid="catalog-product-price">34,90 €</p>
+                  <dl class="product-specs">
+                    <div>
+                      <dt>Exposition</dt>
+                      <dd>Mi-ombre</dd>
+                    </div>
+                    <div>
+                      <dt>Taille</dt>
+                      <dd>M</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            </li>
+          </ul>
+          <ul class="product-list" data-view="liste">
+            <li class="product-item" data-product-id="3">
+              <article
+                class="product-card"
+                id="produit-monstera-thai-constellation"
+                data-testid="catalog-product"
+              >
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="/images/product-3-400.avif 400w, /images/product-3-800.avif 800w"
+                    sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcset="/images/product-3-400.webp 400w, /images/product-3-800.webp 800w"
+                    sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                  />
+                  <img
+                    src="/images/product-3-400.webp"
+                    alt="Monstera Thai Constellation"
+                    width="400"
+                    height="400"
+                    decoding="async"
+                  />
+                </picture>
+                <div class="product-body">
+                  <h2 class="product-name">Monstera Thai Constellation</h2>
+                  <p class="product-price" data-testid="catalog-product-price">129,00 €</p>
+                  <dl class="product-specs">
+                    <div>
+                      <dt>Exposition</dt>
+                      <dd>Mi-ombre</dd>
+                    </div>
+                    <div>
+                      <dt>Taille</dt>
+                      <dd>L</dd>
+                    </div>
+                  </dl>
+                  <p class="badge">Rupture de stock</p>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="sg-icons" data-testid="styleguide-icons">
+          <h2 id="sg-icons">Icônes</h2>
+          <ul class="sg-icons">
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#accessibility"></use></svg
+              ><code>accessibility</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#arrow-left"></use></svg
+              ><code>arrow-left</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#arrow-right"></use></svg
+              ><code>arrow-right</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#chevron-down"></use></svg
+              ><code>chevron-down</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#menu"></use></svg
+              ><code>menu</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#close"></use></svg
+              ><code>close</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#filter"></use></svg
+              ><code>filter</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#grid"></use></svg
+              ><code>grid</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#list"></use></svg
+              ><code>list</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#retry"></use></svg
+              ><code>retry</code>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#mail"></use></svg
+              ><code>mail</code>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="sg-logo" data-testid="styleguide-logo">
+          <h2 id="sg-logo">Logo</h2>
+          <div class="sg-row">
+            <p class="sg-logo"><img src="/logo-mark.svg" alt="" width="64" height="64" /></p>
+            <p class="sg-logo">
+              <span class="logo"
+                ><img src="/logo-mark.svg" alt="" width="32" height="32" /><span
+                  >HTML CSS Vanilla Boilerplate</span
+                ></span
+              >
+            </p>
+            <p class="sg-logo sg-dark">
+              <span class="logo"
+                ><img src="/logo-mark.svg" alt="" width="32" height="32" /><span
+                  >HTML CSS Vanilla Boilerplate</span
+                ></span
+              >
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer-inner">
+        <nav aria-label="Liens légaux">
+          <ul>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+            <li><a href="/donnees-personnelles">Données personnelles</a></li>
+            <li><a href="/accessibilite">Accessibilité : non conforme</a></li>
+            <li><a href="/plan-du-site">Plan du site</a></li>
+          </ul>
+        </nav>
+        <p class="site-footer-brand">
+          <img src="/logo-mark.svg" alt="" width="20" height="20" />HTML CSS Vanilla Boilerplate
+        </p>
+        <!-- dev:styleguide -->
+      </div>
+    </footer>
+  </body>
+</html>

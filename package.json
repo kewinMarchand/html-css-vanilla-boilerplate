@@ -1,0 +1,38 @@
+{
+  "name": "html-css-vanilla-boilerplate",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Boilerplate HTML, CSS et JavaScript natifs, sans framework ni build, avec validation, tests e2e, accessibilité et Lighthouse",
+  "scripts": {
+    "postinstall": "node scripts/vendor.js",
+    "dev": "node scripts/serve.js 3130",
+    "lint": "yarn lint:html && yarn lint:css",
+    "lint:html": "html-validate \"site/**/*.html\"",
+    "lint:css": "stylelint \"site/**/*.css\"",
+    "lint:fix": "stylelint \"site/**/*.css\" --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:unit": "node --test \"tests/unit/**/*.test.js\"",
+    "test:e2e": "playwright test tests/e2e",
+    "test:a11y": "playwright test tests/a11y",
+    "lhci": "lhci autorun"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "~1.63.0",
+    "html-validate": "^11.16.2",
+    "prettier": "^3.9.9",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0"
+  },
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": ">=24.14.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "embla-carousel": "^8"
+  }
+}

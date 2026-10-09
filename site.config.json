@@ -1,0 +1,59 @@
+{
+  "name": "HTML CSS Vanilla Boilerplate",
+  "description": "Boilerplate HTML, CSS et JavaScript natifs, sans framework ni étape de build, outillé pour la validation, les tests end-to-end et l'accessibilité.",
+  "url": "https://www.example.com",
+  "locale": "fr_FR",
+  "themeColor": "#1d4ed8",
+  "navigation": [
+    {
+      "href": "/",
+      "label": "Accueil"
+    },
+    {
+      "href": "/catalogue",
+      "label": "Catalogue"
+    },
+    {
+      "href": "/taches",
+      "label": "Tâches"
+    },
+    {
+      "href": "/contact",
+      "label": "Contact"
+    }
+  ],
+  "legalNavigation": [
+    {
+      "href": "/mentions-legales",
+      "label": "Mentions légales"
+    },
+    {
+      "href": "/donnees-personnelles",
+      "label": "Données personnelles"
+    },
+    {
+      "href": "/accessibilite",
+      "label": "Accessibilité : non conforme"
+    },
+    {
+      "href": "/plan-du-site",
+      "label": "Plan du site"
+    }
+  ],
+  "publisher": {
+    "companyName": "Exemple SAS",
+    "address": "10 rue de l'Exemple, 13100 Aix-en-Provence",
+    "siret": "000 000 000 00000",
+    "publicationDirector": "Camille Exemple",
+    "email": "contact@example.com"
+  },
+  "host": {
+    "name": "Hébergeur Exemple",
+    "address": "1 avenue Fictive, 75000 Paris"
+  },
+  "accessibility": {
+    "auditDate": null,
+    "complianceRate": null,
+    "auditor": null
+  }
+}

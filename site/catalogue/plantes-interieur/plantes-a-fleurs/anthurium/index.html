@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anthurium · Catalogue · HTML CSS Vanilla Boilerplate</title>
+    <meta
+      name="description"
+      content="Catalogue de démonstration d'une jardinerie tropicale fictive, anthurium : 3 plantes à filtrer par exposition, taille, prix et stock."
+    />
+    <link
+      rel="canonical"
+      href="https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HTML CSS Vanilla Boilerplate" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Anthurium · Catalogue · HTML CSS Vanilla Boilerplate" />
+    <meta
+      property="og:description"
+      content="Catalogue de démonstration d'une jardinerie tropicale fictive, anthurium : 3 plantes à filtrer par exposition, taille, prix et stock."
+    />
+    <meta
+      property="og:url"
+      content="https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+    />
+    <meta property="og:image" content="https://www.example.com/images/product-7-800.webp" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt" content="HTML CSS Vanilla Boilerplate" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anthurium · Catalogue · HTML CSS Vanilla Boilerplate" />
+    <meta
+      name="twitter:description"
+      content="Catalogue de démonstration d'une jardinerie tropicale fictive, anthurium : 3 plantes à filtrer par exposition, taille, prix et stock."
+    />
+    <meta name="twitter:image" content="https://www.example.com/images/product-7-800.webp" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script>
+      document.documentElement.dataset.js = ''
+      try {
+        if (localStorage.getItem('a11y-mode') === 'enhanced') {
+          document.documentElement.dataset.a11yMode = 'enhanced'
+        }
+      } catch {}
+    </script>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script type="module" src="/js/core/a11yModeToggle.js"></script>
+    <script type="module" src="/js/core/categoryMenu.js"></script>
+    <script type="module" src="/js/domains/catalog/ui/catalog.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Anthurium",
+        "numberOfItems": 3,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Anthurium andreanum rouge",
+            "url": "https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/anthurium#produit-anthurium-andreanum-rouge"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Anthurium clarinervium",
+            "url": "https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/anthurium#produit-anthurium-clarinervium"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Anthurium blanc Champion",
+            "url": "https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/anthurium#produit-anthurium-blanc-champion"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Accueil",
+            "item": "https://www.example.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Catalogue",
+            "item": "https://www.example.com/catalogue"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Plantes d'intérieur",
+            "item": "https://www.example.com/catalogue/plantes-interieur"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Plantes à fleurs",
+            "item": "https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Anthurium",
+            "item": "https://www.example.com/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <header class="site-header" data-site-header>
+      <div class="container site-header-inner">
+        <a class="logo" href="/" data-testid="layout-logo">
+          <img src="/logo-mark.svg" alt="" width="32" height="32" />
+          <span>HTML CSS Vanilla Boilerplate</span>
+        </a>
+        <nav class="main-nav" aria-label="Navigation principale">
+          <ul class="main-nav-list">
+            <li><a href="/">Accueil</a></li>
+            <li class="category-menu" data-category-menu>
+              <a class="category-menu-fallback" href="/catalogue">Catalogue</a>
+              <button
+                type="button"
+                class="category-menu-toggle"
+                aria-expanded="false"
+                aria-controls="category-menu"
+                data-category-menu-toggle
+                data-testid="layout-category-menu-toggle"
+              >
+                Catalogue
+                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                  <use href="/icons/sprite.svg#chevron-down"></use>
+                </svg>
+              </button>
+              <div
+                class="category-panel"
+                id="category-menu"
+                data-category-panel
+                data-testid="layout-category-menu"
+                hidden
+              >
+                <a class="category-panel-all" href="/catalogue">Tout le catalogue</a>
+                <div class="category-columns">
+                  <ul class="category-column">
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-interieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'intérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/feuillages"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Feuillages<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/monstera"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Monstera</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/feuillages/fougeres"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Fougères</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-interieur/plantes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Plantes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Anthurium</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-interieur/plantes-a-fleurs/strelitzia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Strelitzia</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-exterieur"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes d'extérieur<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-exterieur/palmiers"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Palmiers</a
+                          >
+                        </li>
+                        <li data-has-children>
+                          <a
+                            href="/catalogue/plantes-exterieur/arbustes-a-fleurs"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            aria-expanded="false"
+                            >Arbustes à fleurs<svg
+                              class="icon"
+                              aria-hidden="true"
+                              focusable="false"
+                              width="20"
+                              height="20"
+                            >
+                              <use href="/icons/sprite.svg#arrow-right"></use></svg
+                          ></a>
+                          <ul class="category-column">
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/heliconia"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Heliconia</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="/catalogue/plantes-exterieur/arbustes-a-fleurs/calliandra"
+                                data-testid="layout-category-link"
+                                data-category-link
+                                >Calliandra</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-aquatiques"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes aquatiques<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-aquatiques/nenuphars"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Nénuphars</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li><a href="/taches">Tâches</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button
+          type="button"
+          class="button button-secondary mobile-menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-mobile-menu-toggle
+          data-testid="layout-mobile-menu-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#menu"></use>
+          </svg>
+          Menu
+        </button>
+        <button
+          type="button"
+          class="button button-secondary a11y-toggle"
+          aria-pressed="false"
+          data-a11y-mode-toggle
+          data-testid="a11y-mode-toggle"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+            <use href="/icons/sprite.svg#accessibility"></use>
+          </svg>
+          Accessibilité renforcée
+        </button>
+      </div>
+      <dialog
+        class="drawer mobile-menu"
+        id="mobile-menu"
+        aria-label="Menu"
+        data-mobile-menu
+        data-testid="layout-mobile-menu"
+      ></dialog>
+    </header>
+    <main id="main">
+      <div class="container page catalog" data-catalog data-category="anthurium">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
+          <ol>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/catalogue">Catalogue</a></li>
+            <li><a href="/catalogue/plantes-interieur">Plantes d'intérieur</a></li>
+            <li><a href="/catalogue/plantes-interieur/plantes-a-fleurs">Plantes à fleurs</a></li>
+            <li><span aria-current="page">Anthurium</span></li>
+          </ol>
+        </nav>
+        <h1 id="catalog-title" tabindex="-1">Anthurium</h1>
+
+        <div class="catalog-layout">
+          <aside class="catalog-aside" aria-labelledby="catalog-filters-title" data-catalog-aside>
+            <h2 id="catalog-filters-title" class="catalog-aside-title">Filtres</h2>
+            <form
+              id="catalog-filters-form"
+              class="catalog-filters"
+              method="get"
+              action="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+              data-catalog-filters
+              data-testid="catalog-filters"
+            >
+              <details class="facet" open>
+                <summary>Exposition</summary>
+                <fieldset>
+                  <legend class="visually-hidden">Exposition</legend>
+                  <div class="check">
+                    <input
+                      type="checkbox"
+                      id="filter-exposures-soleil"
+                      name="exposition"
+                      value="soleil"
+                      data-facet="exposures"
+                      data-testid="catalog-filter-exposure-soleil"
+                      disabled
+                    />
+                    <label for="filter-exposures-soleil"
+                      >Soleil
+                      <span class="facet-count" data-count="exposures-soleil">(0)</span></label
+                    >
+                  </div>
+                  <div class="check">
+                    <input
+                      type="checkbox"
+                      id="filter-exposures-mi-ombre"
+                      name="exposition"
+                      value="mi-ombre"
+                      data-facet="exposures"
+                      data-testid="catalog-filter-exposure-mi-ombre"
+                    />
+                    <label for="filter-exposures-mi-ombre"
+                      >Mi-ombre
+                      <span class="facet-count" data-count="exposures-mi-ombre">(2)</span></label
+                    >
+                  </div>
+                  <div class="check">
+                    <input
+                      type="checkbox"
+                      id="filter-exposures-ombre"
+                      name="exposition"
+                      value="ombre"
+                      data-facet="exposures"
+                      data-testid="catalog-filter-exposure-ombre"
+                    />
+                    <label for="filter-exposures-ombre"
+                      >Ombre
+                      <span class="facet-count" data-count="exposures-ombre">(1)</span></label
+                    >
+                  </div>
+                </fieldset>
+              </details>
+              <details class="facet" open>
+                <summary>Taille</summary>
+                <fieldset>
+                  <legend class="visually-hidden">Taille</legend>
+                  <div class="check">
+                    <input
+                      type="checkbox"
+                      id="filter-sizes-S"
+                      name="taille"
+                      value="S"
+                      data-facet="sizes"
+                      data-testid="catalog-filter-size-S"
+                    />
+                    <label for="filter-sizes-S"
+                      >Petite (S) <span class="facet-count" data-count="sizes-S">(1)</span></label
+                    >
+                  </div>
+                  <div class="check">
+                    <input
+                      type="checkbox"
+                      id="filter-sizes-M"
+                      name="taille"
+                      value="M"
+                      data-facet="sizes"
+                      data-testid="catalog-filter-size-M"
+                    />
+                    <label for="filter-sizes-M"
+                      >Moyenne (M) <span class="facet-count" data-count="sizes-M">(2)</span></label
+                    >
+                  </div>
+                  <div class="check">
+                    <input
+                      type="checkbox"
+                      id="filter-sizes-L"
+                      name="taille"
+                      value="L"
+                      data-facet="sizes"
+                      data-testid="catalog-filter-size-L"
+                      disabled
+                    />
+                    <label for="filter-sizes-L"
+                      >Grande (L) <span class="facet-count" data-count="sizes-L">(0)</span></label
+                    >
+                  </div>
+                </fieldset>
+              </details>
+              <details class="facet" open>
+                <summary>Prix</summary>
+                <fieldset class="price-fields">
+                  <legend class="visually-hidden">Prix en euros</legend>
+                  <div class="field">
+                    <label for="filter-price-min">Minimum (€)</label>
+                    <input
+                      type="number"
+                      id="filter-price-min"
+                      name="prix_min"
+                      min="0"
+                      step="1"
+                      inputmode="numeric"
+                      data-facet="priceMin"
+                      data-testid="catalog-filter-price-min"
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="filter-price-max">Maximum (€)</label>
+                    <input
+                      type="number"
+                      id="filter-price-max"
+                      name="prix_max"
+                      min="0"
+                      step="1"
+                      inputmode="numeric"
+                      data-facet="priceMax"
+                      data-testid="catalog-filter-price-max"
+                    />
+                  </div>
+                </fieldset>
+              </details>
+              <div class="switch">
+                <input
+                  type="checkbox"
+                  role="switch"
+                  id="filter-in-stock"
+                  name="en_stock"
+                  value="1"
+                  data-facet="inStock"
+                  data-testid="catalog-filter-in-stock"
+                />
+                <label for="filter-in-stock">En stock uniquement</label>
+              </div>
+              <button
+                type="submit"
+                class="button button-primary"
+                data-catalog-apply
+                data-testid="catalog-filters-apply"
+              >
+                Appliquer les filtres
+              </button>
+            </form>
+          </aside>
+          <div class="catalog-main">
+            <div class="catalog-toolbar">
+              <button
+                type="button"
+                class="button button-secondary"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="catalog-filters-dialog"
+                data-catalog-filters-open
+                data-testid="catalog-filters-open"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                  <use href="/icons/sprite.svg#filter"></use>
+                </svg>
+                Filtrer <span data-catalog-active-count></span>
+              </button>
+              <p
+                class="catalog-count"
+                role="status"
+                data-catalog-count
+                data-testid="catalog-results-count"
+              >
+                3 produits
+              </p>
+              <div class="catalog-sort">
+                <label for="catalog-sort">Trier par</label>
+                <select
+                  id="catalog-sort"
+                  name="tri"
+                  form="catalog-filters-form"
+                  data-catalog-sort
+                  data-testid="catalog-sort"
+                >
+                  <option value="pertinence">Pertinence</option>
+                  <option value="prix-asc">Prix croissant</option>
+                  <option value="prix-desc">Prix décroissant</option>
+                  <option value="nom">Nom</option>
+                </select>
+              </div>
+              <nav class="catalog-view" aria-label="Affichage">
+                <a
+                  href="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+                  aria-current="page"
+                  data-catalog-view="grille"
+                  data-testid="catalog-view-grid"
+                  ><svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                    <use href="/icons/sprite.svg#grid"></use>
+                  </svg>
+                  Grille</a
+                >
+                <a
+                  href="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium?vue=liste"
+                  data-catalog-view="liste"
+                  data-testid="catalog-view-list"
+                  ><svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                    <use href="/icons/sprite.svg#list"></use>
+                  </svg>
+                  Liste</a
+                >
+              </nav>
+            </div>
+            <div
+              class="active-filters"
+              data-catalog-active-filters
+              data-testid="catalog-active-filters"
+              hidden
+            >
+              <ul class="chip-list" data-catalog-chips></ul>
+              <button
+                type="button"
+                class="link-button"
+                data-catalog-clear
+                data-testid="catalog-clear-filters"
+              >
+                Tout effacer
+              </button>
+            </div>
+            <div class="catalog-state" data-catalog-state></div>
+            <ul class="product-list" data-catalog-list data-view="grille">
+              <li class="product-item" data-product-id="7">
+                <article
+                  class="product-card"
+                  id="produit-anthurium-andreanum-rouge"
+                  data-testid="catalog-product"
+                >
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcset="/images/product-7-400.avif 400w, /images/product-7-800.avif 800w"
+                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                    />
+                    <source
+                      type="image/webp"
+                      srcset="/images/product-7-400.webp 400w, /images/product-7-800.webp 800w"
+                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                    />
+                    <img
+                      src="/images/product-7-400.webp"
+                      alt="Anthurium andreanum rouge"
+                      width="400"
+                      height="400"
+                      decoding="async"
+                    />
+                  </picture>
+                  <div class="product-body">
+                    <h2 class="product-name">Anthurium andreanum rouge</h2>
+                    <p class="product-price" data-testid="catalog-product-price">24,90 €</p>
+                    <dl class="product-specs">
+                      <div>
+                        <dt>Exposition</dt>
+                        <dd>Mi-ombre</dd>
+                      </div>
+                      <div>
+                        <dt>Taille</dt>
+                        <dd>M</dd>
+                      </div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+              <li class="product-item" data-product-id="8">
+                <article
+                  class="product-card"
+                  id="produit-anthurium-clarinervium"
+                  data-testid="catalog-product"
+                >
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcset="/images/product-8-400.avif 400w, /images/product-8-800.avif 800w"
+                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                    />
+                    <source
+                      type="image/webp"
+                      srcset="/images/product-8-400.webp 400w, /images/product-8-800.webp 800w"
+                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                    />
+                    <img
+                      src="/images/product-8-400.webp"
+                      alt="Anthurium clarinervium"
+                      width="400"
+                      height="400"
+                      decoding="async"
+                    />
+                  </picture>
+                  <div class="product-body">
+                    <h2 class="product-name">Anthurium clarinervium</h2>
+                    <p class="product-price" data-testid="catalog-product-price">39,90 €</p>
+                    <dl class="product-specs">
+                      <div>
+                        <dt>Exposition</dt>
+                        <dd>Ombre</dd>
+                      </div>
+                      <div>
+                        <dt>Taille</dt>
+                        <dd>S</dd>
+                      </div>
+                    </dl>
+                    <p class="badge">Rupture de stock</p>
+                  </div>
+                </article>
+              </li>
+              <li class="product-item" data-product-id="9">
+                <article
+                  class="product-card"
+                  id="produit-anthurium-blanc-champion"
+                  data-testid="catalog-product"
+                >
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcset="/images/product-9-400.avif 400w, /images/product-9-800.avif 800w"
+                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                    />
+                    <source
+                      type="image/webp"
+                      srcset="/images/product-9-400.webp 400w, /images/product-9-800.webp 800w"
+                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                    />
+                    <img
+                      src="/images/product-9-400.webp"
+                      alt="Anthurium blanc Champion"
+                      width="400"
+                      height="400"
+                      decoding="async"
+                    />
+                  </picture>
+                  <div class="product-body">
+                    <h2 class="product-name">Anthurium blanc Champion</h2>
+                    <p class="product-price" data-testid="catalog-product-price">26,90 €</p>
+                    <dl class="product-specs">
+                      <div>
+                        <dt>Exposition</dt>
+                        <dd>Mi-ombre</dd>
+                      </div>
+                      <div>
+                        <dt>Taille</dt>
+                        <dd>M</dd>
+                      </div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+            </ul>
+            <nav
+              class="pagination"
+              aria-label="Pagination"
+              data-catalog-pagination
+              data-testid="catalog-pagination"
+              hidden
+            >
+              <ul></ul>
+            </nav>
+          </div>
+        </div>
+        <dialog
+          class="drawer"
+          id="catalog-filters-dialog"
+          aria-labelledby="catalog-filters-dialog-title"
+          data-catalog-filters-dialog
+        >
+          <div class="drawer-header">
+            <h2 id="catalog-filters-dialog-title">Filtres</h2>
+            <button
+              type="button"
+              class="icon-button"
+              aria-label="Fermer les filtres"
+              data-catalog-dialog-close
+            >
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#close"></use>
+              </svg>
+            </button>
+          </div>
+          <div class="drawer-body" data-catalog-dialog-body></div>
+          <div class="drawer-footer">
+            <button
+              type="button"
+              class="button button-primary"
+              data-catalog-dialog-done
+              data-testid="catalog-filters-done"
+            >
+              Voir les 3 produits
+            </button>
+          </div>
+        </dialog>
+        <template id="catalog-loading-template">
+          <div class="product-skeletons" role="status" data-testid="catalog-loading">
+            <span class="visually-hidden">Chargement des produits…</span>
+            <span class="skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="skeleton skeleton-card" aria-hidden="true"></span>
+          </div>
+        </template>
+        <template id="catalog-error-template">
+          <div class="alert alert-error" role="alert" data-testid="catalog-error">
+            <p data-catalog-error-message></p>
+            <button
+              type="button"
+              class="button button-secondary"
+              data-catalog-retry
+              data-testid="catalog-retry"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                <use href="/icons/sprite.svg#retry"></use>
+              </svg>
+              Réessayer
+            </button>
+          </div>
+        </template>
+        <template id="catalog-empty-template">
+          <div class="alert alert-info" data-testid="catalog-empty">
+            <p>Aucun produit ne correspond à ces filtres.</p>
+            <button
+              type="button"
+              class="button button-secondary"
+              data-catalog-empty-clear
+              data-testid="catalog-empty-clear"
+            >
+              Tout effacer
+            </button>
+          </div>
+        </template>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer-inner">
+        <nav aria-label="Liens légaux">
+          <ul>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+            <li><a href="/donnees-personnelles">Données personnelles</a></li>
+            <li><a href="/accessibilite">Accessibilité : non conforme</a></li>
+            <li><a href="/plan-du-site">Plan du site</a></li>
+          </ul>
+        </nav>
+        <p class="site-footer-brand">
+          <img src="/logo-mark.svg" alt="" width="20" height="20" />HTML CSS Vanilla Boilerplate
+        </p>
+        <!-- dev:styleguide -->
+      </div>
+    </footer>
+  </body>
+</html>

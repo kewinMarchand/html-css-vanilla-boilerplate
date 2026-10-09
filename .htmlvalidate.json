@@ -1,0 +1,30 @@
+{
+  "$schema": "https://html-validate.org/schemas/config.json",
+  "extends": ["html-validate:recommended", "html-validate:document"],
+  "rules": {
+    "doctype-style": [
+      "error",
+      {
+        "style": "lowercase"
+      }
+    ],
+    "void-style": [
+      "error",
+      {
+        "style": "selfclose"
+      }
+    ],
+    "require-sri": [
+      "error",
+      {
+        "target": "crossorigin"
+      }
+    ],
+    "form-dup-name": [
+      "error",
+      {
+        "shared": ["radio", "checkbox", "button", "reset", "submit"]
+      }
+    ]
+  }
+}

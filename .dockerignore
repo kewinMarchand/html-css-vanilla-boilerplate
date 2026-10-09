@@ -1,0 +1,10 @@
+.git
+.github
+node_modules
+test-results
+playwright-report
+.lighthouseci
+tests
+site/vendor
+site/charte-graphique
+site/js/domains/styleguide
