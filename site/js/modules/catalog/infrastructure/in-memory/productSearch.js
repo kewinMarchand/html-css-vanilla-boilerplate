@@ -1,5 +1,6 @@
-import { EXPOSURES, SIZES } from './catalogQuery.js'
-import { branchSlugs, childrenOf } from './categoryTree.js'
+import { EXPOSURES, SIZES } from '../../domain/catalogQuery.js'
+import { branchSlugs, childrenOf } from '../../domain/categoryTree.js'
+import { eurosToCents } from '../../domain/price.js'
 
 export const ITEMS_PER_PAGE = 12
 
@@ -9,8 +10,8 @@ const matchers = (query) => ({
   exposure: (product) => !query.exposures.length || query.exposures.includes(product.exposure),
   size: (product) => !query.sizes.length || query.sizes.includes(product.size),
   others: (product) =>
-    (query.priceMin === null || product.price >= query.priceMin * 100) &&
-    (query.priceMax === null || product.price <= query.priceMax * 100) &&
+    (query.priceMin === null || product.price >= eurosToCents(query.priceMin)) &&
+    (query.priceMax === null || product.price <= eurosToCents(query.priceMax)) &&
     (!query.inStock || product.inStock),
 })
 
@@ -68,19 +69,3 @@ export const searchCatalog = ({ products, categories, categorySlug, query }) => 
     }),
   }
 }
-
-export const paginationWindow = (current, total) => {
-  if (total <= 7) return Array.from({ length: total }, (_, index) => index + 1)
-  const pages = [1, current - 1, current, current + 1, total].filter(
-    (page, index, list) => page >= 1 && page <= total && list.indexOf(page) === index,
-  )
-  return pages.flatMap((page, index) =>
-    index > 0 && page - pages[index - 1] > 1 ? ['…', page] : [page],
-  )
-}
-
-const PRICE_FORMAT = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' })
-
-export const formatPrice = (cents) => PRICE_FORMAT.format(cents / 100)
-
-export const formatResultsCount = (total) => `${total} ${total > 1 ? 'produits' : 'produit'}`

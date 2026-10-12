@@ -7,7 +7,7 @@ import {
   parseCategorySlugs,
   resolveCategoryPath,
 } from '../../site/js/modules/catalog/domain/categoryPath.js'
-import { CATEGORIES } from '../../site/js/modules/catalog/infrastructure/catalogData.js'
+import { CATEGORIES } from '../../site/js/modules/catalog/infrastructure/in-memory/catalogData.js'
 
 describe('chemin de catégorie', () => {
   it('construit l’URL d’une suite de slugs', () => {

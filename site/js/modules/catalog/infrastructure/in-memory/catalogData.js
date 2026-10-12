@@ -1,3 +1,5 @@
+import { Price } from '../../domain/price.js'
+
 export const CATEGORIES = [
   { slug: 'plantes-interieur', name: "Plantes d'intérieur", parentSlug: null, position: 1 },
   { slug: 'feuillages', name: 'Feuillages', parentSlug: 'plantes-interieur', position: 2 },
@@ -25,7 +27,7 @@ export const CATEGORIES = [
   { slug: 'nenuphars', name: 'Nénuphars', parentSlug: 'plantes-aquatiques', position: 14 },
 ]
 
-export const PRODUCTS = [
+const PRODUCT_ROWS = [
   {
     id: 1,
     slug: 'monstera-deliciosa',
@@ -291,3 +293,8 @@ export const PRODUCTS = [
     image: 12,
   },
 ]
+
+export const PRODUCTS = PRODUCT_ROWS.map((product) => ({
+  ...product,
+  price: Price.fromCents(product.price),
+}))

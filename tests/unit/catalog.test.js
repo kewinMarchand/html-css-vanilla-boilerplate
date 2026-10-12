@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { CATEGORIES, PRODUCTS } from '../../site/js/modules/catalog/infrastructure/catalogData.js'
+import {
+  CATEGORIES,
+  PRODUCTS,
+} from '../../site/js/modules/catalog/infrastructure/in-memory/catalogData.js'
 import {
   clearFilters,
   countActiveFilters,
@@ -13,12 +16,11 @@ import {
 } from '../../site/js/modules/catalog/domain/catalogQuery.js'
 import { activeFilters } from '../../site/js/modules/catalog/ui/activeFilters.js'
 import {
-  formatPrice,
-  formatResultsCount,
-  paginationWindow,
   searchCatalog,
   sortProducts,
-} from '../../site/js/modules/catalog/domain/catalogSearch.js'
+} from '../../site/js/modules/catalog/infrastructure/in-memory/productSearch.js'
+import { formatResultsCount } from '../../site/js/modules/catalog/ui/labels.js'
+import { paginationWindow } from '../../site/js/modules/catalog/ui/pagination.js'
 
 const search = (categorySlug, changes = {}) =>
   searchCatalog({
@@ -128,8 +130,7 @@ describe('pagination et formats', () => {
     assert.deepEqual(paginationWindow(10, 10), [1, '…', 9, 10])
   })
 
-  it('formate les prix et les compteurs', () => {
-    assert.equal(formatPrice(3490).replace(/\s/g, ' '), '34,90 €')
+  it('formate les compteurs', () => {
     assert.equal(formatResultsCount(1), '1 produit')
     assert.equal(formatResultsCount(12), '12 produits')
   })

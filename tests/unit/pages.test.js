@@ -6,7 +6,11 @@ import { describe, it } from 'node:test'
 
 import { complianceStatus } from '../../lib/accessibilityCompliance.js'
 import { breadcrumbTrail } from '../../lib/breadcrumb.js'
-import { CATEGORIES } from '../../site/js/modules/catalog/infrastructure/catalogData.js'
+import { formatPrice } from '../../site/js/modules/catalog/domain/price.js'
+import {
+  CATEGORIES,
+  PRODUCTS,
+} from '../../site/js/modules/catalog/infrastructure/in-memory/catalogData.js'
 import { listCategoryPaths } from '../../site/js/modules/catalog/domain/categoryPath.js'
 
 const ROOT = new URL('../../', import.meta.url).pathname
@@ -130,6 +134,21 @@ describe('sitemap et plan du site', () => {
         PAGES.some((page) => page.route === route),
         route,
       )
+  })
+
+  it('affiche dans chaque carte produit le prix formaté du jeu de données', () => {
+    const cards = PAGES.filter((page) => page.route.startsWith('/catalogue')).flatMap(
+      ({ html }) => [
+        ...html.matchAll(
+          /data-product-id="(\d+)"[\s\S]*?data-testid="catalog-product-price">([^<]+)</g,
+        ),
+      ],
+    )
+    assert.ok(cards.length > 0)
+    for (const [, id, price] of cards) {
+      const product = PRODUCTS.find((item) => item.id === Number(id))
+      assert.equal(text(price), formatPrice(product.price).replace(/\s/g, ' '), product.name)
+    }
   })
 
   it('a une page statique pour chaque chemin de catégorie, et aucune autre', () => {

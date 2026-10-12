@@ -11,8 +11,9 @@ import {
   SIZES,
   withFilters,
 } from '../domain/catalogQuery.js'
-import { formatResultsCount, paginationWindow } from '../domain/catalogSearch.js'
 import { activeFilters } from './activeFilters.js'
+import { formatResultsCount } from './labels.js'
+import { paginationWindow } from './pagination.js'
 
 const root = document.querySelector('[data-catalog]')
 const $ = (selector) => root.querySelector(selector)

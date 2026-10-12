@@ -1,5 +1,5 @@
-import { searchCatalog } from '../domain/catalogSearch.js'
-import { CATEGORIES, PRODUCTS } from './catalogData.js'
+import { CATEGORIES, PRODUCTS } from './in-memory/catalogData.js'
+import { searchCatalog } from './in-memory/productSearch.js'
 
 const LATENCY_MS = 300
 

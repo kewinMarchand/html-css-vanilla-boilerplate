@@ -70,9 +70,11 @@ site/                        racine servie telle quelle
   css/main.css               feuille unique : reset, tokens, base, layout, components, utilities
   js/
     modules/<module>/        catalog, contact, task : un sous-domaine métier chacun
-      domain/                types et fonctions pures, testés unitairement
+      domain/                fonctions pures et value objects (CatalogQuery, CategoryPath, Price)
+      application/           catalogue seulement : cas d'utilisation loadCatalogPage
       infrastructure/        données en mémoire avec latence (remplacées par l'API au branchement)
-      ui/                    point d'entrée chargé par la page, branchement au DOM
+        in-memory/           catalogue : jeu de données et recherche qui simule l'API
+      ui/                    point d'entrée chargé par la page, libellés, branchement au DOM
     views/styleguide/        charte graphique (développement seulement)
     shared/                  socle : mode renforcé, menu de catégories, modale, latestOnly
       carousel/              seul fichier qui importe Embla
