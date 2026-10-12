@@ -6,8 +6,8 @@ import { describe, it } from 'node:test'
 
 import { complianceStatus } from '../../lib/accessibilityCompliance.js'
 import { breadcrumbTrail } from '../../lib/breadcrumb.js'
-import { CATEGORIES } from '../../site/js/domains/catalog/api/catalogData.js'
-import { categoryPath } from '../../site/js/domains/catalog/common/models/catalogSearch.js'
+import { CATEGORIES } from '../../site/js/modules/catalog/infrastructure/catalogData.js'
+import { categoryPath } from '../../site/js/modules/catalog/domain/catalogSearch.js'
 
 const ROOT = new URL('../../', import.meta.url).pathname
 const SITE_DIR = join(ROOT, 'site')

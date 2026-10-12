@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { latestOnly, STALE } from '../../site/js/core/latestOnly.js'
+import { latestOnly, STALE } from '../../site/js/shared/latestOnly.js'
 
 const deferred = () => {
   let resolve

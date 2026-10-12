@@ -6,7 +6,7 @@ import {
   formatDoneCount,
   formatVisibleCount,
   splitOnMatch,
-} from '../../site/js/domains/tasks/common/models/tasks.js'
+} from '../../site/js/modules/task/domain/tasks.js'
 
 const TASKS = [
   { id: '1', title: 'Brancher la vraie API', done: false },

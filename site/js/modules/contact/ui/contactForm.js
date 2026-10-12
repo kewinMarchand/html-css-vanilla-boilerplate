@@ -1,5 +1,5 @@
-import { sendContactMessage } from '../api/sendContactMessage.js'
-import { validateField } from '../common/models/contactSchema.js'
+import { sendContactMessage } from '../infrastructure/sendContactMessage.js'
+import { validateField } from '../domain/contactSchema.js'
 
 const form = document.querySelector('[data-contact-form]')
 const status = form.querySelector('[data-contact-status]')

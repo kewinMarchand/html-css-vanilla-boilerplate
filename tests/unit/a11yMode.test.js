@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { A11Y_MODE_KEY, isEnhanced, setA11yMode } from '../../site/js/core/a11yMode.js'
+import { A11Y_MODE_KEY, isEnhanced, setA11yMode } from '../../site/js/shared/a11yMode.js'
 
 const fakeButton = () => ({
   attributes: {},

@@ -1,11 +1,6 @@
-import { findAllTasks } from '../api/tasksRepository.js'
-import { TasksLoadError } from '../common/exceptions/TasksLoadError.js'
-import {
-  filterTasks,
-  formatDoneCount,
-  formatVisibleCount,
-  splitOnMatch,
-} from '../common/models/tasks.js'
+import { findAllTasks } from '../infrastructure/tasksRepository.js'
+import { TasksLoadError } from '../infrastructure/TasksLoadError.js'
+import { filterTasks, formatDoneCount, formatVisibleCount, splitOnMatch } from '../domain/tasks.js'
 
 const state = document.querySelector('[data-tasks-state]')
 const scenario = new URLSearchParams(location.search).get('scenario')

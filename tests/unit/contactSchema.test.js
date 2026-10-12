@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { validateField } from '../../site/js/domains/contact/common/models/contactSchema.js'
+import { validateField } from '../../site/js/modules/contact/domain/contactSchema.js'
 
 describe('validation du formulaire de contact', () => {
   it('accepte un message complet', () => {

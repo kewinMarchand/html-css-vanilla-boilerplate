@@ -1,9 +1,12 @@
-qa: lint format-check test-unit ## QA rapide : HTML, CSS, format, tests unitaires
+qa: lint arch-selftest format-check test-unit ## QA rapide : HTML, CSS, architecture, auto-test des règles, format, tests unitaires
 
 qa-full: qa test-e2e test-a11y metrics test-prod ## QA complète : QA rapide + e2e + a11y + Lighthouse + image de prod
 
-lint: ## html-validate et stylelint
+lint: ## html-validate, stylelint et règles d'architecture (dependency-cruiser)
 	yarn lint
+
+arch-selftest: ## Écrit des violations volontaires des règles d'architecture, exige leur détection, puis les retire
+	node scripts/arch-selftest.js
 
 lint-fix: ## stylelint avec correction automatique
 	yarn lint:fix
@@ -31,4 +34,4 @@ metrics: ## Métriques Lighthouse CI (perf ≥ 90, a11y et SEO = 100)
 test-prod: ## Vérifie l'image Docker de production (codes HTTP, en-têtes, maintenance)
 	sh scripts/test-prod.sh
 
-.PHONY: qa qa-full lint lint-fix format format-check test test-unit test-e2e test-a11y metrics test-prod
+.PHONY: qa qa-full lint arch-selftest lint-fix format format-check test test-unit test-e2e test-a11y metrics test-prod

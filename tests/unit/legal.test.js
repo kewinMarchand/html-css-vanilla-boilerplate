@@ -3,10 +3,7 @@ import { describe, it } from 'node:test'
 
 import { complianceStatus } from '../../lib/accessibilityCompliance.js'
 import { breadcrumbJsonLd, breadcrumbTrail } from '../../lib/breadcrumb.js'
-import {
-  contrastLevel,
-  contrastRatio,
-} from '../../site/js/domains/styleguide/common/models/contrast.js'
+import { contrastLevel, contrastRatio } from '../../site/js/views/styleguide/contrast.js'
 
 describe('état de conformité RGAA', () => {
   it('est non conforme sans audit', () => {

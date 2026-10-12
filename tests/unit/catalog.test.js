@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import { CATEGORIES, PRODUCTS } from '../../site/js/domains/catalog/api/catalogData.js'
+import { CATEGORIES, PRODUCTS } from '../../site/js/modules/catalog/infrastructure/catalogData.js'
 import {
   activeFilters,
   clearFilters,
@@ -11,7 +11,7 @@ import {
   parseQuery,
   serializeQuery,
   withFilters,
-} from '../../site/js/domains/catalog/common/models/catalogQuery.js'
+} from '../../site/js/modules/catalog/domain/catalogQuery.js'
 import {
   categoryPath,
   formatPrice,
@@ -19,7 +19,7 @@ import {
   paginationWindow,
   searchCatalog,
   sortProducts,
-} from '../../site/js/domains/catalog/common/models/catalogSearch.js'
+} from '../../site/js/modules/catalog/domain/catalogSearch.js'
 
 const search = (categorySlug, changes = {}) =>
   searchCatalog({

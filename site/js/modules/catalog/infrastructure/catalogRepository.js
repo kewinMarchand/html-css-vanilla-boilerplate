@@ -1,4 +1,4 @@
-import { searchCatalog } from '../common/models/catalogSearch.js'
+import { searchCatalog } from '../domain/catalogSearch.js'
 import { CATEGORIES, PRODUCTS } from './catalogData.js'
 
 const LATENCY_MS = 300

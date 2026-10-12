@@ -1,4 +1,4 @@
-import { contrastLevel, contrastRatio } from '../common/models/contrast.js'
+import { contrastLevel, contrastRatio } from './contrast.js'
 
 const root = document.querySelector('[data-styleguide]')
 const canvas = document.createElement('canvas')

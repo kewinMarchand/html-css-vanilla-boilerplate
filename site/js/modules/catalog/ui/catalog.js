@@ -1,7 +1,7 @@
-import { latestOnly, STALE } from '/js/core/latestOnly.js'
+import { latestOnly, STALE } from '/js/shared/latestOnly.js'
 
-import { searchProducts } from '../api/catalogRepository.js'
-import { CatalogLoadError } from '../common/exceptions/CatalogLoadError.js'
+import { searchProducts } from '../infrastructure/catalogRepository.js'
+import { CatalogLoadError } from './CatalogLoadError.js'
 import {
   activeFilters,
   clearFilters,
@@ -12,8 +12,8 @@ import {
   serializeQuery,
   SIZES,
   withFilters,
-} from '../common/models/catalogQuery.js'
-import { formatResultsCount, paginationWindow } from '../common/models/catalogSearch.js'
+} from '../domain/catalogQuery.js'
+import { formatResultsCount, paginationWindow } from '../domain/catalogSearch.js'
 
 const root = document.querySelector('[data-catalog]')
 const $ = (selector) => root.querySelector(selector)

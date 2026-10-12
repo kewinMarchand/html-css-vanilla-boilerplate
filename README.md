@@ -23,6 +23,7 @@ Point de départ pour un site en **HTML, CSS et JavaScript natifs**, sans framew
 | Embla Carousel 8                   | Seule dépendance d'exécution, servie depuis `site/vendor/`          |
 | `scripts/serve.js`                 | Serveur statique de développement, sans dépendance                  |
 | html-validate, stylelint, Prettier | Validation HTML, CSS et format                                      |
+| dependency-cruiser                 | Règles de dépendance entre modules et couches                       |
 | `node:test`                        | Tests unitaires, sans dépendance                                    |
 | Playwright + axe-core              | Tests end-to-end et accessibilité, desktop et mobile, deux modes    |
 | Lighthouse CI                      | Performance, accessibilité, SEO                                     |
@@ -48,16 +49,17 @@ L'URL publique est `https://www.example.com` (domaine réservé aux exemples). E
 
 `make help` liste toutes les commandes. Les principales :
 
-| Commande                               | Effet                                                                                            |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `make up`                              | Serveur de développement sur le port 3130                                                        |
-| `make qa`                              | QA rapide : html-validate, stylelint, Prettier, tests unitaires                                  |
-| `make qa-full`                         | QA complète : QA rapide, e2e, accessibilité, Lighthouse, image de production                     |
-| `make test-e2e`                        | Playwright, desktop et mobile                                                                    |
-| `make test-a11y`                       | axe-core, WCAG 2.1 AA, chaque page dans les deux modes d'affichage                               |
-| `make metrics`                         | Lighthouse CI sur le port 3250 : échoue sous 90 en performance, sous 100 en accessibilité et SEO |
-| `make test-prod`                       | Construit l'image nginx et vérifie codes HTTP, en-têtes et mode maintenance                      |
-| `make docker-build` / `make docker-up` | Image de production, sur le port `PORT` (8080 par défaut)                                        |
+| Commande                               | Effet                                                                                                    |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `make up`                              | Serveur de développement sur le port 3130                                                                |
+| `make qa`                              | QA rapide : html-validate, stylelint, règles d'architecture et leur auto-test, Prettier, tests unitaires |
+| `make arch-selftest`                   | Écrit une violation de chaque règle d'architecture, exige sa détection, puis la retire                   |
+| `make qa-full`                         | QA complète : QA rapide, e2e, accessibilité, Lighthouse, image de production                             |
+| `make test-e2e`                        | Playwright, desktop et mobile                                                                            |
+| `make test-a11y`                       | axe-core, WCAG 2.1 AA, chaque page dans les deux modes d'affichage                                       |
+| `make metrics`                         | Lighthouse CI sur le port 3250 : échoue sous 90 en performance, sous 100 en accessibilité et SEO         |
+| `make test-prod`                       | Construit l'image nginx et vérifie codes HTTP, en-têtes et mode maintenance                              |
+| `make docker-build` / `make docker-up` | Image de production, sur le port `PORT` (8080 par défaut)                                                |
 
 ## Architecture
 
@@ -67,23 +69,24 @@ site/                        racine servie telle quelle
   404.html, 50x.html, 503.html
   css/main.css               feuille unique : reset, tokens, base, layout, components, utilities
   js/
-    core/                    socle : mode renforcé, menu de catégories, modale
-    features/carousel/       brique agnostique, seul fichier qui importe Embla
-    domains/<domaine>/
-      api/                   données en mémoire avec latence
-      common/models/         fonctions pures, testées unitairement
-      common/exceptions/     erreurs métier en français
-      ui/                    branchement au DOM de la page
+    modules/<module>/        catalog, contact, task : un sous-domaine métier chacun
+      domain/                types et fonctions pures, testés unitairement
+      infrastructure/        données en mémoire avec latence (remplacées par l'API au branchement)
+      ui/                    point d'entrée chargé par la page, branchement au DOM
+    views/styleguide/        charte graphique (développement seulement)
+    shared/                  socle : mode renforcé, menu de catégories, modale, latestOnly
+      carousel/              seul fichier qui importe Embla
   vendor/                    Embla, copié par `yarn install` (non versionné)
   images/, icons/            médias AVIF et WebP, sprite d'icônes SVG
 lib/                         fonctions d'outillage testées (fil d'Ariane, conformité RGAA)
-scripts/                     serveur de développement, copie d'Embla, contrôle de l'image de prod
+scripts/                     serveur de développement, copie d'Embla, contrôle de l'image de prod,
+                             auto-test des règles d'architecture
 docker/                      configuration nginx et en-têtes de sécurité
 tests/unit, tests/e2e, tests/a11y
 site.config.json             nom, URL, navigation, éditeur, hébergeur, état d'audit
 ```
 
-Le sens des dépendances est `domains/` vers `features/` vers `core/`. Une feature ne connaît aucune donnée métier : le carrousel reçoit ses diapositives dans le HTML.
+L'architecture suit le document commun `ARCHITECTURE-DDD.md` (forme vanilla). Chaque page HTML est sa propre couche de routage : elle charge par `<script type="module">` le point d'entrée `ui/` d'un module, une vue ou le socle. Un module n'importe jamais un autre module ni une vue, le socle n'importe ni module ni vue, et dans un module le domaine n'importe que lui-même. `make lint` vérifie ces règles avec dependency-cruiser, et `make arch-selftest` prouve qu'elles mordent en écrivant une violation de chacune. Le carrousel du socle ne connaît aucune donnée métier : il reçoit ses diapositives dans le HTML.
 
 ### Sans build : ce qui est assumé
 
@@ -108,7 +111,7 @@ Il pose `data-js` et le mode renforcé avant le premier rendu. La CSP l'autorise
 
 ### Brancher la vraie API
 
-Seuls les fichiers `api/` des domaines changent : `tasksRepository.js`, `catalogRepository.js`, `sendContactMessage.js`. Le paramètre d'URL `scenario=error|empty` des démos devient l'en-tête `X-Scenario` de l'API de test.
+Seuls les fichiers `infrastructure/` des modules changent : `tasksRepository.js`, `catalogRepository.js`, `sendContactMessage.js`. Le paramètre d'URL `scenario=error|empty` des démos devient l'en-tête `X-Scenario` de l'API de test.
 
 ## CSS natif utilisé
 
