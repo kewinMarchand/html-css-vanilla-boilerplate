@@ -14,6 +14,9 @@ install: ## Installe les dépendances, copie Embla dans site/vendor et installe 
 up: ## Lance le serveur statique de développement (http://localhost:3130)
 	yarn dev
 
+icons: ## Génère site/icons.svg et la liste des noms depuis icons.json (noms Lucide)
+	node scripts/icons.js
+
 docker-build: ## Construit l'image nginx de production
 	docker compose build
 
@@ -23,4 +26,4 @@ docker-up: ## Lance l'image de production (port PORT, 8080 par défaut)
 docker-down: ## Arrête le conteneur
 	docker compose down
 
-.PHONY: help install up docker-build docker-up docker-down
+.PHONY: help install up icons docker-build docker-up docker-down

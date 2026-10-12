@@ -142,6 +142,8 @@ Les styles du catalogue et des tâches restent dans `site/css/main.css` (section
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `make up`                              | Serveur de développement sur le port 3130                                                                |
 | `make qa`                              | QA rapide : html-validate, stylelint, règles d'architecture et leur auto-test, Prettier, tests unitaires |
+| `make icons`                           | Génère `site/icons.svg` et la liste des noms depuis `icons.json`                                         |
+| `make icons-check`                     | Échoue si le sprite est périmé ou si le site cite une icône absente de `icons.json`                      |
 | `make arch-selftest`                   | Écrit une violation de chaque règle d'architecture, exige sa détection, puis la retire                   |
 | `make qa-full`                         | QA complète : QA rapide, e2e, accessibilité, Lighthouse, image de production                             |
 | `make test-e2e`                        | Playwright, desktop et mobile                                                                            |
@@ -169,7 +171,8 @@ site/                        racine servie par nginx, avec inclusions côté ser
     shared/                  socle : mode renforcé, menu de catégories, modale, latestOnly
       carousel/              seul fichier qui importe Embla
   vendor/                    Embla, copié par `yarn install` (non versionné)
-  images/, icons/            médias AVIF et WebP, sprite d'icônes SVG
+  icons.svg                  sprite d'icônes Lucide, généré par `make icons`
+  images/, icons/            médias AVIF et WebP, icônes de l'application
 lib/                         fonctions d'outillage testées (fil d'Ariane, conformité RGAA)
 scripts/                     serveur de développement, copie d'Embla, contrôle de l'image de prod,
                              auto-test des règles d'architecture
@@ -196,6 +199,12 @@ L'architecture suit le document commun `ARCHITECTURE-DDD.md` (forme vanilla). Ch
 3. Garder en tête de `<body>` les trois directives : `set var="page"`, puis l'inclusion du header, et celle du footer en bas. Si la page entre dans la navigation, l'ajouter à `site.config.json` et à `site/partials/header.html` (ou `footer.html`), avec sa branche `aria-current`.
 4. L'ajouter à `sitemap.xml` et au plan du site, à `.lighthouserc.json` si elle doit être mesurée.
 5. Écrire son test dans `tests/e2e/`.
+
+### Ajouter une icône
+
+1. Ajouter son nom Lucide (lucide.dev) à `icons.json`.
+2. `make icons` régénère `site/icons.svg` et `site/js/shared/iconNames.js`.
+3. L'utiliser : `<svg class="icon" aria-hidden="true" focusable="false" width="20" height="20"><use href="/icons.svg#nom"></use></svg>`. Une icône porteuse de sens prend `role="img"` et un nom accessible au lieu d'`aria-hidden`.
 
 ### Changer le script inline du `<head>`
 

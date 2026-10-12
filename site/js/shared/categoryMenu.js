@@ -118,7 +118,7 @@ const SVG_NS = 'http://www.w3.org/2000/svg'
 const iconNode = (name) => {
   const svg = document.createElementNS(SVG_NS, 'svg')
   const use = document.createElementNS(SVG_NS, 'use')
-  use.setAttribute('href', `/icons/sprite.svg#${name}`)
+  use.setAttribute('href', `/icons.svg#${name}`)
   svg.setAttribute('class', 'icon')
   svg.setAttribute('aria-hidden', 'true')
   svg.setAttribute('width', '20')
@@ -142,14 +142,14 @@ const renderLevel = () => {
     tabIndex: -1,
     textContent: level.label,
   })
-  const close = element('button', { type: 'button', className: 'icon-button' }, [iconNode('close')])
+  const close = element('button', { type: 'button', className: 'icon-button' }, [iconNode('x')])
   close.setAttribute('aria-label', 'Fermer le menu')
   close.addEventListener('click', () => mobileMenu.close())
 
   const body = element('div', { className: 'drawer-body' })
   if (parent) {
     const back = element('button', { type: 'button', className: 'mobile-menu-back' }, [
-      iconNode('arrow-left'),
+      iconNode('chevron-left'),
       `Retour : ${parent.label}`,
     ])
     back.dataset.testid = 'layout-mobile-menu-back'
@@ -171,7 +171,7 @@ const renderLevel = () => {
   }
   for (const child of level.children) {
     if (child.children.length) {
-      const button = element('button', { type: 'button' }, [child.label, iconNode('arrow-right')])
+      const button = element('button', { type: 'button' }, [child.label, iconNode('chevron-right')])
       button.dataset.testid = `layout-mobile-menu-level-${child.href.split('/').at(-1)}`
       button.addEventListener('click', () => {
         levels = [...levels, child]

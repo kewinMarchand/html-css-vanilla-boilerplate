@@ -1,3 +1,5 @@
+import { ICON_NAMES } from '/js/shared/iconNames.js'
+
 import { contrastLevel, contrastRatio } from './contrast.js'
 
 const root = document.querySelector('[data-styleguide]')
@@ -54,6 +56,28 @@ const renderSpacing = () => {
   })
 }
 
+const SVG_NS = 'http://www.w3.org/2000/svg'
+
+const renderIcons = () => {
+  root.querySelector('[data-icon-gallery]').replaceChildren(
+    ...ICON_NAMES.map((name) => {
+      const svg = document.createElementNS(SVG_NS, 'svg')
+      const use = document.createElementNS(SVG_NS, 'use')
+      use.setAttribute('href', `/icons.svg#${name}`)
+      svg.setAttribute('class', 'icon')
+      svg.setAttribute('aria-hidden', 'true')
+      svg.setAttribute('width', '20')
+      svg.setAttribute('height', '20')
+      svg.append(use)
+      const label = document.createElement('code')
+      label.textContent = name
+      const item = document.createElement('li')
+      item.append(svg, label)
+      return item
+    }),
+  )
+}
+
 const render = () => {
   renderColors()
   renderTypography()
@@ -64,3 +88,4 @@ new MutationObserver(render).observe(document.documentElement, {
   attributeFilter: ['data-a11y-mode'],
 })
 render()
+renderIcons()
