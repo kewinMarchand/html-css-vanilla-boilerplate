@@ -94,3 +94,58 @@ test.describe('Mise en page', () => {
     await expect(breadcrumb.getByText('Feuillages')).toHaveAttribute('aria-current', 'page')
   })
 })
+
+test.describe('Header mobile compact', () => {
+  test.skip(({ isMobile }) => !isMobile, 'header compact réservé au mobile')
+
+  for (const mode of MODES) {
+    test(`tient sur une ligne à 375 px avec deux boutons icône en mode ${mode.name}`, async ({
+      page,
+    }) => {
+      if (mode.enhanced) await enableEnhancedMode(page)
+      await page.setViewportSize({ width: 375, height: 800 })
+      await page.goto('/contact')
+      const logo = await page.getByTestId('layout-logo').boundingBox()
+      const menu = page.getByTestId('layout-mobile-menu-toggle')
+      const a11y = page.getByTestId('a11y-mode-toggle')
+
+      await expect(menu).toHaveAccessibleName('Menu')
+      await expect(a11y).toHaveAccessibleName('Accessibilité renforcée')
+      for (const button of [menu, a11y]) {
+        const box = await button.boundingBox()
+        expect(box.width).toBeGreaterThanOrEqual(44)
+        expect(box.height).toBeGreaterThanOrEqual(44)
+        expect(box.x).toBeGreaterThan(logo.x + logo.width - 1)
+        expect(Math.abs(box.y + box.height / 2 - (logo.y + logo.height / 2))).toBeLessThan(
+          logo.height / 2,
+        )
+      }
+
+      await expect(menu).toHaveAttribute('aria-expanded', 'false')
+      await menu.click()
+      await expect(page.getByTestId('layout-mobile-menu')).toBeVisible()
+      await expect(menu).toHaveAttribute('aria-expanded', 'true')
+      await page.keyboard.press('Escape')
+      await expect(menu).toBeFocused()
+
+      const pressed = mode.enhanced ? 'true' : 'false'
+      await expect(a11y).toHaveAttribute('aria-pressed', pressed)
+    })
+  }
+})
+
+test.describe('Header desktop', () => {
+  test.skip(({ isMobile }) => isMobile, 'libellés visibles réservés au desktop')
+
+  test('garde le libellé visible du bouton du mode renforcé et masque le bouton Menu', async ({
+    page,
+  }) => {
+    await page.goto('/contact')
+
+    await expect(page.getByTestId('a11y-mode-toggle')).toContainText('Accessibilité renforcée')
+    await expect(page.getByTestId('a11y-mode-toggle')).toHaveAccessibleName(
+      'Accessibilité renforcée',
+    )
+    await expect(page.getByTestId('layout-mobile-menu-toggle')).toBeHidden()
+  })
+})

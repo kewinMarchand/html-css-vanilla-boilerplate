@@ -294,28 +294,30 @@
         </nav>
         <button
           type="button"
-          class="button button-secondary mobile-menu-toggle"
+          class="button button-secondary header-icon-button mobile-menu-toggle"
           aria-expanded="false"
           aria-controls="mobile-menu"
           data-mobile-menu-toggle
+          aria-label="Menu"
           data-testid="layout-mobile-menu-toggle"
         >
           <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
             <use href="/icons/sprite.svg#menu"></use>
           </svg>
-          Menu
+          <span class="header-button-label">Menu</span>
         </button>
         <button
           type="button"
-          class="button button-secondary a11y-toggle"
+          class="button button-secondary header-icon-button a11y-toggle"
           aria-pressed="false"
           data-a11y-mode-toggle
+          aria-label="Accessibilité renforcée"
           data-testid="a11y-mode-toggle"
         >
           <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
             <use href="/icons/sprite.svg#accessibility"></use>
           </svg>
-          Accessibilité renforcée
+          <span class="header-button-label">Accessibilité renforcée</span>
         </button>
       </div>
       <dialog

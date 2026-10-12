@@ -115,6 +115,23 @@ describe('pages statiques', () => {
     })
   }
 
+  it('recopie le même header dans toutes les pages, à l’état aria-current près', () => {
+    const headers = new Set(
+      PAGES.map(({ html }) =>
+        html
+          .match(/<header class="site-header"[\s\S]*?<\/header>/)[0]
+          .replace(/\s*aria-current="page"/g, ''),
+      ),
+    )
+    assert.equal(headers.size, 1)
+    const [header] = headers
+    assert.match(header, /aria-label="Menu"[\s\S]*?data-testid="layout-mobile-menu-toggle"/)
+    assert.match(
+      header,
+      /aria-label="Accessibilité renforcée"[\s\S]*?data-testid="a11y-mode-toggle"/,
+    )
+  })
+
   it('donne un titre unique à chaque page', () => {
     const titles = PAGES.map(({ html }) => text(html.match(/<title>([\s\S]*?)<\/title>/)[1]))
     assert.equal(new Set(titles).size, titles.length)

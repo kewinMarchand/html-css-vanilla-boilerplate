@@ -651,6 +651,26 @@
       & .mobile-menu-toggle:not([hidden]) {
         display: inline-flex;
       }
+
+      & .site-header-inner {
+        flex-wrap: nowrap;
+        gap: var(--space-xs);
+      }
+
+      & .logo {
+        flex: 1 1 auto;
+        min-inline-size: 0;
+      }
+
+      & .header-icon-button {
+        flex-shrink: 0;
+        inline-size: var(--tap-target);
+        padding: 0;
+      }
+
+      & .header-button-label {
+        display: none;
+      }
     }
   }
 
