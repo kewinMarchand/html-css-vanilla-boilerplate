@@ -13,7 +13,6 @@ import {
   withFilters,
 } from '../../site/js/modules/catalog/domain/catalogQuery.js'
 import {
-  categoryPath,
   formatPrice,
   formatResultsCount,
   paginationWindow,
@@ -129,13 +128,9 @@ describe('pagination et formats', () => {
     assert.deepEqual(paginationWindow(10, 10), [1, '…', 9, 10])
   })
 
-  it('formate les prix, les compteurs et les chemins', () => {
+  it('formate les prix et les compteurs', () => {
     assert.equal(formatPrice(3490).replace(/\s/g, ' '), '34,90 €')
     assert.equal(formatResultsCount(1), '1 produit')
     assert.equal(formatResultsCount(12), '12 produits')
-    assert.equal(
-      categoryPath(CATEGORIES, 'monstera'),
-      '/catalogue/plantes-interieur/feuillages/monstera',
-    )
   })
 })

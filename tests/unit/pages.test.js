@@ -7,7 +7,7 @@ import { describe, it } from 'node:test'
 import { complianceStatus } from '../../lib/accessibilityCompliance.js'
 import { breadcrumbTrail } from '../../lib/breadcrumb.js'
 import { CATEGORIES } from '../../site/js/modules/catalog/infrastructure/catalogData.js'
-import { categoryPath } from '../../site/js/modules/catalog/domain/catalogSearch.js'
+import { listCategoryPaths } from '../../site/js/modules/catalog/domain/categoryPath.js'
 
 const ROOT = new URL('../../', import.meta.url).pathname
 const SITE_DIR = join(ROOT, 'site')
@@ -40,7 +40,7 @@ const hrefsIn = (html, label) => {
 }
 const PUBLIC_ROUTES = [
   ...SITE.navigation.map((item) => item.href),
-  ...CATEGORIES.map((category) => categoryPath(CATEGORIES, category.slug)),
+  ...listCategoryPaths(CATEGORIES),
   ...SITE.legalNavigation.map((item) => item.href),
 ]
 
@@ -130,6 +130,13 @@ describe('sitemap et plan du site', () => {
         PAGES.some((page) => page.route === route),
         route,
       )
+  })
+
+  it('a une page statique pour chaque chemin de catégorie, et aucune autre', () => {
+    const catalogPages = PAGES.map((page) => page.route).filter((route) =>
+      route.startsWith('/catalogue/'),
+    )
+    assert.deepEqual(catalogPages.toSorted(), listCategoryPaths(CATEGORIES).toSorted())
   })
 
   it('est repris par le plan du site', () => {
