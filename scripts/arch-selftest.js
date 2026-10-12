@@ -23,6 +23,16 @@ const VIOLATIONS = [
     source: "import '../ui/catalog.js'\n",
   },
   {
+    rule: 'interface-vers-infrastructure',
+    file: 'site/js/modules/catalog/ui/archSelftestViolation.js',
+    source: "import '../infrastructure/catalogRepository.js'\n",
+  },
+  {
+    rule: 'application-hors-domaine-infrastructure',
+    file: 'site/js/modules/catalog/application/archSelftestViolation.js',
+    source: "import '../ui/activeFilters.js'\n",
+  },
+  {
     rule: 'module-vers-vue',
     file: 'site/js/modules/contact/ui/archSelftestViolation.js',
     source: "import '/js/views/styleguide/contrast.js'\n",

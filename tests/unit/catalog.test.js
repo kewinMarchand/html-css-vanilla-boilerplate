@@ -3,7 +3,6 @@ import { describe, it } from 'node:test'
 
 import { CATEGORIES, PRODUCTS } from '../../site/js/modules/catalog/infrastructure/catalogData.js'
 import {
-  activeFilters,
   clearFilters,
   countActiveFilters,
   DEFAULT_QUERY,
@@ -12,6 +11,7 @@ import {
   serializeQuery,
   withFilters,
 } from '../../site/js/modules/catalog/domain/catalogQuery.js'
+import { activeFilters } from '../../site/js/modules/catalog/ui/activeFilters.js'
 import {
   formatPrice,
   formatResultsCount,

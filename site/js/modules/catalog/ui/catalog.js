@@ -1,9 +1,7 @@
 import { latestOnly, STALE } from '/js/shared/latestOnly.js'
 
-import { searchProducts } from '../infrastructure/catalogRepository.js'
-import { CatalogLoadError } from './CatalogLoadError.js'
+import { loadCatalogPage } from '../application/loadCatalogPage.js'
 import {
-  activeFilters,
   clearFilters,
   countActiveFilters,
   EXPOSURES,
@@ -14,6 +12,7 @@ import {
   withFilters,
 } from '../domain/catalogQuery.js'
 import { formatResultsCount, paginationWindow } from '../domain/catalogSearch.js'
+import { activeFilters } from './activeFilters.js'
 
 const root = document.querySelector('[data-catalog]')
 const $ = (selector) => root.querySelector(selector)
@@ -171,10 +170,6 @@ const renderPagination = (result) => {
 }
 
 const renderResult = (result) => {
-  if (result.page !== query.page) {
-    query = { ...query, page: result.page }
-    history.replaceState(null, '', urlFor(query))
-  }
   list.removeAttribute('aria-busy')
   list.replaceChildren(...result.items.map((product) => productNodes.get(product.id)))
   state.replaceChildren(...(result.total ? [] : [fromTemplate('catalog-empty-template')]))
@@ -199,13 +194,7 @@ const renderError = (message) => {
   state.querySelector('[data-catalog-retry]').addEventListener('click', () => load())
 }
 
-const fetchResult = latestOnly(async () => {
-  try {
-    return await searchProducts({ categorySlug, query, scenario })
-  } catch {
-    throw new CatalogLoadError()
-  }
-})
+const loadLatestPage = latestOnly(() => loadCatalogPage({ categorySlug, query, scenario }))
 
 const load = async ({ showLoading = true } = {}) => {
   if (showLoading) {
@@ -213,12 +202,17 @@ const load = async ({ showLoading = true } = {}) => {
     state.replaceChildren(fromTemplate('catalog-loading-template'))
     count.textContent = 'Chargement des produits…'
   }
-  try {
-    const result = await fetchResult()
-    if (result !== STALE) renderResult(result)
-  } catch (error) {
-    renderError(error.message)
+  const page = await loadLatestPage()
+  if (page === STALE) return
+  if (page.status === 'error') {
+    renderError(page.message)
+    return
   }
+  if (page.query.page !== query.page) {
+    query = page.query
+    history.replaceState(null, '', urlFor(query))
+  }
+  renderResult(page.result)
 }
 
 const navigate = async (nextQuery, { focusTitle = false } = {}) => {

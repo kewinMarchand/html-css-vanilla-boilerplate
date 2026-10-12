@@ -3,9 +3,6 @@ export const SIZES = ['S', 'M', 'L']
 export const SORTS = ['pertinence', 'prix-asc', 'prix-desc', 'nom']
 export const VIEWS = ['grille', 'liste']
 
-export const EXPOSURE_LABELS = { soleil: 'Soleil', 'mi-ombre': 'Mi-ombre', ombre: 'Ombre' }
-export const SIZE_LABELS = { S: 'Petite (S)', M: 'Moyenne (M)', L: 'Grande (L)' }
-
 export const DEFAULT_QUERY = Object.freeze({
   exposures: [],
   sizes: [],
@@ -70,21 +67,3 @@ export const countActiveFilters = (query) =>
 
 export const isFiltered = (query) =>
   countActiveFilters(query) > 0 || query.sort !== DEFAULT_QUERY.sort
-
-export const activeFilters = (query) => [
-  ...query.exposures.map((value) => ({
-    label: EXPOSURE_LABELS[value],
-    remove: (q) => ({ exposures: q.exposures.filter((item) => item !== value) }),
-  })),
-  ...query.sizes.map((value) => ({
-    label: SIZE_LABELS[value],
-    remove: (q) => ({ sizes: q.sizes.filter((item) => item !== value) }),
-  })),
-  ...(query.priceMin === null
-    ? []
-    : [{ label: `Prix minimum : ${query.priceMin} €`, remove: () => ({ priceMin: null }) }]),
-  ...(query.priceMax === null
-    ? []
-    : [{ label: `Prix maximum : ${query.priceMax} €`, remove: () => ({ priceMax: null }) }]),
-  ...(query.inStock ? [{ label: 'En stock', remove: () => ({ inStock: false }) }] : []),
-]
