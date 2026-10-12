@@ -4,4 +4,4 @@ Une décision structurante par fichier, numérotée, jamais réécrite une fois 
 
 | ADR                                          | Décision                                                    | Statut   |
 | -------------------------------------------- | ----------------------------------------------------------- | -------- |
-| [0001](0001-inclusions-serveur-nginx-ssi.md) | Header et footer partagés par inclusions côté serveur (SSI) | Proposée |
+| [0001](0001-inclusions-serveur-nginx-ssi.md) | Header et footer partagés par inclusions côté serveur (SSI) | Acceptée |

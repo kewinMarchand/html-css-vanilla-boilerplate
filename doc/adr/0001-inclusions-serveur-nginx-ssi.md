@@ -1,6 +1,6 @@
 # 0001 — Header et footer partagés par inclusions côté serveur (SSI)
 
-- **Statut** : Proposée
+- **Statut** : Acceptée
 - **Date** : 2026-10-12
 - **Décideurs** : Kewin Marchand
 
