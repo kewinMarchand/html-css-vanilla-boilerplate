@@ -1,9 +1,11 @@
-import { createReadStream } from 'node:fs'
+import { createReadStream, readFileSync } from 'node:fs'
 import { readFile, stat } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { extname, join, normalize } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
+
+import { renderSsi } from './ssi.js'
 
 const ROOT = fileURLToPath(new URL('../site/', import.meta.url))
 const HEADERS_FILE = fileURLToPath(new URL('../docker/security-headers.conf', import.meta.url))
@@ -11,6 +13,7 @@ const PORT = Number(process.argv[2] ?? 3130)
 const MAINTENANCE = process.env.MAINTENANCE === '1'
 const ERROR_TEST_ROUTE = '/_erreur-test'
 const STYLEGUIDE_MARKER = '<!-- dev:styleguide -->'
+const PARTIALS = '/partials/'
 const STYLEGUIDE_LINK = '<p><a href="/charte-graphique">Charte graphique (développement)</a></p>'
 
 const TYPES = {
@@ -56,7 +59,7 @@ const decodePath = (pathname) => {
 
 const resolveFile = async (pathname) => {
   const decoded = decodePath(pathname)
-  if (decoded === undefined) return undefined
+  if (decoded === undefined || decoded.startsWith(PARTIALS)) return undefined
   const path = join(ROOT, normalize(decoded))
   if (!path.startsWith(ROOT)) return undefined
   for (const candidate of [path, join(path, 'index.html')]) {
@@ -83,7 +86,10 @@ const send = async (request, response, status, file, extraHeaders = {}) => {
 
   let body = await readFile(file)
   if (extension === '.html') {
-    body = Buffer.from(body.toString('utf8').replace(STYLEGUIDE_MARKER, STYLEGUIDE_LINK))
+    const html = renderSsi(body.toString('utf8'), {
+      readInclude: (path) => readFileSync(join(ROOT, path), 'utf8'),
+    })
+    body = Buffer.from(html.replace(STYLEGUIDE_MARKER, STYLEGUIDE_LINK))
   }
   if (/\bgzip\b/.test(request.headers['accept-encoding'] ?? '')) {
     body = gzipSync(body)

@@ -6,3 +6,4 @@ yarn.lock
 site/vendor
 site/images
 site/icons/*.png
+.cache

@@ -25,6 +25,7 @@
       {
         "shared": ["radio", "checkbox", "button", "reset", "submit"]
       }
-    ]
+    ],
+    "no-trailing-whitespace": "off"
   }
 }

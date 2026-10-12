@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
-import { readdirSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { describe, it } from 'node:test'
 
 import { complianceStatus } from '../../lib/accessibilityCompliance.js'
+import { renderSsi, sitePages } from '../../scripts/ssi.js'
 import { breadcrumbTrail } from '../../lib/breadcrumb.js'
 import { formatPrice } from '../../site/js/modules/catalog/domain/price.js'
 import {
@@ -19,17 +20,14 @@ const SITE = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'))
 const HEADERS = readFileSync(join(ROOT, 'docker/security-headers.conf'), 'utf8')
 const ERROR_PAGES = ['/404', '/405', '/50x', '/503']
 
-const htmlFiles = (dir) =>
-  readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const path = join(dir, entry.name)
-    if (entry.isDirectory()) return entry.name === 'vendor' ? [] : htmlFiles(path)
-    return entry.name.endsWith('.html') ? [path] : []
-  })
-
-const PAGES = htmlFiles(SITE_DIR).map((file) => {
+const PAGES = sitePages(SITE_DIR).map((file) => {
   const route =
     `/${relative(SITE_DIR, file)}`.replace(/\/?index\.html$/, '').replace(/\.html$/, '') || '/'
-  return { file, route, html: readFileSync(file, 'utf8') }
+  const source = readFileSync(file, 'utf8')
+  const html = renderSsi(source, {
+    readInclude: (path) => readFileSync(join(SITE_DIR, path), 'utf8'),
+  })
+  return { file, route, source, html }
 })
 
 const attribute = (html, pattern) => html.match(pattern)?.[1]
@@ -115,21 +113,28 @@ describe('pages statiques', () => {
     })
   }
 
-  it('recopie le même header dans toutes les pages, à l’état aria-current près', () => {
-    const headers = new Set(
-      PAGES.map(({ html }) =>
-        html
-          .match(/<header class="site-header"[\s\S]*?<\/header>/)[0]
-          .replace(/\s*aria-current="page"/g, ''),
-      ),
-    )
-    assert.equal(headers.size, 1)
-    const [header] = headers
-    assert.match(header, /aria-label="Menu"[\s\S]*?data-testid="layout-mobile-menu-toggle"/)
-    assert.match(
-      header,
-      /aria-label="Accessibilité renforcée"[\s\S]*?data-testid="a11y-mode-toggle"/,
-    )
+  it('inclut le header et le footer partagés après avoir nommé la page', () => {
+    for (const { route, source } of PAGES) {
+      const directives = [...source.matchAll(/<!--#\s*(\w+)[^>]*-->/g)].map((match) => match[0])
+      assert.equal(directives.length, 3, route)
+      assert.match(directives[0], /^<!--# set var="page" value="[a-z-]+" -->$/, route)
+      assert.equal(directives[1], '<!--# include virtual="/partials/header.html" -->', route)
+      assert.equal(directives[2], '<!--# include virtual="/partials/footer.html" -->', route)
+      assert.ok(!source.includes('<header class="site-header"'), route)
+    }
+  })
+
+  it('marque dans le header et le footer le lien de la page courante, et lui seul', () => {
+    for (const { route, html } of PAGES) {
+      const chrome = [
+        html.match(/<header class="site-header"[\s\S]*?<\/header>/)[0],
+        html.match(/<footer class="site-footer">[\s\S]*?<\/footer>/)[0],
+      ].join('')
+      const current = [...chrome.matchAll(/<a\b[^>]*\shref="([^"]+)"[^>]*aria-current="page"/g)]
+      for (const [, href] of current) assert.equal(href, route, route)
+    }
+    const home = PAGES.find((page) => page.route === '/').html
+    assert.match(home, /data-testid="layout-logo" aria-current="page"/)
   })
 
   it('donne un titre unique à chaque page', () => {

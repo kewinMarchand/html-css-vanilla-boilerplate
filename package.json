@@ -8,7 +8,7 @@
     "postinstall": "node scripts/vendor.js",
     "dev": "node scripts/serve.js 3130",
     "lint": "yarn lint:html && yarn lint:css && yarn lint:arch",
-    "lint:html": "html-validate \"site/**/*.html\"",
+    "lint:html": "node scripts/render-pages.js .cache/rendered && html-validate \".cache/rendered/**/*.html\"",
     "lint:css": "stylelint \"site/**/*.css\"",
     "lint:arch": "depcruise site/js lib --config .dependency-cruiser.cjs",
     "lint:fix": "stylelint \"site/**/*.css\" --fix",

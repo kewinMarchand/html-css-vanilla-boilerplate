@@ -1,0 +1,32 @@
+<footer class="site-footer">
+  <div class="container site-footer-inner">
+    <nav aria-label="Liens légaux">
+      <ul>
+        <!--# if expr="$page = mentions-legales" -->
+        <li><a href="/mentions-legales" aria-current="page">Mentions légales</a></li>
+        <!--# else -->
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+        <!--# endif -->
+        <!--# if expr="$page = donnees-personnelles" -->
+        <li><a href="/donnees-personnelles" aria-current="page">Données personnelles</a></li>
+        <!--# else -->
+        <li><a href="/donnees-personnelles">Données personnelles</a></li>
+        <!--# endif -->
+        <!--# if expr="$page = accessibilite" -->
+        <li><a href="/accessibilite" aria-current="page">Accessibilité : non conforme</a></li>
+        <!--# else -->
+        <li><a href="/accessibilite">Accessibilité : non conforme</a></li>
+        <!--# endif -->
+        <!--# if expr="$page = plan-du-site" -->
+        <li><a href="/plan-du-site" aria-current="page">Plan du site</a></li>
+        <!--# else -->
+        <li><a href="/plan-du-site">Plan du site</a></li>
+        <!--# endif -->
+      </ul>
+    </nav>
+    <p class="site-footer-brand">
+      <img src="/logo-mark.svg" alt="" width="20" height="20" />HTML CSS Vanilla Boilerplate
+    </p>
+    <!-- dev:styleguide -->
+  </div>
+</footer>

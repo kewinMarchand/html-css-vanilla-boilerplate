@@ -1,0 +1,274 @@
+<a class="skip-link" href="#main">Aller au contenu principal</a>
+<header class="site-header" data-site-header>
+  <div class="container site-header-inner">
+    <!--# if expr="$page = accueil" -->
+    <a class="logo" href="/" data-testid="layout-logo" aria-current="page">
+      <img src="/logo-mark.svg" alt="" width="32" height="32" />
+      <span>HTML CSS Vanilla Boilerplate</span>
+    </a>
+    <!--# else -->
+    <a class="logo" href="/" data-testid="layout-logo">
+      <img src="/logo-mark.svg" alt="" width="32" height="32" />
+      <span>HTML CSS Vanilla Boilerplate</span>
+    </a>
+    <!--# endif -->
+    <nav class="main-nav" aria-label="Navigation principale">
+      <ul class="main-nav-list">
+        <!--# if expr="$page = accueil" -->
+        <li><a href="/" aria-current="page">Accueil</a></li>
+        <!--# else -->
+        <li><a href="/">Accueil</a></li>
+        <!--# endif -->
+        <li class="category-menu" data-category-menu>
+          <!--# if expr="$page = catalogue" -->
+          <a class="category-menu-fallback" href="/catalogue" aria-current="page">Catalogue</a>
+          <!--# else -->
+          <a class="category-menu-fallback" href="/catalogue">Catalogue</a>
+          <!--# endif -->
+          <button
+            type="button"
+            class="category-menu-toggle"
+            aria-expanded="false"
+            aria-controls="category-menu"
+            data-category-menu-toggle
+            data-testid="layout-category-menu-toggle"
+          >
+            Catalogue
+            <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+              <use href="/icons/sprite.svg#chevron-down"></use>
+            </svg>
+          </button>
+          <div
+            class="category-panel"
+            id="category-menu"
+            data-category-panel
+            data-testid="layout-category-menu"
+            hidden
+          >
+            <a class="category-panel-all" href="/catalogue">Tout le catalogue</a>
+            <div class="category-columns">
+              <ul class="category-column">
+                <li data-has-children>
+                  <a
+                    href="/catalogue/plantes-interieur"
+                    data-testid="layout-category-link"
+                    data-category-link
+                    aria-expanded="false"
+                    >Plantes d'intérieur<svg
+                      class="icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      width="20"
+                      height="20"
+                    >
+                      <use href="/icons/sprite.svg#arrow-right"></use></svg
+                  ></a>
+                  <ul class="category-column">
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-interieur/feuillages"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Feuillages<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-interieur/feuillages/monstera"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Monstera</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            href="/catalogue/plantes-interieur/feuillages/fougeres"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Fougères</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-interieur/plantes-a-fleurs"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Plantes à fleurs<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-interieur/plantes-a-fleurs/anthurium"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Anthurium</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            href="/catalogue/plantes-interieur/plantes-a-fleurs/strelitzia"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Strelitzia</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li data-has-children>
+                  <a
+                    href="/catalogue/plantes-exterieur"
+                    data-testid="layout-category-link"
+                    data-category-link
+                    aria-expanded="false"
+                    >Plantes d'extérieur<svg
+                      class="icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      width="20"
+                      height="20"
+                    >
+                      <use href="/icons/sprite.svg#arrow-right"></use></svg
+                  ></a>
+                  <ul class="category-column">
+                    <li>
+                      <a
+                        href="/catalogue/plantes-exterieur/palmiers"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        >Palmiers</a
+                      >
+                    </li>
+                    <li data-has-children>
+                      <a
+                        href="/catalogue/plantes-exterieur/arbustes-a-fleurs"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        aria-expanded="false"
+                        >Arbustes à fleurs<svg
+                          class="icon"
+                          aria-hidden="true"
+                          focusable="false"
+                          width="20"
+                          height="20"
+                        >
+                          <use href="/icons/sprite.svg#arrow-right"></use></svg
+                      ></a>
+                      <ul class="category-column">
+                        <li>
+                          <a
+                            href="/catalogue/plantes-exterieur/arbustes-a-fleurs/heliconia"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Heliconia</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            href="/catalogue/plantes-exterieur/arbustes-a-fleurs/calliandra"
+                            data-testid="layout-category-link"
+                            data-category-link
+                            >Calliandra</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li data-has-children>
+                  <a
+                    href="/catalogue/plantes-aquatiques"
+                    data-testid="layout-category-link"
+                    data-category-link
+                    aria-expanded="false"
+                    >Plantes aquatiques<svg
+                      class="icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      width="20"
+                      height="20"
+                    >
+                      <use href="/icons/sprite.svg#arrow-right"></use></svg
+                  ></a>
+                  <ul class="category-column">
+                    <li>
+                      <a
+                        href="/catalogue/plantes-aquatiques/nenuphars"
+                        data-testid="layout-category-link"
+                        data-category-link
+                        >Nénuphars</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!--# if expr="$page = taches" -->
+        <li><a href="/taches" aria-current="page">Tâches</a></li>
+        <!--# else -->
+        <li><a href="/taches">Tâches</a></li>
+        <!--# endif -->
+        <!--# if expr="$page = contact" -->
+        <li><a href="/contact" aria-current="page">Contact</a></li>
+        <!--# else -->
+        <li><a href="/contact">Contact</a></li>
+        <!--# endif -->
+      </ul>
+    </nav>
+    <button
+      type="button"
+      class="button button-secondary header-icon-button mobile-menu-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-mobile-menu-toggle
+      aria-label="Menu"
+      data-testid="layout-mobile-menu-toggle"
+    >
+      <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+        <use href="/icons/sprite.svg#menu"></use>
+      </svg>
+      <span class="header-button-label">Menu</span>
+    </button>
+    <button
+      type="button"
+      class="button button-secondary header-icon-button a11y-toggle"
+      aria-pressed="false"
+      data-a11y-mode-toggle
+      aria-label="Accessibilité renforcée"
+      data-testid="a11y-mode-toggle"
+    >
+      <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+        <use href="/icons/sprite.svg#accessibility"></use>
+      </svg>
+      <span class="header-button-label">Accessibilité renforcée</span>
+    </button>
+  </div>
+  <dialog
+    class="drawer mobile-menu"
+    id="mobile-menu"
+    aria-label="Menu"
+    data-mobile-menu
+    data-testid="layout-mobile-menu"
+  ></dialog>
+</header>

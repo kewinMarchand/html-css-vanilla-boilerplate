@@ -1,6 +1,6 @@
 # html-css-vanilla-boilerplate
 
-Point de départ pour un site en **HTML, CSS et JavaScript natifs**, sans framework, sans bundler et sans étape de build. Les fichiers servis sont ceux du dépôt. L'outillage (validation, format, tests, Lighthouse) ne sert qu'au développement.
+Point de départ pour un site en **HTML, CSS et JavaScript natifs**, sans framework, sans bundler et sans étape de build. Les fichiers servis sont ceux du dépôt, assemblés par nginx avec les inclusions côté serveur (SSI) pour le header et le footer. L'outillage (validation, format, tests, Lighthouse) ne sert qu'au développement.
 
 | Page                | Ce qu'elle montre                                                                                       |
 | ------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -64,8 +64,9 @@ L'URL publique est `https://www.example.com` (domaine réservé aux exemples). E
 ## Architecture
 
 ```
-site/                        racine servie telle quelle
-  index.html, */index.html   une page par route, header et footer recopiés dans chaque page
+site/                        racine servie par nginx, avec inclusions côté serveur
+  index.html, */index.html   une page par route, qui inclut le header et le footer
+  partials/                  header (avec le lien d'évitement) et footer, en un seul exemplaire
   404.html, 50x.html, 503.html
   css/main.css               feuille unique : reset, tokens, base, layout, components, utilities
   js/
@@ -92,7 +93,7 @@ L'architecture suit le document commun `ARCHITECTURE-DDD.md` (forme vanilla). Ch
 
 ### Sans build : ce qui est assumé
 
-- **Header et footer sont recopiés dans chaque page.** Pas d'include côté serveur ni de générateur. Pour qu'une copie ne dérive pas, `tests/unit/pages.test.js` vérifie sur toutes les pages : navigation et liens légaux identiques à `site.config.json`, fil d'Ariane et JSON-LD conformes au calcul de `lib/breadcrumb.js`, titre et description dans les bonnes longueurs, canonique, hash du script inline présent dans la CSP, sitemap et plan du site complets, informations légales reprises de la configuration.
+- **Header et footer sont inclus par nginx** (`<!--# include virtual="/partials/header.html" -->`), sans générateur ni build. Chaque page nomme d'abord sa place (`<!--# set var="page" value="contact" -->`), ce qui choisit le lien marqué `aria-current`. Le serveur de développement résout les mêmes directives. Un hébergement purement statique, sans SSI, afficherait les pages sans header ni footer (décision et alternatives : `doc/adr/0001-inclusions-serveur-nginx-ssi.md`). Le `<head>` SEO et le fil d'Ariane restent écrits dans chaque page. Pour qu'ils ne dérivent pas, `tests/unit/pages.test.js` vérifie sur le rendu de toutes les pages : navigation et liens légaux identiques à `site.config.json`, fil d'Ariane et JSON-LD conformes au calcul de `lib/breadcrumb.js`, titre et description dans les bonnes longueurs, canonique, hash du script inline présent dans la CSP, sitemap et plan du site complets, informations légales reprises de la configuration.
 - **Le catalogue est rendu en entier dans le HTML** (contenu indexable). Le module `catalog.js` lit l'URL, filtre, trie et pagine côté client en réordonnant les cartes existantes. Sans JavaScript, la liste complète reste visible et le formulaire `GET` place les filtres dans l'URL sans les appliquer : limite assumée d'un site sans serveur applicatif.
 - **Le formulaire de contact ne s'envoie qu'avec JavaScript.** Il n'y a pas de serveur pour traiter un envoi. Sans JavaScript, un message au-dessus du formulaire l'annonce et donne l'adresse e-mail, et le `POST` natif reçoit une page française en 405 (`site/405.html`, servie par nginx et par `scripts/serve.js`).
 - **Les balises `robots` et canonique des pages filtrées** sont mises à jour par le script. Un robot sans JavaScript voit la page de catégorie indexable, dont la canonique est déjà la version sans filtre.
@@ -103,7 +104,7 @@ L'architecture suit le document commun `ARCHITECTURE-DDD.md` (forme vanilla). Ch
 
 1. Copier une page existante proche, par exemple `site/contact/index.html`, vers `site/<route>/index.html`.
 2. Adapter `<title>`, description, canonique, Open Graph, JSON-LD `BreadcrumbList`, fil d'Ariane et `<h1>`.
-3. Si elle entre dans la navigation, l'ajouter à `site.config.json` puis à la navigation de **chaque** page. `make test-unit` liste les pages oubliées.
+3. Garder en tête de `<body>` les trois directives : `set var="page"`, puis l'inclusion du header, et celle du footer en bas. Si la page entre dans la navigation, l'ajouter à `site.config.json` et à `site/partials/header.html` (ou `footer.html`), avec sa branche `aria-current`.
 4. L'ajouter à `sitemap.xml` et au plan du site, à `.lighthouserc.json` si elle doit être mesurée.
 5. Écrire son test dans `tests/e2e/`.
 
@@ -143,6 +144,7 @@ Le bouton de l'en-tête pose `data-a11y-mode="enhanced"` sur `<html>`, mémoris�
 L'image `nginx:1.29-alpine` sert `site/`, sans la charte graphique ni son script (`.dockerignore`) :
 
 - URL propres par `try_files $uri $uri/index.html`, 404 personnalisée, 500/502/504 sur `50x.html`.
+- Inclusions côté serveur (`ssi on;`) pour le header et le footer, `/partials/` interne (404 en accès direct).
 - En-têtes de sécurité partagés avec le serveur de développement (`docker/security-headers.conf`), dont une CSP sans `unsafe-inline`.
 - Maintenance : `MAINTENANCE=1 make docker-up` répond 503 avec `Retry-After` sur toutes les pages, les fichiers statiques restant servis.
 - La route `/_erreur-test`, qui déclenche la 500, n'existe que dans le serveur de développement.
