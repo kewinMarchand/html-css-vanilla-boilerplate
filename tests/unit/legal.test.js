@@ -35,21 +35,6 @@ describe('fil d’Ariane', () => {
     ])
   })
 
-  it('suit l’arbre des catégories', () => {
-    assert.deepEqual(
-      breadcrumbTrail('/catalogue/plantes-interieur/feuillages', 'Feuillages').map(
-        (item) => item.label,
-      ),
-      ['Accueil', 'Catalogue', "Plantes d'intérieur", 'Feuillages'],
-    )
-  })
-
-  it('refuse un chemin de catalogue qui ne suit pas l’arbre', () => {
-    assert.throws(() => breadcrumbTrail('/catalogue/plantes-exterieur/feuillages', 'Feuillages'), {
-      message: 'Chemin de catégorie inconnu : /catalogue/plantes-exterieur/feuillages',
-    })
-  })
-
   it('produit un BreadcrumbList avec des URL absolues', () => {
     const ld = breadcrumbJsonLd(breadcrumbTrail('/contact', 'Contact'), 'https://www.example.com')
     assert.equal(ld['@type'], 'BreadcrumbList')

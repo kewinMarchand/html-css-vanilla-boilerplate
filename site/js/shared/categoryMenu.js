@@ -71,19 +71,21 @@ const moveFocus = (event) => {
   }
 }
 
-toggle.addEventListener('click', () => (panel.hidden ? openPanel() : closePanel()))
-panel.addEventListener('mouseover', onPanelPointer)
-panel.addEventListener('focusin', onPanelPointer)
-panel.addEventListener('keydown', moveFocus)
-menuItem.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') closePanel({ restoreFocus: true })
-})
-menuItem.addEventListener('focusout', (event) => {
-  if (!menuItem.contains(event.relatedTarget)) closePanel()
-})
-document.addEventListener('click', (event) => {
-  if (!menuItem.contains(event.target)) closePanel()
-})
+if (menuItem) {
+  toggle.addEventListener('click', () => (panel.hidden ? openPanel() : closePanel()))
+  panel.addEventListener('mouseover', onPanelPointer)
+  panel.addEventListener('focusin', onPanelPointer)
+  panel.addEventListener('keydown', moveFocus)
+  menuItem.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closePanel({ restoreFocus: true })
+  })
+  menuItem.addEventListener('focusout', (event) => {
+    if (!menuItem.contains(event.relatedTarget)) closePanel()
+  })
+  document.addEventListener('click', (event) => {
+    if (!menuItem.contains(event.target)) closePanel()
+  })
+}
 
 const readTree = (list) =>
   [...list.children].map((item) => ({
@@ -202,5 +204,5 @@ mobileMenu.addEventListener('close', () => {
 })
 matchMedia('(width >= 1024px)').addEventListener('change', (event) => {
   if (event.matches && mobileMenu.open) mobileMenu.close()
-  if (!event.matches) closePanel()
+  if (!event.matches && menuItem) closePanel()
 })

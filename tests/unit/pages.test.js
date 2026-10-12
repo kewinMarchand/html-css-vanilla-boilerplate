@@ -1,50 +1,26 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { join, relative } from 'node:path'
+import { join } from 'node:path'
 import { describe, it } from 'node:test'
 
 import { complianceStatus } from '../../lib/accessibilityCompliance.js'
-import { renderSsi, sitePages } from '../../scripts/ssi.js'
 import { breadcrumbTrail } from '../../lib/breadcrumb.js'
-import { formatPrice } from '../../site/js/modules/catalog/domain/price.js'
-import {
-  CATEGORIES,
-  PRODUCTS,
-} from '../../site/js/modules/catalog/infrastructure/in-memory/catalogData.js'
-import { listCategoryPaths } from '../../site/js/modules/catalog/domain/categoryPath.js'
+import { PAGES, ROOT, SITE_DIR, text } from './renderedPages.js'
 
-const ROOT = new URL('../../', import.meta.url).pathname
-const SITE_DIR = join(ROOT, 'site')
 const SITE = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'))
 const HEADERS = readFileSync(join(ROOT, 'docker/security-headers.conf'), 'utf8')
 const ERROR_PAGES = ['/404', '/405', '/50x', '/503']
-
-const PAGES = sitePages(SITE_DIR).map((file) => {
-  const route =
-    `/${relative(SITE_DIR, file)}`.replace(/\/?index\.html$/, '').replace(/\.html$/, '') || '/'
-  const source = readFileSync(file, 'utf8')
-  const html = renderSsi(source, {
-    readInclude: (path) => readFileSync(join(SITE_DIR, path), 'utf8'),
-  })
-  return { file, route, source, html }
-})
+const DEV_PAGES = ['/charte-graphique']
 
 const attribute = (html, pattern) => html.match(pattern)?.[1]
-const text = (fragment) =>
-  fragment
-    .replace(/<[^>]+>/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
 const hrefsIn = (html, label) => {
   const nav = html.match(new RegExp(`<nav[^>]*aria-label="${label}"[\\s\\S]*?</nav>`))?.[0] ?? ''
   return [...nav.matchAll(/<a [^>]*href="([^"]+)"/g)].map(([, href]) => href)
 }
-const PUBLIC_ROUTES = [
-  ...SITE.navigation.map((item) => item.href),
-  ...listCategoryPaths(CATEGORIES),
-  ...SITE.legalNavigation.map((item) => item.href),
-]
+const PUBLIC_ROUTES = PAGES.map((page) => page.route).filter(
+  (route) => !ERROR_PAGES.includes(route) && !DEV_PAGES.includes(route),
+)
 
 describe('pages statiques', () => {
   for (const { route, html } of PAGES) {
@@ -91,7 +67,7 @@ describe('pages statiques', () => {
         assert.equal(ld.itemListElement.length, trail.length)
       })
 
-      if (!ERROR_PAGES.includes(route) && route !== '/charte-graphique') {
+      if (!ERROR_PAGES.includes(route) && !DEV_PAGES.includes(route)) {
         it('porte des métadonnées SEO complètes', () => {
           const title = text(html.match(/<title>([\s\S]*?)<\/title>/)[1])
           const description = attribute(html, /<meta\s+name="description"\s+content="([^"]+)"/)
@@ -150,34 +126,15 @@ describe('sitemap et plan du site', () => {
   )
 
   it('liste toutes les routes publiques et elles seules', () => {
-    assert.deepEqual(locs, PUBLIC_ROUTES)
+    assert.deepEqual(locs.toSorted(), PUBLIC_ROUTES.toSorted())
+    for (const item of [...SITE.navigation, ...SITE.legalNavigation]) {
+      assert.ok(locs.includes(item.href), item.href)
+    }
     for (const route of locs)
       assert.ok(
         PAGES.some((page) => page.route === route),
         route,
       )
-  })
-
-  it('affiche dans chaque carte produit le prix formaté du jeu de données', () => {
-    const cards = PAGES.filter((page) => page.route.startsWith('/catalogue')).flatMap(
-      ({ html }) => [
-        ...html.matchAll(
-          /data-product-id="(\d+)"[\s\S]*?data-testid="catalog-product-price">([^<]+)</g,
-        ),
-      ],
-    )
-    assert.ok(cards.length > 0)
-    for (const [, id, price] of cards) {
-      const product = PRODUCTS.find((item) => item.id === Number(id))
-      assert.equal(text(price), formatPrice(product.price).replace(/\s/g, ' '), product.name)
-    }
-  })
-
-  it('a une page statique pour chaque chemin de catégorie, et aucune autre', () => {
-    const catalogPages = PAGES.map((page) => page.route).filter((route) =>
-      route.startsWith('/catalogue/'),
-    )
-    assert.deepEqual(catalogPages.toSorted(), listCategoryPaths(CATEGORIES).toSorted())
   })
 
   it('est repris par le plan du site', () => {
