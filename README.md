@@ -45,6 +45,95 @@ make up        # http://localhost:3130
 
 L'URL publique est `https://www.example.com` (domaine réservé aux exemples). Elle apparaît dans les balises canoniques, Open Graph, JSON-LD, `sitemap.xml` et `robots.txt`, et dans `site.config.json`. Remplacez-la partout avant une mise en ligne.
 
+## Démarrer un projet à partir de ce dépôt
+
+### Créer le dépôt
+
+Le dépôt est un modèle (« template ») sur GitHub. C'est la voie recommandée : le nouveau projet part d'un historique propre, sans lien avec celui-ci.
+
+- Sur GitHub, bouton « Use this template ».
+- Ou en ligne de commande :
+
+  ```sh
+  gh repo create mon-projet --template kewinMarchand/html-css-vanilla-boilerplate --private --clone
+  cd mon-projet
+  make install
+  ```
+
+Pour suivre le boilerplate de près, en gardant son historique, on peut aussi le forker : `gh repo fork kewinMarchand/html-css-vanilla-boilerplate --clone`.
+
+### Récupérer les mises à jour du boilerplate
+
+- **Depuis un fork**, l'historique est commun : on fusionne.
+
+  ```sh
+  git remote add upstream https://github.com/kewinMarchand/html-css-vanilla-boilerplate.git
+  git fetch upstream
+  git merge upstream/main
+  ```
+
+- **Depuis un template**, l'historique n'est pas commun : un `merge` rejouerait tout le dépôt. On reprend les commits utiles un par un.
+
+  ```sh
+  git remote add boilerplate https://github.com/kewinMarchand/html-css-vanilla-boilerplate.git
+  git fetch boilerplate
+  git log --oneline boilerplate/main
+  git cherry-pick <commit>
+  ```
+
+Dans les deux cas, `make qa` puis `make test-e2e` après la mise à jour.
+
+### Personnaliser
+
+| Quoi                                                           | Fichiers                                                                                                                                                                                                                                                                                                    |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Nom du projet                                                  | `package.json` (`name`, `description`), titre de ce README, `LICENSE`                                                                                                                                                                                                                                       |
+| Nom du site, URL, navigation, éditeur, hébergeur, état d'audit | `site.config.json`, puis les textes qui le reprennent : `site/partials/header.html` et `footer.html` (nom du site, liens), `<head>` de chaque page (titre, canonique, Open Graph, JSON-LD), `site/sitemap.xml`, `site/robots.txt`. Les tests unitaires signalent toute page qui diverge de la configuration |
+| URL publique                                                   | `https://www.example.com`, à remplacer partout (`site.config.json`, `<head>` des pages, `sitemap.xml`, `robots.txt`)                                                                                                                                                                                        |
+| Ports                                                          | développement et Playwright : 3130 (`package.json`, script `dev`, et `playwright.config.js`). Lighthouse : 3250 (`.lighthouserc.json`). Contrôle de l'image : 3140 (`scripts/test-prod.sh`). Image de production : `PORT`, 8080 par défaut (`Makefile`, `compose.yaml`)                                     |
+| Logo et favicons                                               | `site/logo-mark.svg`, `site/favicon.svg`, `site/favicon.ico`, `site/apple-touch-icon.png`, `site/icons/icon-192.png`, `site/icons/icon-512.png`, `site/manifest.webmanifest`, image de partage `site/images/og-image.jpg`                                                                                   |
+| Pages légales                                                  | `site/mentions-legales/`, `site/donnees-personnelles/`, `site/accessibilite/` (état de conformité calculé depuis `accessibility` dans `site.config.json`), `site/plan-du-site/`                                                                                                                             |
+| URL mesurées par Lighthouse                                    | `.lighthouserc.json`                                                                                                                                                                                                                                                                                        |
+| Intégration continue                                           | `.github/workflows/ci.yml`                                                                                                                                                                                                                                                                                  |
+| Script inline du `<head>` modifié                              | nouveau hash dans `docker/security-headers.conf` (donné par `make test-unit`)                                                                                                                                                                                                                               |
+
+### Retirer les modules d'exemple
+
+`catalog` (catalogue) et `task` (démo des tâches) sont des exemples. La procédure ci-dessous les retire tous les deux et laisse `make qa` vert, auto-test d'architecture compris : `make arch-selftest` crée ses propres modules factices et ne dépend d'aucun module d'exemple. Pour n'en retirer qu'un, ne suivre que ses lignes.
+
+1. Supprimer le code et les pages :
+
+   ```sh
+   rm -r site/js/modules/catalog site/catalogue site/js/modules/task site/taches
+   ```
+
+2. Retirer leurs entrées de navigation :
+   - `site/partials/header.html` : l'élément `<li class="category-menu" data-category-menu>` en entier (le menu de catégories), et le bloc `if` du lien « Tâches ». `site/js/shared/categoryMenu.js` reste nécessaire pour le menu mobile et fonctionne sans menu de catégories.
+   - `site.config.json` : les entrées `/catalogue` et `/taches` de `navigation`.
+3. Retirer leurs URL : lignes `/catalogue` et `/taches` de `site/sitemap.xml`, liens et section « Catégories du catalogue » de `site/plan-du-site/index.html`, lien « Parcourir le catalogue » de `site/404.html`, URL correspondantes de `.lighthouserc.json`.
+4. Repointer le premier appel à l'action de l'accueil (`data-testid="home-tasks-link"` dans `site/index.html`), qui mène à `/taches`.
+5. `lib/breadcrumb.js` : garder seulement l'accueil et la page courante.
+
+   ```js
+   export const breadcrumbTrail = (path, label) =>
+     path === '/' ? [] : [HOME, { label, href: path }]
+   ```
+
+   en retirant les imports du catalogue et la constante `CATALOG`.
+
+6. Supprimer leurs tests :
+
+   ```sh
+   rm tests/unit/catalog.test.js tests/unit/catalogPages.test.js tests/unit/categoryPath.test.js \
+     tests/unit/loadCatalogPage.test.js tests/unit/price.test.js tests/unit/tasks.test.js \
+     tests/e2e/catalogue.e2e.js tests/e2e/menu.e2e.js tests/e2e/taches.e2e.js
+   ```
+
+7. `yarn format`, puis `make qa` : vert à ce stade.
+8. Avant `make test-e2e`, `make test-a11y` et `make test-prod`, adapter les tests qui visitent encore ces pages : `CATEGORY_ROUTES` dans `tests/e2e/routes.js`, la route catalogue filtrée et le test « menu ouvert » de `tests/a11y/pages.a11y.js`, le fil d'Ariane et la capture du catalogue dans `tests/e2e/layout.e2e.js`, le lien de l'accueil dans `tests/e2e/accueil.e2e.js`, les routes `/catalogue` et `/taches` de `scripts/test-prod.sh`.
+
+Les styles du catalogue et des tâches restent dans `site/css/main.css` (sections « Catalogue » et « Tâches ») jusqu'à ce qu'on les retire, sans effet sur la QA.
+
 ## Commandes
 
 `make help` liste toutes les commandes. Les principales :
