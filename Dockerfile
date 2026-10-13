@@ -8,7 +8,7 @@ RUN yarn install --frozen-lockfile --production --ignore-scripts \
   && node scripts/vendor.js
 
 FROM nginx:1.29-alpine
-ENV MAINTENANCE=0 GLITCHTIP_DSN="" GLITCHTIP_ENVIRONMENT=production
+ENV MAINTENANCE=0 GLITCHTIP_DSN="" GLITCHTIP_ENVIRONMENT=production MATOMO_URL="" MATOMO_SITE_ID=""
 COPY docker/security-headers.conf /etc/nginx/snippets/security-headers.conf
 COPY docker/default.conf.template /etc/nginx/templates/default.conf.template
 COPY site /usr/share/nginx/html

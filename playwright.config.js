@@ -8,6 +8,8 @@ export const OBSERVABILITY_PORT = 3133
 const OBSERVABILITY_ENV = {
   GLITCHTIP_DSN: 'http://cle@localhost:3231/1',
   GLITCHTIP_ENVIRONMENT: 'test',
+  MATOMO_URL: 'http://matomo.test/',
+  MATOMO_SITE_ID: '1',
 }
 
 export default defineConfig({

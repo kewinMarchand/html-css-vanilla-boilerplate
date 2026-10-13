@@ -40,3 +40,13 @@
 ></script>
 <!--# endif -->
 <!--# endif -->
+<!--# if expr="$matomo_url" -->
+<!--# if expr="$matomo_site_id" -->
+<script
+  type="module"
+  src="/js/shared/matomo.js"
+  data-matomo-url="<!--# echo var='matomo_url' -->"
+  data-matomo-site-id="<!--# echo var='matomo_site_id' -->"
+></script>
+<!--# endif -->
+<!--# endif -->

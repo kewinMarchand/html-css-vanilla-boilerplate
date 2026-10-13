@@ -3,6 +3,11 @@ map "${GLITCHTIP_DSN}" $glitchtip_origin {
     default "";
 }
 
+map "${MATOMO_URL}|${MATOMO_SITE_ID}" $matomo_origin {
+    "~^(?<matomo_base>https?://[^/|]+)[^|]*\|.+$" $matomo_base;
+    default "";
+}
+
 map "${MAINTENANCE}" $maintenance {
     default 0;
     1 1;
@@ -25,6 +30,8 @@ server {
     ssi on;
     set $glitchtip_dsn "${GLITCHTIP_DSN}";
     set $glitchtip_environment "${GLITCHTIP_ENVIRONMENT}";
+    set $matomo_url "${MATOMO_URL}";
+    set $matomo_site_id "${MATOMO_SITE_ID}";
 
     include /etc/nginx/snippets/security-headers.conf;
 

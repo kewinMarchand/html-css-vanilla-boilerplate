@@ -5,6 +5,7 @@ import { describe, it } from 'node:test'
 
 import {
   glitchtipOrigin,
+  matomoOrigin,
   observabilityVariables,
   resolveVariables,
 } from '../../scripts/observability.js'
@@ -15,6 +16,8 @@ const NONE = observabilityVariables({})
 const CONFIGURED = observabilityVariables({
   GLITCHTIP_DSN: DSN,
   GLITCHTIP_ENVIRONMENT: 'production',
+  MATOMO_URL: 'https://matomo.example.com/',
+  MATOMO_SITE_ID: '3',
 })
 
 const scriptTags = (html) =>
@@ -26,6 +29,11 @@ const scriptTags = (html) =>
 
 const glitchtipScripts = (html) =>
   scriptTags(html).filter((attributes) => attributes.src === '/js/shared/glitchtip.js')
+
+const matomoScripts = (html) =>
+  scriptTags(html).filter((attributes) => attributes.src === '/js/shared/matomo.js')
+
+const audienceSection = (html) => html.includes('data-testid="legal-audience-measurement"')
 
 const csp = (variables) => {
   const conf = readFileSync(join(ROOT, 'docker/security-headers.conf'), 'utf8')
@@ -63,7 +71,11 @@ describe('GlitchTip', () => {
         'data-glitchtip-environment': 'production',
       },
     ])
-    assert.deepEqual(csp(CONFIGURED)['connect-src'], ["'self'", 'https://glitchtip.example.com'])
+    assert.deepEqual(csp(CONFIGURED)['connect-src'], [
+      "'self'",
+      'https://glitchtip.example.com',
+      'https://matomo.example.com',
+    ])
   })
 
   it('ne charge rien sur les pages d’erreur attendues', () => {
@@ -77,5 +89,45 @@ describe('GlitchTip', () => {
       renderPage(page('/').source, { ...CONFIGURED, glitchtip_environment: 'a"b<c' }),
     )
     assert.equal(script['data-glitchtip-environment'], 'a&quot;b&lt;c')
+  })
+})
+
+describe('Matomo', () => {
+  it('n’ouvre l’origine que si l’adresse et le site sont renseignés', () => {
+    assert.equal(
+      matomoOrigin('https://matomo.example.com/stats/', '3'),
+      'https://matomo.example.com',
+    )
+    assert.equal(matomoOrigin('https://matomo.example.com/', ''), '')
+    assert.equal(matomoOrigin('', '3'), '')
+  })
+
+  it('n’injecte ni traceur ni paragraphe sans configuration', () => {
+    for (const { route, source } of PAGES) {
+      const html = renderPage(source, NONE)
+      assert.deepEqual(matomoScripts(html), [], route)
+      assert.equal(audienceSection(html), false, route)
+    }
+    assert.equal(csp(NONE)['script-src'].length, 2)
+  })
+
+  it('injecte l’adresse et le site, et ouvre l’origine dans script-src', () => {
+    assert.deepEqual(matomoScripts(renderPage(page('/').source, CONFIGURED)), [
+      {
+        type: 'module',
+        src: '/js/shared/matomo.js',
+        'data-matomo-url': 'https://matomo.example.com/',
+        'data-matomo-site-id': '3',
+      },
+    ])
+    assert.equal(csp(CONFIGURED)['script-src'].at(-1), 'https://matomo.example.com')
+  })
+
+  it('décrit la mesure d’audience sur la page Données personnelles seulement si elle est active', () => {
+    assert.equal(
+      audienceSection(renderPage(page('/donnees-personnelles').source, CONFIGURED)),
+      true,
+    )
+    assert.equal(audienceSection(renderPage(page('/donnees-personnelles').source, NONE)), false)
   })
 })

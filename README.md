@@ -141,8 +141,10 @@ Les styles du catalogue et des tâches restent dans `site/css/main.css` (section
 | `MAINTENANCE`           | `1` : toutes les pages répondent 503                                             |
 | `GLITCHTIP_DSN`         | suivi des erreurs du navigateur (DSN au format Sentry). Vide : rien n'est chargé |
 | `GLITCHTIP_ENVIRONMENT` | environnement transmis à GlitchTip, `production` par défaut                      |
+| `MATOMO_URL`            | adresse de l'instance Matomo, mesure d'audience sans cookie                      |
+| `MATOMO_SITE_ID`        | identifiant du site dans Matomo. Sans les deux, rien n'est chargé                |
 
-Le serveur de développement lit les mêmes variables : `GLITCHTIP_DSN=… make up`.
+Le serveur de développement lit les mêmes variables, par exemple `GLITCHTIP_DSN=… make up`.
 
 ## Commandes
 

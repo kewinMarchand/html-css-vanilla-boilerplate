@@ -17,6 +17,8 @@ const VARIANTS = {
   'avec-traceurs': observabilityVariables({
     GLITCHTIP_DSN: 'https://cle@glitchtip.example.com/1',
     GLITCHTIP_ENVIRONMENT: 'production',
+    MATOMO_URL: 'https://matomo.example.com/',
+    MATOMO_SITE_ID: '1',
   }),
 }
 
