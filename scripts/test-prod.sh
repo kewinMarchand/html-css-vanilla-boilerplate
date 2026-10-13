@@ -79,6 +79,8 @@ if [ "${1:-}" = checks ]; then
     fi
     expect_header / "content-security-policy: default-src 'self'; script-src 'self' 'sha256-"
     expect_header /route-inexistante "x-content-type-options: nosniff"
+    expect_header / "content-security-policy: .*connect-src 'self' http://localhost:8090 *;"
+    expect_body / '<link rel="preconnect" href="http://localhost:8090" crossorigin data-api-url'
     expect_no_ssi_error "sans traceur"
     if curl --silent "http://localhost:$PORT/" | grep --quiet 'data-glitchtip-dsn\|data-matomo-url'; then
       echo "FAIL un traceur est injecté sans configuration"
@@ -98,7 +100,7 @@ if [ "${1:-}" = checks ]; then
     else
       echo "ok   GlitchTip absent d'une 404"
     fi
-    expect_header / "content-security-policy: .*connect-src 'self' https://glitchtip.example.com https://matomo.example.com"
+    expect_header / "content-security-policy: .*connect-src 'self' http://localhost:8090 https://glitchtip.example.com https://matomo.example.com"
     ;;
   maintenance)
     expect_status / 503

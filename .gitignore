@@ -7,3 +7,4 @@ blob-report/
 .DS_Store
 *.log
 .cache/
+.api/

@@ -9,3 +9,4 @@ site/vendor
 site/charte-graphique
 site/js/views/styleguide
 .cache
+.api

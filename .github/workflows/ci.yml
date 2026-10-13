@@ -22,8 +22,12 @@ jobs:
     needs: qa
     steps:
       - uses: actions/checkout@v7
+      - run: git clone --depth 1 https://github.com/kewinMarchand/hono-mongo-test-api.git .api
+      - run: make -C .api install db-reset
       - run: make install
       - run: make test-e2e test-a11y
+        env:
+          API_URL: http://localhost:8091
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
@@ -31,6 +35,10 @@ jobs:
           path: playwright-report
           retention-days: 7
       - run: make metrics
+        env:
+          API_URL: http://localhost:8091
+      - run: make -C .api down
+        if: always()
 
   prod:
     runs-on: ubuntu-latest
