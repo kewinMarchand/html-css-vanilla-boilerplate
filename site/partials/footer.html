@@ -30,8 +30,10 @@
     <!-- dev:styleguide -->
   </div>
 </footer>
-<!--# if expr="$glitchtip_dsn" -->
-<!--# if expr="$page != erreur" -->
+<!--# set var="glitchtip" value="" -->
+<!--# if expr="$glitchtip_origin" --><!--# set var="glitchtip" value="on" --><!--# endif -->
+<!--# if expr="$page = erreur" --><!--# set var="glitchtip" value="" --><!--# endif -->
+<!--# if expr="$glitchtip" -->
 <script
   type="module"
   src="/js/shared/glitchtip.js"
@@ -39,14 +41,11 @@
   data-glitchtip-environment="<!--# echo var='glitchtip_environment' -->"
 ></script>
 <!--# endif -->
-<!--# endif -->
-<!--# if expr="$matomo_url" -->
-<!--# if expr="$matomo_site_id" -->
+<!--# if expr="$matomo_origin" -->
 <script
   type="module"
   src="/js/shared/matomo.js"
   data-matomo-url="<!--# echo var='matomo_url' -->"
   data-matomo-site-id="<!--# echo var='matomo_site_id' -->"
 ></script>
-<!--# endif -->
 <!--# endif -->

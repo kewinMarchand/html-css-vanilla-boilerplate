@@ -31,7 +31,8 @@ const evaluate = (expression, variables) => {
  * Sous-ensemble des inclusions côté serveur de nginx utilisé par le site : include virtual,
  * set, echo (encodé en entités HTML, comme par défaut dans nginx), if, elif, else, endif, et les
  * expressions `$variable` (non vide), `$variable = texte` ou `$variable != texte`.
- * Comme dans nginx, une variable posée par `set` est visible dans les fichiers inclus.
+ * Comme dans nginx, une variable posée par `set` est visible dans les fichiers inclus, et un
+ * `if` ne peut pas en contenir un autre : on combine des conditions par `set` successifs.
  */
 export const renderSsi = (html, { readInclude, variables = {} }) => {
   const conditions = []
@@ -47,6 +48,7 @@ export const renderSsi = (html, { readInclude, variables = {} }) => {
     const current = conditions.at(-1)
 
     if (command === 'if') {
+      if (current) throw new SsiError('« if » imbriqué : nginx ne le prend pas en charge')
       const parentActive = isActive()
       const active = parentActive && evaluate(params.expr, variables)
       conditions.push({ parentActive, active, taken: active })

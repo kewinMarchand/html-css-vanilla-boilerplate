@@ -28,12 +28,18 @@ describe('inclusions côté serveur', () => {
     assert.equal(render('<!--# include virtual="/partials/nav.html" -->'), '[aucun]')
   })
 
-  it('gère la négation et les conditions imbriquées', () => {
+  it('gère la négation, elif et else', () => {
     const html =
-      '<!--# if expr="$a != x" -->1<!--# if expr="$b = y" -->2<!--# else -->3<!--# endif --><!--# else -->4<!--# endif -->'
-    assert.equal(render(html, { a: 'z', b: 'y' }), '12')
-    assert.equal(render(html, { a: 'z', b: 'n' }), '13')
-    assert.equal(render(html, { a: 'x', b: 'y' }), '4')
+      '<!--# if expr="$a != x" -->1<!--# elif expr="$a = x" -->2<!--# else -->3<!--# endif -->'
+    assert.equal(render(html, { a: 'z' }), '1')
+    assert.equal(render(html, { a: 'x' }), '2')
+  })
+
+  it('refuse un if imbriqué, comme nginx', () => {
+    assert.throws(
+      () => render('<!--# if expr="$a" --><!--# if expr="$b" -->x<!--# endif --><!--# endif -->'),
+      { message: '« if » imbriqué : nginx ne le prend pas en charge' },
+    )
   })
 
   it('ignore set dans une branche inactive', () => {

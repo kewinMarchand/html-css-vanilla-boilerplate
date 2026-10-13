@@ -8,9 +8,13 @@ FAILED=0
 
 docker build --quiet --tag "$IMAGE" . > /dev/null
 
+PAGES='/ /catalogue /catalogue/plantes-interieur /catalogue/plantes-interieur/feuillages /taches /contact /mentions-legales /donnees-personnelles /accessibilite /plan-du-site /route-inexistante'
+
 start() {
+  maintenance=$1
+  shift
   docker rm --force "$NAME" > /dev/null 2>&1 || true
-  docker run --detach --name "$NAME" --publish "$PORT:80" --env "MAINTENANCE=$1" "$IMAGE" > /dev/null
+  docker run --detach --name "$NAME" --publish "$PORT:80" --env "MAINTENANCE=$maintenance" "$@" "$IMAGE" > /dev/null
   until curl --silent --output /dev/null "http://localhost:$PORT/"; do sleep 0.2; done
 }
 
@@ -32,6 +36,18 @@ expect_body() {
     echo "FAIL inclusions non résolues sur $1"
     FAILED=1
   fi
+}
+
+expect_no_ssi_error() {
+  errors=0
+  for route in $PAGES; do
+    if curl --silent "http://localhost:$PORT$route" | grep --quiet 'an error occurred'; then
+      echo "FAIL directive SSI en erreur sur $route"
+      errors=1
+      FAILED=1
+    fi
+  done
+  if [ "$errors" = 0 ]; then echo "ok   aucune directive SSI en erreur ($1)"; fi
 }
 
 expect_header() {
@@ -67,6 +83,27 @@ else
 fi
 expect_header / "content-security-policy: default-src 'self'; script-src 'self' 'sha256-"
 expect_header /route-inexistante "x-content-type-options: nosniff"
+expect_no_ssi_error "sans traceur"
+if curl --silent "http://localhost:$PORT/" | grep --quiet 'data-glitchtip-dsn\|data-matomo-url'; then
+  echo "FAIL un traceur est injecté sans configuration"
+  FAILED=1
+else
+  echo "ok   aucun traceur sans configuration"
+fi
+
+start 0 --env 'GLITCHTIP_DSN=https://cle@glitchtip.example.com/1' \
+  --env 'MATOMO_URL=https://matomo.example.com/' --env 'MATOMO_SITE_ID=1'
+expect_no_ssi_error "avec traceurs"
+expect_body / 'data-glitchtip-dsn="https://cle@glitchtip.example.com/1"'
+expect_body / 'data-matomo-url="https://matomo.example.com/"'
+expect_body /donnees-personnelles 'data-testid="legal-audience-measurement"'
+if curl --silent "http://localhost:$PORT/route-inexistante" | grep --quiet 'data-glitchtip-dsn'; then
+  echo "FAIL GlitchTip injecté sur une 404"
+  FAILED=1
+else
+  echo "ok   GlitchTip absent d'une 404"
+fi
+expect_header / "content-security-policy: .*connect-src 'self' https://glitchtip.example.com https://matomo.example.com"
 
 start 1
 expect_status / 503
