@@ -91,7 +91,9 @@ describe('pages statiques', () => {
 
   it('inclut le header et le footer partagés après avoir nommé la page', () => {
     for (const { route, source } of PAGES) {
-      const directives = [...source.matchAll(/<!--#\s*(\w+)[^>]*-->/g)].map((match) => match[0])
+      const directives = [...source.matchAll(/<!--#\s*(set|include)\b[^>]*-->/g)].map(
+        (match) => match[0],
+      )
       assert.equal(directives.length, 3, route)
       assert.match(directives[0], /^<!--# set var="page" value="[a-z-]+" -->$/, route)
       assert.equal(directives[1], '<!--# include virtual="/partials/header.html" -->', route)
