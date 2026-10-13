@@ -1052,7 +1052,14 @@
   }
 
   .skeleton-card {
-    block-size: 320px;
+    display: grid;
+    grid-template-rows: auto 130px;
+    block-size: auto;
+
+    &::before {
+      aspect-ratio: 1;
+      content: '';
+    }
   }
 
   .pagination {

@@ -181,6 +181,7 @@ const renderProduct = (product, index) => {
   const img = $item('[data-product-image]')
   img.src = `${image}-400.webp`
   img.alt = product.name
+  if (index === 0) img.fetchPriority = 'high'
   if (index >= EAGER_IMAGES) img.loading = 'lazy'
   $item('[data-product-name]').textContent = product.name
   $item('[data-product-price]').textContent = formatPrice(product.price)
