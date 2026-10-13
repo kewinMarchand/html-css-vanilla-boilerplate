@@ -39,9 +39,11 @@ test.describe('Accueil', () => {
     const track = await page.getByTestId('carousel-track').boundingBox()
     const y = track.y + track.height / 2
 
-    await page.mouse.move(track.x + track.width * 0.8, y)
+    // Glisser de 80 % de la piste : au-delà de la moitié d'une diapositive en mobile, Embla
+    // avance même si le relâcher n'est pas compté comme un geste vif (machine chargée).
+    await page.mouse.move(track.x + track.width * 0.9, y)
     await page.mouse.down()
-    await page.mouse.move(track.x + track.width * 0.3, y, { steps: 10 })
+    await page.mouse.move(track.x + track.width * 0.1, y, { steps: 10 })
     await page.mouse.up()
 
     await expect(currentDot(page)).not.toHaveAttribute('aria-label', 'Aller à la diapositive 1')
