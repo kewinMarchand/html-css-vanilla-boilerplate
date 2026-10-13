@@ -14,11 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .nvmrc
-          cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: make install
       - run: make qa
 
   e2e:
@@ -26,12 +22,7 @@ jobs:
     needs: qa
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .nvmrc
-          cache: yarn
-      - run: yarn install --frozen-lockfile
-      - run: npx playwright install --with-deps chromium
+      - run: make install
       - run: make test-e2e test-a11y
       - uses: actions/upload-artifact@v7
         if: failure()
@@ -46,4 +37,5 @@ jobs:
     needs: qa
     steps:
       - uses: actions/checkout@v7
+      - run: make install
       - run: make test-prod

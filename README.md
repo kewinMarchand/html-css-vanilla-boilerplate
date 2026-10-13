@@ -31,15 +31,14 @@ Point de départ pour un site en **HTML, CSS et JavaScript natifs**, sans framew
 
 ## Prérequis
 
-- Node.js 24.14 ou plus (`.nvmrc`), Yarn 1, pour l'outillage seulement
-- Docker, pour l'image de production (optionnel)
+- Docker avec Compose, `make` et git. Rien d'autre : Node, Yarn et Chromium tournent dans le conteneur de développement (image Playwright), y compris pour la QA, les tests et Lighthouse.
 
 ## Démarrage
 
 ```sh
 git clone https://github.com/kewinMarchand/html-css-vanilla-boilerplate.git
 cd html-css-vanilla-boilerplate
-make install   # dépendances, copie d'Embla dans site/vendor, Chromium des tests
+make install   # image de dev, dépendances dans son volume, copie d'Embla dans site/vendor
 make up        # http://localhost:3130
 ```
 
