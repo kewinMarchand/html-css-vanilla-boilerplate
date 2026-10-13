@@ -5,3 +5,5 @@ services:
       - '${PORT:-8080}:80'
     environment:
       MAINTENANCE: ${MAINTENANCE:-0}
+      GLITCHTIP_DSN: ${GLITCHTIP_DSN:-}
+      GLITCHTIP_ENVIRONMENT: ${GLITCHTIP_ENVIRONMENT:-production}

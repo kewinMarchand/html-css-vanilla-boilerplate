@@ -134,6 +134,16 @@ Dans les deux cas, `make qa` puis `make test-e2e` après la mise à jour.
 
 Les styles du catalogue et des tâches restent dans `site/css/main.css` (sections « Catalogue » et « Tâches ») jusqu'à ce qu'on les retire, sans effet sur la QA.
 
+### Variables d'environnement de l'image
+
+| Variable                | Rôle                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| `MAINTENANCE`           | `1` : toutes les pages répondent 503                                             |
+| `GLITCHTIP_DSN`         | suivi des erreurs du navigateur (DSN au format Sentry). Vide : rien n'est chargé |
+| `GLITCHTIP_ENVIRONMENT` | environnement transmis à GlitchTip, `production` par défaut                      |
+
+Le serveur de développement lit les mêmes variables : `GLITCHTIP_DSN=… make up`.
+
 ## Commandes
 
 `make help` liste toutes les commandes. Les principales :

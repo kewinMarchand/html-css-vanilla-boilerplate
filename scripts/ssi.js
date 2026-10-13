@@ -1,9 +1,10 @@
 import { readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
-const DIRECTIVE = /<!--#\s*(\w+)((?:\s+\w+="[^"]*")*)\s*-->/g
-const PARAMETER = /(\w+)="([^"]*)"/g
-const EXPRESSION = /^\$(\w+)\s*(!?=)\s*(.*)$/
+const DIRECTIVE = /<!--#\s*(\w+)((?:\s+\w+=(?:"[^"]*"|'[^']*'))*)\s*-->/g
+const PARAMETER = /(\w+)=(?:"([^"]*)"|'([^']*)')/g
+const EXPRESSION = /^\$(\w+)(?:\s*(!?=)\s*(.*))?$/
+const ENTITIES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
 
 export class SsiError extends Error {
   constructor(message) {
@@ -13,19 +14,23 @@ export class SsiError extends Error {
 }
 
 const parameters = (raw) =>
-  Object.fromEntries([...raw.matchAll(PARAMETER)].map(([, name, value]) => [name, value]))
+  Object.fromEntries(
+    [...raw.matchAll(PARAMETER)].map(([, name, double, single]) => [name, double ?? single]),
+  )
 
 const evaluate = (expression, variables) => {
   const match = expression?.match(EXPRESSION)
   if (!match) throw new SsiError(`Expression SSI non prise en charge : ${expression}`)
   const [, name, operator, text] = match
-  const equal = (variables[name] ?? '') === text
-  return operator === '=' ? equal : !equal
+  const value = variables[name] ?? ''
+  if (!operator) return value !== ''
+  return operator === '=' ? value === text : value !== text
 }
 
 /**
  * Sous-ensemble des inclusions côté serveur de nginx utilisé par le site : include virtual,
- * set, if, elif, else, endif, et les expressions `$variable = texte` ou `$variable != texte`.
+ * set, echo (encodé en entités HTML, comme par défaut dans nginx), if, elif, else, endif, et les
+ * expressions `$variable` (non vide), `$variable = texte` ou `$variable != texte`.
  * Comme dans nginx, une variable posée par `set` est visible dans les fichiers inclus.
  */
 export const renderSsi = (html, { readInclude, variables = {} }) => {
@@ -56,6 +61,10 @@ export const renderSsi = (html, { readInclude, variables = {} }) => {
       if (!conditions.pop()) throw new SsiError('« endif » sans « if »')
     } else if (command === 'set') {
       if (isActive()) variables[params.var] = params.value
+    } else if (command === 'echo') {
+      if (isActive()) {
+        output += String(variables[params.var] ?? '').replace(/[&<>"']/g, (c) => ENTITIES[c])
+      }
     } else if (command === 'include') {
       if (isActive()) output += renderSsi(readInclude(params.virtual), { readInclude, variables })
     } else {

@@ -3,6 +3,13 @@ import { defineConfig, devices } from '@playwright/test'
 const PORT = 3130
 const BASE_URL = `http://localhost:${PORT}`
 
+// Second serveur avec des valeurs factices pour tests/e2e/observability.e2e.js : aucun traceur réel.
+export const OBSERVABILITY_PORT = 3133
+const OBSERVABILITY_ENV = {
+  GLITCHTIP_DSN: 'http://cle@localhost:3231/1',
+  GLITCHTIP_ENVIRONMENT: 'test',
+}
+
 export default defineConfig({
   testMatch: /.*\.(e2e|a11y)\.js/,
   fullyParallel: true,
@@ -19,9 +26,17 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
-  webServer: {
-    command: `node scripts/serve.js ${PORT}`,
-    url: BASE_URL,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: `node scripts/serve.js ${PORT}`,
+      url: BASE_URL,
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: `node scripts/serve.js ${OBSERVABILITY_PORT}`,
+      url: `http://localhost:${OBSERVABILITY_PORT}`,
+      reuseExistingServer: !process.env.CI,
+      env: OBSERVABILITY_ENV,
+    },
+  ],
 })

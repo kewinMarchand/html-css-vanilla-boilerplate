@@ -8,3 +8,4 @@ site/images
 site/icons/*.png
 .cache
 site/js/shared/iconNames.js
+vendor

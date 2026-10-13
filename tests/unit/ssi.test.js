@@ -45,10 +45,20 @@ describe('inclusions côté serveur', () => {
     )
   })
 
+  it('affiche une variable encodée en entités et teste si elle est renseignée', () => {
+    assert.equal(
+      render(`<!--# if expr="$a" -->[<!--# echo var='a' -->]<!--# else -->vide<!--# endif -->`, {
+        a: '<"x">',
+      }),
+      '[&lt;&quot;x&quot;&gt;]',
+    )
+    assert.equal(render('<!--# if expr="$a" -->[a]<!--# else -->vide<!--# endif -->', {}), 'vide')
+  })
+
   it('refuse les directives et les blocs hors du sous-ensemble pris en charge', () => {
-    assert.throws(() => render('<!--# echo var="page" -->'), SsiError)
+    assert.throws(() => render('<!--# exec cmd="ls" -->'), SsiError)
     assert.throws(() => render('<!--# if expr="$a = b" -->'), { message: '« if » sans « endif »' })
     assert.throws(() => render('<!--# endif -->'), { message: '« endif » sans « if »' })
-    assert.throws(() => render('<!--# if expr="$a" --><!--# endif -->'), SsiError)
+    assert.throws(() => render('<!--# if expr="a = b" --><!--# endif -->'), SsiError)
   })
 })

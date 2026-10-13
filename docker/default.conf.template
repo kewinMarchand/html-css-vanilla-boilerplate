@@ -1,3 +1,8 @@
+map "${GLITCHTIP_DSN}" $glitchtip_origin {
+    "~^(?<glitchtip_scheme>https?)://[^@/]+@(?<glitchtip_host>[^/]+)/" "$glitchtip_scheme://$glitchtip_host";
+    default "";
+}
+
 map "${MAINTENANCE}" $maintenance {
     default 0;
     1 1;
@@ -18,6 +23,8 @@ server {
     gzip_types text/css text/javascript application/javascript application/json application/manifest+json image/svg+xml text/xml text/plain;
 
     ssi on;
+    set $glitchtip_dsn "${GLITCHTIP_DSN}";
+    set $glitchtip_environment "${GLITCHTIP_ENVIRONMENT}";
 
     include /etc/nginx/snippets/security-headers.conf;
 

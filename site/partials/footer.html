@@ -30,3 +30,13 @@
     <!-- dev:styleguide -->
   </div>
 </footer>
+<!--# if expr="$glitchtip_dsn" -->
+<!--# if expr="$page != erreur" -->
+<script
+  type="module"
+  src="/js/shared/glitchtip.js"
+  data-glitchtip-dsn="<!--# echo var='glitchtip_dsn' -->"
+  data-glitchtip-environment="<!--# echo var='glitchtip_environment' -->"
+></script>
+<!--# endif -->
+<!--# endif -->
