@@ -2,7 +2,7 @@ const DSN = /^(https?):\/\/[^@/]+@([^/]+)\//
 const URL_ORIGIN = /^(https?:\/\/[^/]+)/
 
 /**
- * Configuration de GlitchTip et de Matomo lue dans l'environnement, telle que nginx la donne aux inclusions
+ * Configuration lue dans l'environnement (API, GlitchTip, Matomo), telle que nginx la donne aux inclusions
  * côté serveur (`set` dans `docker/default.conf.template`) et à la CSP (`map`). Le serveur de
  * développement et les tests la calculent ici de la même façon. Sans valeur, tout reste vide.
  */
@@ -24,6 +24,19 @@ export const observabilityVariables = (env) => {
     matomo_url: matomoUrl,
     matomo_site_id: matomoSiteId,
     matomo_origin: matomoOrigin(matomoUrl, matomoSiteId),
+  }
+}
+
+export const DEFAULT_API_URL = 'http://localhost:8090'
+
+export const apiOrigin = (url) => url.match(URL_ORIGIN)?.[1] ?? ''
+
+export const runtimeVariables = (env) => {
+  const apiUrl = env.API_URL || DEFAULT_API_URL
+  return {
+    ...observabilityVariables(env),
+    api_url: apiUrl,
+    api_origin: apiOrigin(apiUrl),
   }
 }
 

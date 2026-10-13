@@ -5,7 +5,7 @@ import { extname, join, normalize } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 
-import { observabilityVariables, resolveVariables } from './observability.js'
+import { resolveVariables, runtimeVariables } from './runtimeVariables.js'
 import { renderSsi } from './ssi.js'
 
 const ROOT = fileURLToPath(new URL('../site/', import.meta.url))
@@ -34,14 +34,14 @@ const TYPES = {
   '.txt': 'text/plain; charset=utf-8',
 }
 
-const OBSERVABILITY = observabilityVariables(process.env)
+const RUNTIME = runtimeVariables(process.env)
 
 const SECURITY_HEADERS = Object.fromEntries(
   [
     ...(await readFile(HEADERS_FILE, 'utf8')).matchAll(
       /add_header\s+([\w-]+)\s+"([^"]*)"\s+always;/g,
     ),
-  ].map(([, name, value]) => [name, resolveVariables(value, OBSERVABILITY)]),
+  ].map(([, name, value]) => [name, resolveVariables(value, RUNTIME)]),
 )
 
 const isFile = async (path) => {
@@ -91,7 +91,7 @@ const send = async (request, response, status, file, extraHeaders = {}) => {
   if (extension === '.html') {
     const html = renderSsi(body.toString('utf8'), {
       readInclude: (path) => readFileSync(join(ROOT, path), 'utf8'),
-      variables: { ...OBSERVABILITY },
+      variables: { ...RUNTIME },
     })
     body = Buffer.from(html.replace(STYLEGUIDE_MARKER, STYLEGUIDE_LINK))
   }

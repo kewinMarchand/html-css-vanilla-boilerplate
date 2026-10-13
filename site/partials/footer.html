@@ -30,6 +30,9 @@
     <!-- dev:styleguide -->
   </div>
 </footer>
+<!--# if expr="$api_origin" -->
+<link rel="preconnect" href="<!--# echo var='api_url' -->" crossorigin data-api-url />
+<!--# endif -->
 <!--# set var="glitchtip" value="" -->
 <!--# if expr="$glitchtip_origin" --><!--# set var="glitchtip" value="on" --><!--# endif -->
 <!--# if expr="$page = erreur" --><!--# set var="glitchtip" value="" --><!--# endif -->

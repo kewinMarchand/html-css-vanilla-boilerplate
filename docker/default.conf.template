@@ -8,6 +8,11 @@ map "${MATOMO_URL}|${MATOMO_SITE_ID}" $matomo_origin {
     default "";
 }
 
+map "${API_URL}" $api_origin {
+    "~^(?<api_base>https?://[^/]+)" $api_base;
+    default "";
+}
+
 map "${MAINTENANCE}" $maintenance {
     default 0;
     1 1;
@@ -32,6 +37,7 @@ server {
     set $glitchtip_environment "${GLITCHTIP_ENVIRONMENT}";
     set $matomo_url "${MATOMO_URL}";
     set $matomo_site_id "${MATOMO_SITE_ID}";
+    set $api_url "${API_URL}";
 
     include /etc/nginx/snippets/security-headers.conf;
 

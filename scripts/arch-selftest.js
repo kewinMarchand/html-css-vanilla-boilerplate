@@ -62,6 +62,11 @@ const VIOLATIONS = [
     source: "import '/js/modules/arch-selftest-a/domain/fixture.js'\n",
   },
   {
+    rule: 'client-api-hors-infrastructure',
+    file: `${MODULE_A}/ui/violation.js`,
+    source: "import '/js/shared/api.js'\n",
+  },
+  {
     rule: 'embla-hors-carrousel',
     file: 'site/js/shared/archSelftestViolation.js',
     source: "import '/vendor/embla-carousel.esm.js'\n",

@@ -2,7 +2,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { observabilityVariables } from './observability.js'
+import { runtimeVariables } from './runtimeVariables.js'
 import { renderSsi, sitePages } from './ssi.js'
 
 const ROOT = fileURLToPath(new URL('../site/', import.meta.url))
@@ -13,8 +13,8 @@ const OUTPUT = process.argv[2]
  * validation HTML couvre les deux branches des inclusions conditionnelles.
  */
 const VARIANTS = {
-  'sans-traceur': observabilityVariables({}),
-  'avec-traceurs': observabilityVariables({
+  'sans-traceur': runtimeVariables({}),
+  'avec-traceurs': runtimeVariables({
     GLITCHTIP_DSN: 'https://cle@glitchtip.example.com/1',
     GLITCHTIP_ENVIRONMENT: 'production',
     MATOMO_URL: 'https://matomo.example.com/',

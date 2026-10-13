@@ -72,6 +72,14 @@ module.exports = {
         ]
       : []),
     {
+      name: 'client-api-hors-infrastructure',
+      comment:
+        'Le client de l’API n’est importé que par la couche infrastructure/http/ des modules (couche anti-corruption).',
+      severity: 'error',
+      from: { pathNot: '^site/js/modules/[^/]+/infrastructure/http/' },
+      to: { path: '^site/js/shared/api\\.js$' },
+    },
+    {
       name: 'embla-hors-carrousel',
       comment: 'Embla n’est importé que par son adaptateur, shared/carousel/.',
       severity: 'error',

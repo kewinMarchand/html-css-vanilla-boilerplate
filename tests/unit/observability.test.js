@@ -4,11 +4,14 @@ import { join } from 'node:path'
 import { describe, it } from 'node:test'
 
 import {
+  apiOrigin,
+  DEFAULT_API_URL,
   glitchtipOrigin,
   matomoOrigin,
   observabilityVariables,
   resolveVariables,
-} from '../../scripts/observability.js'
+  runtimeVariables,
+} from '../../scripts/runtimeVariables.js'
 import { PAGES, renderPage, ROOT } from './renderedPages.js'
 
 const DSN = 'https://cle@glitchtip.example.com/1'
@@ -129,5 +132,25 @@ describe('Matomo', () => {
       true,
     )
     assert.equal(audienceSection(renderPage(page('/donnees-personnelles').source, NONE)), false)
+  })
+})
+
+describe('API', () => {
+  it('pointe sur API Platform par défaut et ouvre son origine dans connect-src', () => {
+    const variables = runtimeVariables({})
+    assert.equal(variables.api_url, DEFAULT_API_URL)
+    assert.equal(apiOrigin('http://localhost:8091/'), 'http://localhost:8091')
+    assert.deepEqual(csp(variables)['connect-src'], ["'self'", 'http://localhost:8090'])
+  })
+
+  it('injecte l’adresse de l’API dans chaque page', () => {
+    const html = renderPage(
+      page('/taches').source,
+      runtimeVariables({ API_URL: 'http://localhost:8091' }),
+    )
+    assert.match(
+      html,
+      /<link rel="preconnect" href="http:\/\/localhost:8091" crossorigin data-api-url \/>/,
+    )
   })
 })
