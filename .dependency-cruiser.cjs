@@ -54,10 +54,10 @@ module.exports = {
     },
     {
       name: 'infrastructure-hors-domaine',
-      comment: 'L’infrastructure n’importe que le domaine de son module.',
+      comment: 'L’infrastructure n’importe que le domaine de son module et le client de l’API.',
       severity: 'error',
       from: { path: '^site/js/modules/([^/]+)/infrastructure/' },
-      to: { pathNot: '^site/js/modules/$1/(domain|infrastructure)/' },
+      to: { pathNot: '^site/js/(modules/$1/(domain|infrastructure)/|shared/api\\.js$)' },
     },
     ...(modulesWithApplication.length > 0
       ? [

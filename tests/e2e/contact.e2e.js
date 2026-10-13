@@ -44,6 +44,20 @@ test.describe('Contact', () => {
     await expect(page.getByTestId('contact-name')).toHaveValue('')
   })
 
+  test('affiche sous le champ la violation renvoyée par l’API', async ({ page }) => {
+    await page.goto('/contact')
+    await page.getByTestId('contact-name').fill('A'.repeat(300))
+    await page.getByTestId('contact-email').fill('ada@exemple.fr')
+    await page.getByTestId('contact-message').fill('Bonjour, ceci est un message.')
+    await page.getByTestId('contact-submit').click()
+
+    await expect(page.getByTestId('contact-name-error')).toHaveText(
+      'Votre nom ne doit pas dépasser 255 caractères.',
+    )
+    await expect(page.getByTestId('contact-name')).toHaveAttribute('aria-invalid', 'true')
+    await expect(page.getByTestId('contact-success')).toHaveCount(0)
+  })
+
   test('ouvre la modale, la ferme avec Échap et rend le focus', async ({ page }) => {
     await page.goto('/contact')
     const opener = page.getByTestId('contact-privacy-open')

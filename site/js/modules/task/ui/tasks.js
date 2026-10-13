@@ -1,9 +1,8 @@
-import { findAllTasks } from '../infrastructure/tasksRepository.js'
+import { findAllTasks } from '../infrastructure/http/tasksRepository.js'
 import { TasksLoadError } from '../infrastructure/TasksLoadError.js'
 import { filterTasks, formatDoneCount, formatVisibleCount, splitOnMatch } from '../domain/tasks.js'
 
 const state = document.querySelector('[data-tasks-state]')
-const scenario = new URLSearchParams(location.search).get('scenario')
 
 const render = (templateId) => {
   state.replaceChildren(document.getElementById(templateId).content.cloneNode(true))
@@ -11,7 +10,7 @@ const render = (templateId) => {
 
 const fetchTasks = async () => {
   try {
-    return await findAllTasks({ scenario })
+    return await findAllTasks()
   } catch {
     throw new TasksLoadError()
   }

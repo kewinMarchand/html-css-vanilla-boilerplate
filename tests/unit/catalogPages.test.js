@@ -3,26 +3,15 @@ import { describe, it } from 'node:test'
 
 import { breadcrumbTrail } from '../../lib/breadcrumb.js'
 import { listCategoryPaths } from '../../site/js/modules/catalog/domain/categoryPath.js'
-import { formatPrice } from '../../site/js/modules/catalog/domain/price.js'
-import {
-  CATEGORIES,
-  PRODUCTS,
-} from '../../site/js/modules/catalog/infrastructure/in-memory/catalogData.js'
-import { PAGES, text } from './renderedPages.js'
+import { CATEGORIES } from '../../lib/categoryTree.js'
+import { PAGES } from './renderedPages.js'
 
 describe('pages statiques du catalogue', () => {
-  it('affiche dans chaque carte produit le prix formaté du jeu de données', () => {
-    const cards = PAGES.filter((page) => page.route.startsWith('/catalogue')).flatMap(
-      ({ html }) => [
-        ...html.matchAll(
-          /data-product-id="(\d+)"[\s\S]*?data-testid="catalog-product-price">([^<]+)</g,
-        ),
-      ],
-    )
-    assert.ok(cards.length > 0)
-    for (const [, id, price] of cards) {
-      const product = PRODUCTS.find((item) => item.id === Number(id))
-      assert.equal(text(price), formatPrice(product.price).replace(/\s/g, ' '), product.name)
+  it('ne contient aucune donnée de produit, toutes lues dans l’API', () => {
+    for (const { route, html } of PAGES.filter((page) => page.route.startsWith('/catalogue'))) {
+      const outsideTemplates = html.replace(/<template[\s\S]*?<\/template>/g, '')
+      assert.ok(!outsideTemplates.includes('data-testid="catalog-product"'), route)
+      assert.ok(html.includes('id="catalog-product-template"'), route)
     }
   })
 

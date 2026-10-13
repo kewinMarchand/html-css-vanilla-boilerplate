@@ -1,4 +1,5 @@
-import { sendContactMessage } from '../infrastructure/sendContactMessage.js'
+import { ContactRejectedError } from '../infrastructure/http/contactTranslation.js'
+import { sendContactMessage } from '../infrastructure/http/sendContactMessage.js'
 import { validateField } from '../domain/contactSchema.js'
 
 const form = document.querySelector('[data-contact-form]')
@@ -7,15 +8,28 @@ const submit = form.querySelector('[type="submit"]')
 const fields = [...form.querySelectorAll('input, textarea')]
 let isSending = false
 
-const check = (field) => {
-  const message = validateField(field.name, field.value)
+const showFieldError = (field, message) => {
   document.getElementById(field.getAttribute('aria-describedby')).textContent = message ?? ''
   if (message) {
     field.setAttribute('aria-invalid', 'true')
   } else {
     field.removeAttribute('aria-invalid')
   }
+}
+
+const check = (field) => {
+  const message = validateField(field.name, field.value)
+  showFieldError(field, message)
   return !message
+}
+
+const showRejection = (fieldErrors) => {
+  const rejected = fieldErrors.map(({ field: name, message }) => {
+    const field = form.elements.namedItem(name)
+    showFieldError(field, message)
+    return field
+  })
+  rejected[0].focus()
 }
 
 const showStatus = (templateId) => {
@@ -50,8 +64,12 @@ form.addEventListener('submit', async (event) => {
     await sendContactMessage(Object.fromEntries(new FormData(form)))
     form.reset()
     showStatus('contact-success-template')
-  } catch {
-    showStatus('contact-error-template')
+  } catch (error) {
+    if (error instanceof ContactRejectedError) {
+      showRejection(error.fieldErrors)
+    } else {
+      showStatus('contact-error-template')
+    }
   } finally {
     isSending = false
     submit.removeAttribute('aria-disabled')

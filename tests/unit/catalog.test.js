@@ -2,10 +2,6 @@ import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
 import {
-  CATEGORIES,
-  PRODUCTS,
-} from '../../site/js/modules/catalog/infrastructure/in-memory/catalogData.js'
-import {
   clearFilters,
   countActiveFilters,
   DEFAULT_QUERY,
@@ -15,20 +11,8 @@ import {
   withFilters,
 } from '../../site/js/modules/catalog/domain/catalogQuery.js'
 import { activeFilters } from '../../site/js/modules/catalog/ui/activeFilters.js'
-import {
-  searchCatalog,
-  sortProducts,
-} from '../../site/js/modules/catalog/infrastructure/in-memory/productSearch.js'
 import { formatResultsCount } from '../../site/js/modules/catalog/ui/labels.js'
 import { paginationWindow } from '../../site/js/modules/catalog/ui/pagination.js'
-
-const search = (categorySlug, changes = {}) =>
-  searchCatalog({
-    products: PRODUCTS,
-    categories: CATEGORIES,
-    categorySlug,
-    query: { ...DEFAULT_QUERY, ...changes },
-  })
 
 describe('requête du catalogue', () => {
   it('fait l’aller-retour URL vers requête vers URL', () => {
@@ -64,58 +48,6 @@ describe('requête du catalogue', () => {
     )
     assert.equal(isFiltered(DEFAULT_QUERY), false)
     assert.equal(isFiltered({ ...DEFAULT_QUERY, sort: 'nom' }), true)
-  })
-})
-
-describe('recherche dans le catalogue', () => {
-  it('limite les produits à la branche de la catégorie', () => {
-    assert.equal(search(null).total, 24)
-    assert.equal(search('plantes-interieur').total, 12)
-    assert.equal(search('feuillages').total, 6)
-    assert.equal(search('monstera').total, 3)
-  })
-
-  it('combine les valeurs d’une facette en OU et les facettes en ET', () => {
-    const result = search('feuillages', { exposures: ['ombre', 'mi-ombre'], sizes: ['S'] })
-    assert.deepEqual(
-      result.items.map((product) => product.slug),
-      ['monstera-adansonii', 'asplenium-nidus'],
-    )
-  })
-
-  it('compte chaque valeur sans appliquer sa propre facette (comptage disjonctif)', () => {
-    const result = search('feuillages', { exposures: ['ombre'] })
-    assert.deepEqual(result.exposureCounts, { soleil: 0, 'mi-ombre': 4, ombre: 2 })
-    assert.deepEqual(result.sizeCounts, { S: 1, M: 1, L: 0 })
-    assert.deepEqual(
-      result.categoryCounts.map(({ category, count }) => [category.slug, count]),
-      [
-        ['monstera', 0],
-        ['fougeres', 2],
-      ],
-    )
-  })
-
-  it('filtre par prix en euros et par stock', () => {
-    const result = search(null, { priceMin: 80, inStock: true })
-    assert.ok(result.items.every((product) => product.price >= 8000 && product.inStock))
-  })
-
-  it('trie par prix et par nom', () => {
-    const prices = sortProducts(PRODUCTS, 'prix-asc').map((product) => product.price)
-    assert.deepEqual(
-      prices,
-      prices.toSorted((a, b) => a - b),
-    )
-    assert.equal(sortProducts(PRODUCTS, 'nom')[0].name, 'Anthurium andreanum rouge')
-    assert.equal(sortProducts(PRODUCTS, 'pertinence'), PRODUCTS)
-  })
-
-  it('pagine par 12 et ramène une page hors limites à la dernière', () => {
-    assert.equal(search(null).items.length, 12)
-    assert.equal(search(null, { page: 2 }).items.length, 12)
-    assert.equal(search(null, { page: 9 }).page, 2)
-    assert.equal(search('monstera').pageCount, 1)
   })
 })
 

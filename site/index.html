@@ -48,6 +48,7 @@
     <script type="module" src="/js/shared/a11yModeToggle.js"></script>
     <script type="module" src="/js/shared/categoryMenu.js"></script>
     <script type="module" src="/js/shared/carousel/carousel.js"></script>
+    <script type="module" src="/js/modules/blog/ui/latestArticles.js"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -366,18 +367,30 @@
         data-testid="home-blog"
       >
         <h2 id="blog-title">Derniers articles</h2>
-        <div class="blog-grid">
+        <div class="blog-state" data-blog-state>
+          <div class="skeleton-list" role="status" data-testid="home-blog-loading">
+            <span class="visually-hidden">Chargement des articles…</span>
+            <span class="skeleton skeleton-card" aria-hidden="true"></span>
+          </div>
+        </div>
+        <noscript>
+          <p class="alert alert-info" data-testid="home-blog-noscript">
+            Les articles sont lus dans l'API par JavaScript. Activez-le pour les afficher.
+          </p>
+        </noscript>
+        <div class="blog-grid" data-blog-grid></div>
+        <template id="blog-card-template">
           <article class="blog-card" data-testid="home-blog-card">
             <picture class="blog-card-media">
               <source
                 type="image/avif"
-                srcset="/images/blog-1-480.avif 480w, /images/blog-1-960.avif 960w"
                 sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+                data-blog-avif
               />
               <source
                 type="image/webp"
-                srcset="/images/blog-1-480.webp 480w, /images/blog-1-960.webp 960w"
                 sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
+                data-blog-webp
               />
               <img
                 src="/images/blog-1-960.webp"
@@ -386,84 +399,34 @@
                 height="540"
                 loading="lazy"
                 decoding="async"
+                data-blog-image
               />
             </picture>
-            <h3>Le CSS natif suffit souvent</h3>
-            <p>
-              Couches de cascade, imbrication et requêtes de conteneur couvrent aujourd'hui
-              l'essentiel de ce qu'apportait un préprocesseur.
-            </p>
+            <h3 data-blog-title>Article</h3>
+            <p data-blog-excerpt></p>
             <footer class="blog-card-meta">
-              <span class="tag">CSS</span>
-              <time datetime="2026-09-28">28 septembre 2026</time>
+              <time data-blog-date></time>
             </footer>
           </article>
-          <article class="blog-card" data-testid="home-blog-card">
-            <picture class="blog-card-media">
-              <source
-                type="image/avif"
-                srcset="/images/blog-2-480.avif 480w, /images/blog-2-960.avif 960w"
-                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
-              />
-              <source
-                type="image/webp"
-                srcset="/images/blog-2-480.webp 480w, /images/blog-2-960.webp 960w"
-                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
-              />
-              <img
-                src="/images/blog-2-960.webp"
-                alt=""
-                width="960"
-                height="540"
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
-            <h3>Un formulaire qui marche sans JavaScript</h3>
-            <p>
-              La validation native du navigateur sert de socle, le script n'ajoute que des messages
-              plus clairs et l'envoi sans rechargement.
-            </p>
-            <footer class="blog-card-meta">
-              <span class="tag">Formulaires</span>
-              <time datetime="2026-09-14">14 septembre 2026</time>
-            </footer>
-          </article>
-          <article class="blog-card" data-testid="home-blog-card">
-            <picture class="blog-card-media">
-              <source
-                type="image/avif"
-                srcset="/images/blog-3-480.avif 480w, /images/blog-3-960.avif 960w"
-                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
-              />
-              <source
-                type="image/webp"
-                srcset="/images/blog-3-480.webp 480w, /images/blog-3-960.webp 960w"
-                sizes="(width >= 1024px) 460px, (width >= 640px) 50vw, 100vw"
-              />
-              <img
-                src="/images/blog-3-960.webp"
-                alt=""
-                width="960"
-                height="540"
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
-            <h3>Un carrousel qui dégrade bien</h3>
-            <p>
-              Sans JavaScript, la piste défile nativement avec un défilement magnétique. Le script
-              ajoute le glisser, les boutons et la pagination.
-            </p>
-            <footer class="blog-card-meta">
-              <span class="tag">Composants</span>
-              <time datetime="2026-08-31">31 août 2026</time>
-            </footer>
-          </article>
-        </div>
-        <p class="blog-empty" data-testid="home-blog-empty">
-          Aucun article pour le moment. Revenez bientôt, la rédaction est au travail.
-        </p>
+        </template>
+        <template id="blog-error-template">
+          <div class="alert alert-error" role="alert" data-testid="home-blog-error">
+            <p data-blog-error-message></p>
+            <button
+              type="button"
+              class="button button-secondary"
+              data-blog-retry
+              data-testid="home-blog-retry"
+            >
+              Réessayer
+            </button>
+          </div>
+        </template>
+        <template id="blog-empty-template">
+          <p class="blog-empty" data-testid="home-blog-empty">
+            Aucun article pour le moment. Revenez bientôt, la rédaction est au travail.
+          </p>
+        </template>
       </section>
     </main>
     <!--# include virtual="/partials/footer.html" -->

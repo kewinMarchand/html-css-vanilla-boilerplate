@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { withScenario } from './routes.js'
+
 test.describe('Tâches', () => {
   test('affiche la liste chargée depuis le dépôt', async ({ page }) => {
     await page.goto('/taches')
@@ -21,7 +23,12 @@ test.describe('Tâches', () => {
   })
 
   test('affiche l’erreur et relance le chargement', async ({ page }) => {
-    await page.goto('/taches?scenario=error')
+    await withScenario(page, 'error')
+    const requests = []
+    page.on('request', (request) => {
+      if (request.url().includes('/api/tasks')) requests.push(request.url())
+    })
+    await page.goto('/taches')
 
     await expect(page.getByTestId('tasks-error')).toContainText(
       'Impossible de charger les tâches pour le moment.',
@@ -29,12 +36,13 @@ test.describe('Tâches', () => {
     await expect(page.getByTestId('tasks-list')).toHaveCount(0)
 
     await page.getByTestId('tasks-retry').click()
-    await expect(page.getByTestId('tasks-loading')).toBeVisible()
+    await expect.poll(() => requests.length).toBe(2)
     await expect(page.getByTestId('tasks-error')).toBeVisible()
   })
 
   test('affiche un message amical quand la liste est vide', async ({ page }) => {
-    await page.goto('/taches?scenario=empty')
+    await withScenario(page, 'empty')
+    await page.goto('/taches')
 
     await expect(page.getByTestId('tasks-empty')).toBeVisible()
     await expect(page.getByTestId('tasks-list')).toHaveCount(0)

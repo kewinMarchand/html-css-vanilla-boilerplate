@@ -1,6 +1,7 @@
 import { latestOnly, STALE } from '/js/shared/latestOnly.js'
 
 import { loadCatalogPage } from '../application/loadCatalogPage.js'
+import { formatPrice } from '../domain/price.js'
 import {
   clearFilters,
   countActiveFilters,
@@ -12,7 +13,7 @@ import {
   withFilters,
 } from '../domain/catalogQuery.js'
 import { activeFilters } from './activeFilters.js'
-import { formatResultsCount } from './labels.js'
+import { EXPOSURE_LABELS, formatResultsCount } from './labels.js'
 import { paginationWindow } from './pagination.js'
 
 const root = document.querySelector('[data-catalog]')
@@ -35,10 +36,7 @@ const doneButton = $('[data-catalog-dialog-done]')
 
 const BASE_PATH = form.getAttribute('action')
 const categorySlug = root.dataset.category || null
-const scenario = new URLSearchParams(location.search).get('scenario')
-const productNodes = new Map(
-  [...list.children].map((item) => [Number(item.dataset.productId), item]),
-)
+const productTemplate = document.getElementById('catalog-product-template')
 let query = parseQuery(new URLSearchParams(location.search))
 
 const urlFor = (nextQuery) => {
@@ -170,9 +168,31 @@ const renderPagination = (result) => {
   )
 }
 
+const EAGER_IMAGES = 4
+
+const renderProduct = (product, index) => {
+  const item = productTemplate.content.firstElementChild.cloneNode(true)
+  const image = `/images/product-${product.image}`
+  const $item = (selector) => item.querySelector(selector)
+  item.dataset.productId = String(product.id)
+  $item('[data-product-card]').id = `produit-${product.slug}`
+  $item('[data-product-avif]').srcset = `${image}-400.avif 400w, ${image}-800.avif 800w`
+  $item('[data-product-webp]').srcset = `${image}-400.webp 400w, ${image}-800.webp 800w`
+  const img = $item('[data-product-image]')
+  img.src = `${image}-400.webp`
+  img.alt = product.name
+  if (index >= EAGER_IMAGES) img.loading = 'lazy'
+  $item('[data-product-name]').textContent = product.name
+  $item('[data-product-price]').textContent = formatPrice(product.price)
+  $item('[data-product-exposure]').textContent = EXPOSURE_LABELS[product.exposure]
+  $item('[data-product-size]').textContent = product.size
+  $item('[data-product-out-of-stock]').hidden = product.inStock
+  return item
+}
+
 const renderResult = (result) => {
   list.removeAttribute('aria-busy')
-  list.replaceChildren(...result.items.map((product) => productNodes.get(product.id)))
+  list.replaceChildren(...result.items.map(renderProduct))
   state.replaceChildren(...(result.total ? [] : [fromTemplate('catalog-empty-template')]))
   state
     .querySelector('[data-catalog-empty-clear]')
@@ -195,7 +215,7 @@ const renderError = (message) => {
   state.querySelector('[data-catalog-retry]').addEventListener('click', () => load())
 }
 
-const loadLatestPage = latestOnly(() => loadCatalogPage({ categorySlug, query, scenario }))
+const loadLatestPage = latestOnly(() => loadCatalogPage({ categorySlug, query }))
 
 const load = async ({ showLoading = true } = {}) => {
   if (showLoading) {

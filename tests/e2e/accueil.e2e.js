@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { withScenario } from './routes.js'
+
 const currentDot = (page) => page.locator('[data-testid="carousel-dot"][aria-current="true"]')
 
 test.describe('Accueil', () => {
@@ -71,13 +73,25 @@ test.describe('Accueil', () => {
     await expect(page.getByTestId('home-blog-empty')).toBeHidden()
   })
 
-  test('la grille de blog affiche un message amical quand elle est vide', async ({ page }) => {
+  test('la grille de blog affiche un message amical quand l’API ne renvoie aucun article', async ({
+    page,
+  }) => {
+    await withScenario(page, 'empty')
     await page.goto('/')
-    await page.getByTestId('home-blog-card').evaluateAll((cards) => {
-      for (const card of cards) card.remove()
-    })
 
     await expect(page.getByTestId('home-blog-empty')).toBeVisible()
+    await expect(page.getByTestId('home-blog-card')).toHaveCount(0)
+  })
+
+  test('la grille de blog propose de réessayer quand l’API échoue', async ({ page }) => {
+    await withScenario(page, 'error')
+    await page.goto('/')
+
+    await expect(page.getByTestId('home-blog-error')).toContainText(
+      'Impossible de charger les articles pour le moment.',
+    )
+    await page.getByTestId('home-blog-retry').click()
+    await expect(page.getByTestId('home-blog-error')).toBeVisible()
   })
 })
 

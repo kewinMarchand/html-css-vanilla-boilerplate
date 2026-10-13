@@ -14,7 +14,7 @@
     "lint:fix": "stylelint \"site/**/*.css\" --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:unit": "node --test \"tests/unit/**/*.test.js\"",
+    "test:unit": "node --import ./tests/unit/siteResolver.js --test \"tests/unit/**/*.test.js\"",
     "test:e2e": "playwright test tests/e2e",
     "test:a11y": "playwright test tests/a11y",
     "lhci": "lhci autorun"

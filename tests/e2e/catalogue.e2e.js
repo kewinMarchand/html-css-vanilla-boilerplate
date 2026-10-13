@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { withScenario } from './routes.js'
+
 const openFilters = async (page, isMobile) => {
   if (isMobile) await page.getByTestId('catalog-filters-open').click()
 }
@@ -101,7 +103,8 @@ test.describe('Catalogue', () => {
   })
 
   test('affiche l’erreur et propose de réessayer', async ({ page }) => {
-    await page.goto('/catalogue?scenario=error')
+    await withScenario(page, 'error')
+    await page.goto('/catalogue')
 
     await expect(page.getByTestId('catalog-error')).toContainText(
       'Impossible de charger les produits pour le moment.',
@@ -132,7 +135,7 @@ test.describe('Catalogue mobile', () => {
 test.describe('Catalogue sans JavaScript', () => {
   test.use({ javaScriptEnabled: false })
 
-  test('le formulaire GET porte les filtres dans l’URL et la liste reste complète', async ({
+  test('le formulaire GET porte les filtres dans l’URL et la page explique la limite', async ({
     page,
   }) => {
     await page.goto('/catalogue')
@@ -140,6 +143,7 @@ test.describe('Catalogue sans JavaScript', () => {
     await page.getByTestId('catalog-filters-apply').click()
 
     await expect(page).toHaveURL(/exposition=soleil/)
-    await expect(page.getByTestId('catalog-product')).toHaveCount(24)
+    await expect(page.getByTestId('catalog-noscript')).toBeVisible()
+    await expect(page.getByTestId('catalog-product')).toHaveCount(0)
   })
 })

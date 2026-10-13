@@ -175,8 +175,7 @@ site/                        racine servie par nginx, avec inclusions côté ser
     modules/<module>/        catalog, contact, task : un sous-domaine métier chacun
       domain/                fonctions pures et value objects (CatalogQuery, CategoryPath, Price)
       application/           catalogue seulement : cas d'utilisation loadCatalogPage
-      infrastructure/        données en mémoire avec latence (remplacées par l'API au branchement)
-        in-memory/           catalogue : jeu de données et recherche qui simule l'API
+      infrastructure/http/   lecture de l'API et traduction validée vers le domaine
       ui/                    point d'entrée chargé par la page, libellés, branchement au DOM
     views/styleguide/        charte graphique (développement seulement)
     shared/                  socle : mode renforcé, menu de catégories, modale, latestOnly
@@ -197,7 +196,7 @@ L'architecture suit le document commun `ARCHITECTURE-DDD.md` (forme vanilla). Ch
 ### Sans build : ce qui est assumé
 
 - **Header et footer sont inclus par nginx** (`<!--# include virtual="/partials/header.html" -->`), sans générateur ni build. Chaque page nomme d'abord sa place (`<!--# set var="page" value="contact" -->`), ce qui choisit le lien marqué `aria-current`. Le serveur de développement résout les mêmes directives. Un hébergement purement statique, sans SSI, afficherait les pages sans header ni footer (décision et alternatives : `doc/adr/0001-inclusions-serveur-nginx-ssi.md`). Le `<head>` SEO et le fil d'Ariane restent écrits dans chaque page. Pour qu'ils ne dérivent pas, `tests/unit/pages.test.js` vérifie sur le rendu de toutes les pages : navigation et liens légaux identiques à `site.config.json`, fil d'Ariane et JSON-LD conformes au calcul de `lib/breadcrumb.js`, titre et description dans les bonnes longueurs, canonique, hash du script inline présent dans la CSP, sitemap et plan du site complets, informations légales reprises de la configuration.
-- **Le catalogue est rendu en entier dans le HTML** (contenu indexable). Le module `catalog.js` lit l'URL, filtre, trie et pagine côté client en réordonnant les cartes existantes. Sans JavaScript, la liste complète reste visible et le formulaire `GET` place les filtres dans l'URL sans les appliquer : limite assumée d'un site sans serveur applicatif.
+- **Les données sont lues dans l'API par le navigateur** : produits, facettes, tâches et articles. Les pages de catégories restent statiques (une par chemin), seule leur liste vient de l'API. Sans JavaScript, chaque zone de données affiche un message, et le formulaire `GET` du catalogue place les filtres dans l'URL sans les appliquer : limite assumée d'un site sans serveur applicatif.
 - **Le formulaire de contact ne s'envoie qu'avec JavaScript.** Il n'y a pas de serveur pour traiter un envoi. Sans JavaScript, un message au-dessus du formulaire l'annonce et donne l'adresse e-mail, et le `POST` natif reçoit une page française en 405 (`site/405.html`, servie par nginx et par `scripts/serve.js`).
 - **Les balises `robots` et canonique des pages filtrées** sont mises à jour par le script. Un robot sans JavaScript voit la page de catégorie indexable, dont la canonique est déjà la version sans filtre.
 
@@ -221,9 +220,9 @@ L'architecture suit le document commun `ARCHITECTURE-DDD.md` (forme vanilla). Ch
 
 Il pose `data-js` et le mode renforcé avant le premier rendu. La CSP l'autorise par son hash : après toute modification, `make test-unit` affiche le nouveau hash attendu, à reporter dans `docker/security-headers.conf`.
 
-### Brancher la vraie API
+### L'API
 
-Seuls les fichiers `infrastructure/` des modules changent : `tasksRepository.js`, `catalogRepository.js`, `sendContactMessage.js`. Le paramètre d'URL `scenario=error|empty` des démos devient l'en-tête `X-Scenario` de l'API de test.
+Le site est branché : `API_URL` désigne l'API (8090, API Platform, par défaut, ou 8091, Hono), par exemple `API_URL=http://localhost:8091 make up`. L'API doit autoriser l'origine du site (CORS). En e2e, les états d'erreur et de liste vide sont provoqués par l'en-tête `X-Scenario`, que Playwright ajoute aux requêtes du navigateur vers l'API (`withScenario` dans `tests/e2e/routes.js`).
 
 ## CSS natif utilisé
 

@@ -54,34 +54,6 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "Palmiers",
-        "numberOfItems": 3,
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Palmier de Chine (Trachycarpus fortunei)",
-            "url": "https://www.example.com/catalogue/plantes-exterieur/palmiers#produit-palmier-de-chine"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Palmier bleu du Mexique (Brahea armata)",
-            "url": "https://www.example.com/catalogue/plantes-exterieur/palmiers#produit-palmier-bleu-du-mexique"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Palmier nain (Chamaerops humilis)",
-            "url": "https://www.example.com/catalogue/plantes-exterieur/palmiers#produit-palmier-nain"
-          }
-        ]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
           {
@@ -152,9 +124,8 @@
                       data-testid="catalog-filter-exposure-soleil"
                     />
                     <label for="filter-exposures-soleil"
-                      >Soleil
-                      <span class="facet-count" data-count="exposures-soleil">(3)</span></label
-                    >
+                      >Soleil <span class="facet-count" data-count="exposures-soleil"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -164,12 +135,10 @@
                       value="mi-ombre"
                       data-facet="exposures"
                       data-testid="catalog-filter-exposure-mi-ombre"
-                      disabled
                     />
                     <label for="filter-exposures-mi-ombre"
-                      >Mi-ombre
-                      <span class="facet-count" data-count="exposures-mi-ombre">(0)</span></label
-                    >
+                      >Mi-ombre <span class="facet-count" data-count="exposures-mi-ombre"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -179,12 +148,10 @@
                       value="ombre"
                       data-facet="exposures"
                       data-testid="catalog-filter-exposure-ombre"
-                      disabled
                     />
                     <label for="filter-exposures-ombre"
-                      >Ombre
-                      <span class="facet-count" data-count="exposures-ombre">(0)</span></label
-                    >
+                      >Ombre <span class="facet-count" data-count="exposures-ombre"></span
+                    ></label>
                   </div>
                 </fieldset>
               </details>
@@ -200,11 +167,10 @@
                       value="S"
                       data-facet="sizes"
                       data-testid="catalog-filter-size-S"
-                      disabled
                     />
                     <label for="filter-sizes-S"
-                      >Petite (S) <span class="facet-count" data-count="sizes-S">(0)</span></label
-                    >
+                      >Petite (S) <span class="facet-count" data-count="sizes-S"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -216,8 +182,8 @@
                       data-testid="catalog-filter-size-M"
                     />
                     <label for="filter-sizes-M"
-                      >Moyenne (M) <span class="facet-count" data-count="sizes-M">(2)</span></label
-                    >
+                      >Moyenne (M) <span class="facet-count" data-count="sizes-M"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -229,8 +195,8 @@
                       data-testid="catalog-filter-size-L"
                     />
                     <label for="filter-sizes-L"
-                      >Grande (L) <span class="facet-count" data-count="sizes-L">(1)</span></label
-                    >
+                      >Grande (L) <span class="facet-count" data-count="sizes-L"></span
+                    ></label>
                   </div>
                 </fieldset>
               </details>
@@ -309,9 +275,7 @@
                 role="status"
                 data-catalog-count
                 data-testid="catalog-results-count"
-              >
-                3 produits
-              </p>
+              ></p>
               <div class="catalog-sort">
                 <label for="catalog-sort">Trier par</label>
                 <select
@@ -365,133 +329,66 @@
                 Tout effacer
               </button>
             </div>
-            <div class="catalog-state" data-catalog-state></div>
-            <ul class="product-list" data-catalog-list data-view="grille">
-              <li class="product-item" data-product-id="13">
-                <article
-                  class="product-card"
-                  id="produit-palmier-de-chine"
-                  data-testid="catalog-product"
-                >
+            <div class="catalog-state" data-catalog-state>
+              <div class="product-skeletons" role="status" data-testid="catalog-loading">
+                <span class="visually-hidden">Chargement des produits…</span>
+                <span class="skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="skeleton skeleton-card" aria-hidden="true"></span>
+              </div>
+            </div>
+            <noscript>
+              <p class="alert alert-info" data-testid="catalog-noscript">
+                Les produits sont lus dans l'API par JavaScript. Activez-le pour afficher le
+                catalogue.
+              </p>
+            </noscript>
+            <ul class="product-list" data-catalog-list data-view="grille"></ul>
+            <template id="catalog-product-template">
+              <li class="product-item">
+                <article class="product-card" data-testid="catalog-product" data-product-card>
                   <picture>
                     <source
                       type="image/avif"
-                      srcset="/images/product-1-400.avif 400w, /images/product-1-800.avif 800w"
                       sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                      data-product-avif
                     />
                     <source
                       type="image/webp"
-                      srcset="/images/product-1-400.webp 400w, /images/product-1-800.webp 800w"
                       sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                      data-product-webp
                     />
                     <img
                       src="/images/product-1-400.webp"
-                      alt="Palmier de Chine (Trachycarpus fortunei)"
+                      alt=""
                       width="400"
                       height="400"
                       decoding="async"
+                      data-product-image
                     />
                   </picture>
                   <div class="product-body">
-                    <h2 class="product-name">Palmier de Chine (Trachycarpus fortunei)</h2>
-                    <p class="product-price" data-testid="catalog-product-price">79,90 €</p>
+                    <h2 class="product-name" data-product-name>Produit</h2>
+                    <p
+                      class="product-price"
+                      data-testid="catalog-product-price"
+                      data-product-price
+                    ></p>
                     <dl class="product-specs">
                       <div>
                         <dt>Exposition</dt>
-                        <dd>Soleil</dd>
+                        <dd data-product-exposure></dd>
                       </div>
                       <div>
                         <dt>Taille</dt>
-                        <dd>L</dd>
+                        <dd data-product-size></dd>
                       </div>
                     </dl>
+                    <p class="badge" data-product-out-of-stock>Rupture de stock</p>
                   </div>
                 </article>
               </li>
-              <li class="product-item" data-product-id="14">
-                <article
-                  class="product-card"
-                  id="produit-palmier-bleu-du-mexique"
-                  data-testid="catalog-product"
-                >
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcset="/images/product-2-400.avif 400w, /images/product-2-800.avif 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <source
-                      type="image/webp"
-                      srcset="/images/product-2-400.webp 400w, /images/product-2-800.webp 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <img
-                      src="/images/product-2-400.webp"
-                      alt="Palmier bleu du Mexique (Brahea armata)"
-                      width="400"
-                      height="400"
-                      decoding="async"
-                    />
-                  </picture>
-                  <div class="product-body">
-                    <h2 class="product-name">Palmier bleu du Mexique (Brahea armata)</h2>
-                    <p class="product-price" data-testid="catalog-product-price">89,90 €</p>
-                    <dl class="product-specs">
-                      <div>
-                        <dt>Exposition</dt>
-                        <dd>Soleil</dd>
-                      </div>
-                      <div>
-                        <dt>Taille</dt>
-                        <dd>M</dd>
-                      </div>
-                    </dl>
-                  </div>
-                </article>
-              </li>
-              <li class="product-item" data-product-id="15">
-                <article
-                  class="product-card"
-                  id="produit-palmier-nain"
-                  data-testid="catalog-product"
-                >
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcset="/images/product-3-400.avif 400w, /images/product-3-800.avif 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <source
-                      type="image/webp"
-                      srcset="/images/product-3-400.webp 400w, /images/product-3-800.webp 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <img
-                      src="/images/product-3-400.webp"
-                      alt="Palmier nain (Chamaerops humilis)"
-                      width="400"
-                      height="400"
-                      decoding="async"
-                    />
-                  </picture>
-                  <div class="product-body">
-                    <h2 class="product-name">Palmier nain (Chamaerops humilis)</h2>
-                    <p class="product-price" data-testid="catalog-product-price">44,90 €</p>
-                    <dl class="product-specs">
-                      <div>
-                        <dt>Exposition</dt>
-                        <dd>Soleil</dd>
-                      </div>
-                      <div>
-                        <dt>Taille</dt>
-                        <dd>M</dd>
-                      </div>
-                    </dl>
-                    <p class="badge">Rupture de stock</p>
-                  </div>
-                </article>
-              </li>
-            </ul>
+            </template>
             <nav
               class="pagination"
               aria-label="Pagination"
@@ -530,7 +427,7 @@
               data-catalog-dialog-done
               data-testid="catalog-filters-done"
             >
-              Voir les 3 produits
+              Voir les produits
             </button>
           </div>
         </dialog>

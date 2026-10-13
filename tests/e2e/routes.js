@@ -15,3 +15,10 @@ export const ROUTES = [
 
 export const enableEnhancedMode = (page) =>
   page.addInitScript(() => localStorage.setItem('a11y-mode', 'enhanced'))
+
+// Les données viennent de l'API, appelée par le navigateur : l'état d'erreur ou de liste vide
+// est provoqué par l'en-tête X-Scenario, ajouté par Playwright à chaque requête vers l'API.
+export const withScenario = (page, scenario) =>
+  page.route('**/api/**', (route) =>
+    route.continue({ headers: { ...route.request().headers(), 'x-scenario': scenario } }),
+  )

@@ -57,34 +57,6 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "Fougères",
-        "numberOfItems": 3,
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Fougère de Boston",
-            "url": "https://www.example.com/catalogue/plantes-interieur/feuillages/fougeres#produit-fougere-de-boston"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Asplenium nidus",
-            "url": "https://www.example.com/catalogue/plantes-interieur/feuillages/fougeres#produit-asplenium-nidus"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Fougère arborescente Dicksonia",
-            "url": "https://www.example.com/catalogue/plantes-interieur/feuillages/fougeres#produit-fougere-arborescente-dicksonia"
-          }
-        ]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
           {
@@ -160,12 +132,10 @@
                       value="soleil"
                       data-facet="exposures"
                       data-testid="catalog-filter-exposure-soleil"
-                      disabled
                     />
                     <label for="filter-exposures-soleil"
-                      >Soleil
-                      <span class="facet-count" data-count="exposures-soleil">(0)</span></label
-                    >
+                      >Soleil <span class="facet-count" data-count="exposures-soleil"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -177,9 +147,8 @@
                       data-testid="catalog-filter-exposure-mi-ombre"
                     />
                     <label for="filter-exposures-mi-ombre"
-                      >Mi-ombre
-                      <span class="facet-count" data-count="exposures-mi-ombre">(1)</span></label
-                    >
+                      >Mi-ombre <span class="facet-count" data-count="exposures-mi-ombre"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -191,9 +160,8 @@
                       data-testid="catalog-filter-exposure-ombre"
                     />
                     <label for="filter-exposures-ombre"
-                      >Ombre
-                      <span class="facet-count" data-count="exposures-ombre">(2)</span></label
-                    >
+                      >Ombre <span class="facet-count" data-count="exposures-ombre"></span
+                    ></label>
                   </div>
                 </fieldset>
               </details>
@@ -211,8 +179,8 @@
                       data-testid="catalog-filter-size-S"
                     />
                     <label for="filter-sizes-S"
-                      >Petite (S) <span class="facet-count" data-count="sizes-S">(1)</span></label
-                    >
+                      >Petite (S) <span class="facet-count" data-count="sizes-S"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -224,8 +192,8 @@
                       data-testid="catalog-filter-size-M"
                     />
                     <label for="filter-sizes-M"
-                      >Moyenne (M) <span class="facet-count" data-count="sizes-M">(1)</span></label
-                    >
+                      >Moyenne (M) <span class="facet-count" data-count="sizes-M"></span
+                    ></label>
                   </div>
                   <div class="check">
                     <input
@@ -237,8 +205,8 @@
                       data-testid="catalog-filter-size-L"
                     />
                     <label for="filter-sizes-L"
-                      >Grande (L) <span class="facet-count" data-count="sizes-L">(1)</span></label
-                    >
+                      >Grande (L) <span class="facet-count" data-count="sizes-L"></span
+                    ></label>
                   </div>
                 </fieldset>
               </details>
@@ -317,9 +285,7 @@
                 role="status"
                 data-catalog-count
                 data-testid="catalog-results-count"
-              >
-                3 produits
-              </p>
+              ></p>
               <div class="catalog-sort">
                 <label for="catalog-sort">Trier par</label>
                 <select
@@ -373,132 +339,66 @@
                 Tout effacer
               </button>
             </div>
-            <div class="catalog-state" data-catalog-state></div>
-            <ul class="product-list" data-catalog-list data-view="grille">
-              <li class="product-item" data-product-id="4">
-                <article
-                  class="product-card"
-                  id="produit-fougere-de-boston"
-                  data-testid="catalog-product"
-                >
+            <div class="catalog-state" data-catalog-state>
+              <div class="product-skeletons" role="status" data-testid="catalog-loading">
+                <span class="visually-hidden">Chargement des produits…</span>
+                <span class="skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="skeleton skeleton-card" aria-hidden="true"></span>
+              </div>
+            </div>
+            <noscript>
+              <p class="alert alert-info" data-testid="catalog-noscript">
+                Les produits sont lus dans l'API par JavaScript. Activez-le pour afficher le
+                catalogue.
+              </p>
+            </noscript>
+            <ul class="product-list" data-catalog-list data-view="grille"></ul>
+            <template id="catalog-product-template">
+              <li class="product-item">
+                <article class="product-card" data-testid="catalog-product" data-product-card>
                   <picture>
                     <source
                       type="image/avif"
-                      srcset="/images/product-4-400.avif 400w, /images/product-4-800.avif 800w"
                       sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                      data-product-avif
                     />
                     <source
                       type="image/webp"
-                      srcset="/images/product-4-400.webp 400w, /images/product-4-800.webp 800w"
                       sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
+                      data-product-webp
                     />
                     <img
-                      src="/images/product-4-400.webp"
-                      alt="Fougère de Boston"
+                      src="/images/product-1-400.webp"
+                      alt=""
                       width="400"
                       height="400"
                       decoding="async"
+                      data-product-image
                     />
                   </picture>
                   <div class="product-body">
-                    <h2 class="product-name">Fougère de Boston</h2>
-                    <p class="product-price" data-testid="catalog-product-price">15,90 €</p>
+                    <h2 class="product-name" data-product-name>Produit</h2>
+                    <p
+                      class="product-price"
+                      data-testid="catalog-product-price"
+                      data-product-price
+                    ></p>
                     <dl class="product-specs">
                       <div>
                         <dt>Exposition</dt>
-                        <dd>Ombre</dd>
+                        <dd data-product-exposure></dd>
                       </div>
                       <div>
                         <dt>Taille</dt>
-                        <dd>M</dd>
+                        <dd data-product-size></dd>
                       </div>
                     </dl>
+                    <p class="badge" data-product-out-of-stock>Rupture de stock</p>
                   </div>
                 </article>
               </li>
-              <li class="product-item" data-product-id="5">
-                <article
-                  class="product-card"
-                  id="produit-asplenium-nidus"
-                  data-testid="catalog-product"
-                >
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcset="/images/product-5-400.avif 400w, /images/product-5-800.avif 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <source
-                      type="image/webp"
-                      srcset="/images/product-5-400.webp 400w, /images/product-5-800.webp 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <img
-                      src="/images/product-5-400.webp"
-                      alt="Asplenium nidus"
-                      width="400"
-                      height="400"
-                      decoding="async"
-                    />
-                  </picture>
-                  <div class="product-body">
-                    <h2 class="product-name">Asplenium nidus</h2>
-                    <p class="product-price" data-testid="catalog-product-price">12,90 €</p>
-                    <dl class="product-specs">
-                      <div>
-                        <dt>Exposition</dt>
-                        <dd>Ombre</dd>
-                      </div>
-                      <div>
-                        <dt>Taille</dt>
-                        <dd>S</dd>
-                      </div>
-                    </dl>
-                  </div>
-                </article>
-              </li>
-              <li class="product-item" data-product-id="6">
-                <article
-                  class="product-card"
-                  id="produit-fougere-arborescente-dicksonia"
-                  data-testid="catalog-product"
-                >
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcset="/images/product-6-400.avif 400w, /images/product-6-800.avif 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <source
-                      type="image/webp"
-                      srcset="/images/product-6-400.webp 400w, /images/product-6-800.webp 800w"
-                      sizes="(width >= 1024px) 280px, (width >= 480px) 45vw, 100vw"
-                    />
-                    <img
-                      src="/images/product-6-400.webp"
-                      alt="Fougère arborescente Dicksonia"
-                      width="400"
-                      height="400"
-                      decoding="async"
-                    />
-                  </picture>
-                  <div class="product-body">
-                    <h2 class="product-name">Fougère arborescente Dicksonia</h2>
-                    <p class="product-price" data-testid="catalog-product-price">89,00 €</p>
-                    <dl class="product-specs">
-                      <div>
-                        <dt>Exposition</dt>
-                        <dd>Mi-ombre</dd>
-                      </div>
-                      <div>
-                        <dt>Taille</dt>
-                        <dd>L</dd>
-                      </div>
-                    </dl>
-                  </div>
-                </article>
-              </li>
-            </ul>
+            </template>
             <nav
               class="pagination"
               aria-label="Pagination"
@@ -537,7 +437,7 @@
               data-catalog-dialog-done
               data-testid="catalog-filters-done"
             >
-              Voir les 3 produits
+              Voir les produits
             </button>
           </div>
         </dialog>
