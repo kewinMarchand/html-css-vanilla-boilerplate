@@ -227,6 +227,8 @@ const load = async ({ showLoading = true } = {}) => {
   const page = await loadLatestPage()
   if (page === STALE) return
   if (page.status === 'error') {
+    // Actualisation d'une page pré-rendue en échec : les produits écrits restent affichés
+    if (!showLoading && list.childElementCount > 0) return
     renderError(page.message)
     return
   }
@@ -298,4 +300,6 @@ doneButton.addEventListener('click', () => dialog.close())
 $('[data-catalog-dialog-close]').addEventListener('click', () => dialog.close())
 
 syncControls()
-load({ showLoading: false })
+// Page pré-rendue (première page sans filtre) : relue sans squelette. Autre état d'URL : squelette
+// jusqu'à la réponse, plutôt que la première page affichée puis remplacée.
+load({ showLoading: list.childElementCount > 0 && serializeQuery(query) !== '' })

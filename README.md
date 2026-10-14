@@ -1,6 +1,6 @@
 # html-css-vanilla-boilerplate
 
-Point de départ pour un site en **HTML, CSS et JavaScript natifs**, sans framework, sans bundler et sans étape de build. Les fichiers servis sont ceux du dépôt, assemblés par nginx avec les inclusions côté serveur (SSI) pour le header et le footer. L'outillage (validation, format, tests, Lighthouse) ne sert qu'au développement.
+Point de départ pour un site en **HTML, CSS et JavaScript natifs**, sans framework et sans bundler. Les fichiers servis sont ceux du dépôt, assemblés par nginx avec les inclusions côté serveur (SSI) pour le header et le footer. Seule l'image de production a une étape de construction : elle pré-rend la première page du catalogue depuis l'API. L'outillage (validation, format, tests, Lighthouse) ne sert qu'au développement.
 
 | Page                | Ce qu'elle montre                                                                                       |
 | ------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -120,7 +120,8 @@ Dans les deux cas, `make qa` puis `make test-e2e` après la mise à jour.
 
    en retirant les imports du catalogue et la constante `CATALOG`.
 
-6. Supprimer leurs tests :
+6. Retirer le pré-rendu du catalogue : l'étape `catalog` du `Dockerfile` (et remettre `COPY site /usr/share/nginx/html` à la place du `COPY --from=catalog`), `scripts/prerender-catalog.js`, `tests/unit/prerenderCatalog.test.js`, la ligne `!tests/unit/siteResolver.js` de `.dockerignore`, le contrôle « catalogue pré-rendu » de `scripts/test-prod.sh`, l'argument `API_URL` et `network: host` du service `web` de `compose.yaml`.
+7. Supprimer leurs tests :
 
    ```sh
    rm tests/unit/catalog.test.js tests/unit/catalogPages.test.js tests/unit/categoryPath.test.js \
@@ -128,8 +129,8 @@ Dans les deux cas, `make qa` puis `make test-e2e` après la mise à jour.
      tests/e2e/catalogue.e2e.js tests/e2e/menu.e2e.js tests/e2e/taches.e2e.js
    ```
 
-7. `yarn format`, puis `make qa` : vert à ce stade.
-8. Avant `make test-e2e`, `make test-a11y` et `make test-prod`, adapter les tests qui visitent encore ces pages : `CATEGORY_ROUTES` dans `tests/e2e/routes.js`, la route catalogue filtrée et le test « menu ouvert » de `tests/a11y/pages.a11y.js`, le fil d'Ariane et la capture du catalogue dans `tests/e2e/layout.e2e.js`, le lien de l'accueil dans `tests/e2e/accueil.e2e.js`, les routes `/catalogue` et `/taches` de `scripts/test-prod.sh`.
+8. `yarn format`, puis `make qa` : vert à ce stade.
+9. Avant `make test-e2e`, `make test-a11y` et `make test-prod`, adapter les tests qui visitent encore ces pages : `CATEGORY_ROUTES` dans `tests/e2e/routes.js`, la route catalogue filtrée et le test « menu ouvert » de `tests/a11y/pages.a11y.js`, le fil d'Ariane et la capture du catalogue dans `tests/e2e/layout.e2e.js`, le lien de l'accueil dans `tests/e2e/accueil.e2e.js`, les routes `/catalogue` et `/taches` de `scripts/test-prod.sh`.
 
 Les styles du catalogue et des tâches restent dans `site/css/main.css` (sections « Catalogue » et « Tâches ») jusqu'à ce qu'on les retire, sans effet sur la QA.
 
@@ -149,19 +150,19 @@ Le serveur de développement lit les mêmes variables, par exemple `GLITCHTIP_DS
 
 `make help` liste toutes les commandes. Les principales :
 
-| Commande                               | Effet                                                                                                    |
-| -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `make up`                              | Serveur de développement sur le port 3130                                                                |
-| `make qa`                              | QA rapide : html-validate, stylelint, règles d'architecture et leur auto-test, Prettier, tests unitaires |
-| `make icons`                           | Génère `site/icons.svg` et la liste des noms depuis `icons.json`                                         |
-| `make icons-check`                     | Échoue si le sprite est périmé ou si le site cite une icône absente de `icons.json`                      |
-| `make arch-selftest`                   | Écrit une violation de chaque règle d'architecture, exige sa détection, puis la retire                   |
-| `make qa-full`                         | QA complète : QA rapide, e2e, accessibilité, Lighthouse, image de production                             |
-| `make test-e2e`                        | Playwright, desktop et mobile                                                                            |
-| `make test-a11y`                       | axe-core, WCAG 2.1 AA, chaque page dans les deux modes d'affichage                                       |
-| `make metrics`                         | Lighthouse CI sur le port 3250 : échoue sous 90 en performance, sous 100 en accessibilité et SEO         |
-| `make test-prod`                       | Construit l'image nginx et vérifie codes HTTP, en-têtes et mode maintenance                              |
-| `make docker-build` / `make docker-up` | Image de production, sur le port `PORT` (8080 par défaut)                                                |
+| Commande                               | Effet                                                                                                                |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `make up`                              | Serveur de développement sur le port 3130                                                                            |
+| `make qa`                              | QA rapide : html-validate, stylelint, règles d'architecture et leur auto-test, Prettier, tests unitaires             |
+| `make icons`                           | Génère `site/icons.svg` et la liste des noms depuis `icons.json`                                                     |
+| `make icons-check`                     | Échoue si le sprite est périmé ou si le site cite une icône absente de `icons.json`                                  |
+| `make arch-selftest`                   | Écrit une violation de chaque règle d'architecture, exige sa détection, puis la retire                               |
+| `make qa-full`                         | QA complète : QA rapide, e2e, accessibilité, Lighthouse, image de production                                         |
+| `make test-e2e`                        | Playwright, desktop et mobile                                                                                        |
+| `make test-a11y`                       | axe-core, WCAG 2.1 AA, chaque page dans les deux modes d'affichage                                                   |
+| `make metrics`                         | Lighthouse CI sur le port 3250 : échoue sous 90 en performance, sous 100 en accessibilité et SEO                     |
+| `make test-prod`                       | Construit l'image nginx et vérifie codes HTTP, en-têtes, catalogue pré-rendu et mode maintenance (API sur `API_URL`) |
+| `make docker-build` / `make docker-up` | Image de production, sur le port `PORT` (8080 par défaut)                                                            |
 
 ## Architecture
 
@@ -197,6 +198,7 @@ L'architecture suit le document commun `ARCHITECTURE-DDD.md` (forme vanilla). Ch
 
 - **Header et footer sont inclus par nginx** (`<!--# include virtual="/partials/header.html" -->`), sans générateur ni build. Chaque page nomme d'abord sa place (`<!--# set var="page" value="contact" -->`), ce qui choisit le lien marqué `aria-current`. Le serveur de développement résout les mêmes directives. Un hébergement purement statique, sans SSI, afficherait les pages sans header ni footer (décision et alternatives : `doc/adr/0001-inclusions-serveur-nginx-ssi.md`). Le `<head>` SEO et le fil d'Ariane restent écrits dans chaque page. Pour qu'ils ne dérivent pas, `tests/unit/pages.test.js` vérifie sur le rendu de toutes les pages : navigation et liens légaux identiques à `site.config.json`, fil d'Ariane et JSON-LD conformes au calcul de `lib/breadcrumb.js`, titre et description dans les bonnes longueurs, canonique, hash du script inline présent dans la CSP, sitemap et plan du site complets, informations légales reprises de la configuration.
 - **Les données sont lues dans l'API par le navigateur** : produits, facettes, tâches et articles. Les pages de catégories restent statiques (une par chemin), seule leur liste vient de l'API. Sans JavaScript, chaque zone de données affiche un message, et le formulaire `GET` du catalogue place les filtres dans l'URL sans les appliquer : limite assumée d'un site sans serveur applicatif.
+- **Le catalogue est pré-rendu dans l'image de production** (`scripts/prerender-catalog.js`, `doc/adr/0002-catalogue-pre-rendu-a-la-construction.md`) : chaque page de catégorie sert sa première page de produits et leur JSON-LD, lisibles sans JavaScript, puis le navigateur les actualise. La construction lit l'API sur `API_URL` (`API_URL=http://localhost:8091 make docker-build`) ; sans API, les pages restent rendues dans le navigateur. Les données écrites sont celles du moment de la construction, et le serveur de développement ne pré-rend rien.
 - **Le formulaire de contact ne s'envoie qu'avec JavaScript.** Il n'y a pas de serveur pour traiter un envoi. Sans JavaScript, un message au-dessus du formulaire l'annonce et donne l'adresse e-mail, et le `POST` natif reçoit une page française en 405 (`site/405.html`, servie par nginx et par `scripts/serve.js`).
 - **Les balises `robots` et canonique des pages filtrées** sont mises à jour par le script. Un robot sans JavaScript voit la page de catégorie indexable, dont la canonique est déjà la version sans filtre.
 

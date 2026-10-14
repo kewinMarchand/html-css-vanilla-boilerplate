@@ -45,5 +45,11 @@ jobs:
     needs: qa
     steps:
       - uses: actions/checkout@v7
+      - run: git clone --depth 1 https://github.com/kewinMarchand/hono-mongo-test-api.git .api
+      - run: make -C .api install db-reset
       - run: make install
       - run: make test-prod
+        env:
+          API_URL: http://localhost:8091
+      - run: make -C .api down
+        if: always()

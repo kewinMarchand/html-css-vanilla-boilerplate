@@ -5,6 +5,7 @@ test-results
 playwright-report
 .lighthouseci
 tests
+!tests/unit/siteResolver.js
 site/vendor
 site/charte-graphique
 site/js/views/styleguide

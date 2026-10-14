@@ -1,6 +1,10 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      network: host
+      args:
+        API_URL: ${API_URL:-http://localhost:8090}
     ports:
       - '${PORT:-8080}:80'
     environment:

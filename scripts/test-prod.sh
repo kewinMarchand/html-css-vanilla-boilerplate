@@ -82,6 +82,13 @@ if [ "${1:-}" = checks ]; then
     expect_header / "content-security-policy: .*connect-src 'self' http://localhost:8090 *;"
     expect_body / '<link rel="preconnect" href="http://localhost:8090" crossorigin data-api-url'
     expect_no_ssi_error "sans traceur"
+    catalog=$(curl --silent "http://localhost:$PORT/catalogue/plantes-interieur")
+    if printf '%s' "$catalog" | grep --quiet 'data-product-id=' && printf '%s' "$catalog" | grep --quiet '"@type":"ItemList"'; then
+      echo "ok   catalogue pré-rendu (produits et JSON-LD ItemList)"
+    else
+      echo "FAIL catalogue non pré-rendu : API injoignable à la construction ?"
+      FAILED=1
+    fi
     if curl --silent "http://localhost:$PORT/" | grep --quiet 'data-glitchtip-dsn\|data-matomo-url'; then
       echo "FAIL un traceur est injecté sans configuration"
       FAILED=1
@@ -132,7 +139,8 @@ check() {
   docker compose run --rm -T node sh scripts/test-prod.sh checks "$1" || FAILED=1
 }
 
-docker build --quiet --tag "$IMAGE" . > /dev/null
+# Le catalogue est pré-rendu à la construction (ADR 0002) : l'API doit répondre sur API_URL
+docker build --quiet --network host --build-arg "API_URL=${API_URL:-http://localhost:8090}" --tag "$IMAGE" . > /dev/null
 
 start 0
 check normal
