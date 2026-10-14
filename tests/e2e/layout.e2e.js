@@ -88,7 +88,7 @@ test.describe('Mise en page', () => {
     await expect(breadcrumb.getByRole('listitem')).toHaveText([
       'Accueil',
       'Catalogue',
-      "Plantes d'intérieur",
+      'Plantes d’intérieur',
       'Feuillages',
     ])
     await expect(breadcrumb.getByText('Feuillages')).toHaveAttribute('aria-current', 'page')

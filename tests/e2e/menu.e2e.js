@@ -18,8 +18,8 @@ test.describe('Menu de catégories, desktop', () => {
     await expect(page.getByTestId('layout-category-menu')).toBeVisible()
     await expect(panelLink(page, 'Feuillages')).toBeHidden()
 
-    await panelLink(page, "Plantes d'intérieur").hover()
-    await expect(panelLink(page, "Plantes d'intérieur")).toHaveAttribute('aria-expanded', 'true')
+    await panelLink(page, 'Plantes d’intérieur').hover()
+    await expect(panelLink(page, 'Plantes d’intérieur')).toHaveAttribute('aria-expanded', 'true')
     await expect(panelLink(page, 'Feuillages')).toBeVisible()
 
     await page.keyboard.press('Escape')
@@ -35,8 +35,8 @@ test.describe('Menu de catégories, desktop', () => {
     await expect(page.getByRole('link', { name: 'Tout le catalogue' })).toBeFocused()
     await page.keyboard.press('Tab')
 
-    await expect(panelLink(page, "Plantes d'intérieur")).toBeFocused()
-    await expect(panelLink(page, "Plantes d'intérieur")).toHaveAttribute('aria-expanded', 'true')
+    await expect(panelLink(page, 'Plantes d’intérieur')).toBeFocused()
+    await expect(panelLink(page, 'Plantes d’intérieur')).toHaveAttribute('aria-expanded', 'true')
     await page.keyboard.press('ArrowRight')
     await expect(panelLink(page, 'Feuillages')).toBeFocused()
   })
@@ -44,7 +44,7 @@ test.describe('Menu de catégories, desktop', () => {
   test('un clic sur une feuille navigue et met à jour le fil d’Ariane', async ({ page }) => {
     await page.goto('/')
     await page.getByTestId('layout-category-menu-toggle').click()
-    await panelLink(page, "Plantes d'intérieur").hover()
+    await panelLink(page, 'Plantes d’intérieur').hover()
     await panelLink(page, 'Feuillages').hover()
     await panelLink(page, 'Monstera').click()
 
@@ -105,7 +105,7 @@ test.describe('Menu mobile', () => {
     )
 
     await page.getByTestId('layout-mobile-menu-level-plantes-interieur').click()
-    await expect(levelTitle).toHaveText("Plantes d'intérieur")
+    await expect(levelTitle).toHaveText('Plantes d’intérieur')
     await expect(page.getByTestId('layout-mobile-menu-back')).toHaveText(/Retour : Catalogue/)
 
     await page.getByTestId('layout-mobile-menu-back').click()

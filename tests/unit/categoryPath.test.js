@@ -34,7 +34,7 @@ describe('chemin de catégorie', () => {
       [
         {
           slug: 'plantes-interieur',
-          name: "Plantes d'intérieur",
+          name: 'Plantes d’intérieur',
           path: '/catalogue/plantes-interieur',
         },
         { slug: 'feuillages', name: 'Feuillages', path: '/catalogue/plantes-interieur/feuillages' },

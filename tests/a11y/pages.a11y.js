@@ -48,7 +48,7 @@ for (const mode of MODES) {
         await page.getByTestId('layout-category-menu-toggle').click()
         await page
           .getByTestId('layout-category-menu')
-          .getByRole('link', { name: "Plantes d'intérieur" })
+          .getByRole('link', { name: 'Plantes d’intérieur' })
           .hover()
       }
       await audit(page)

@@ -29,7 +29,7 @@ describe('fil d’Ariane du catalogue', () => {
       breadcrumbTrail('/catalogue/plantes-interieur/feuillages', 'Feuillages').map(
         (item) => item.label,
       ),
-      ['Accueil', 'Catalogue', "Plantes d'intérieur", 'Feuillages'],
+      ['Accueil', 'Catalogue', 'Plantes d’intérieur', 'Feuillages'],
     )
   })
 
