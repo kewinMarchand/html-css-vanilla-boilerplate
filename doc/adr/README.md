@@ -5,4 +5,4 @@ Une décision structurante par fichier, numérotée, jamais réécrite une fois 
 | ADR                                                   | Décision                                                    | Statut   |
 | ----------------------------------------------------- | ----------------------------------------------------------- | -------- |
 | [0001](0001-inclusions-serveur-nginx-ssi.md)          | Header et footer partagés par inclusions côté serveur (SSI) | Acceptée |
-| [0002](0002-catalogue-pre-rendu-a-la-construction.md) | Catalogue pré-rendu à la construction de l'image            | Proposée |
+| [0002](0002-catalogue-pre-rendu-a-la-construction.md) | Catalogue pré-rendu à la construction de l'image            | Acceptée |
