@@ -1,5 +1,7 @@
 FROM node:24-alpine AS vendor
 WORKDIR /app
+# git : boilerplates-ui est une dépendance git, installée par étiquette
+RUN apk add --no-cache git
 COPY package.json yarn.lock ./
 COPY scripts/vendor.js scripts/vendor.js
 COPY vendor vendor

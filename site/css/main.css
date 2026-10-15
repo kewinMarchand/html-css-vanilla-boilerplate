@@ -1,4 +1,6 @@
-@layer reset, tokens, base, layout, components, utilities;
+/* bui : tokens et composants de boilerplates-ui (site/vendor/boilerplates-ui.css, chargée après cette feuille), au-dessus des
+   styles d'éléments du site et sous ses composants, qui gardent la main pour les surcharges. */
+@layer reset, tokens, base, layout, bui, components, utilities;
 
 @layer reset {
   *,
@@ -51,16 +53,12 @@
 
     --font-family:
       system-ui, -apple-system, 'Segoe UI', roboto, 'Helvetica Neue', arial, sans-serif;
-    --font-size-base: 16px;
-    --font-size-sm: calc(var(--font-size-base) * 0.875);
-    --font-size-lg: calc(var(--font-size-base) * 1.25);
-    --font-size-h3: calc(var(--font-size-base) * 1.25);
-    --font-size-h2: calc(var(--font-size-base) * 1.625);
-    --font-size-h1: clamp(
-      calc(var(--font-size-base) * 2),
-      calc(var(--font-size-base) * 1.25 + 3vw),
-      calc(var(--font-size-base) * 3.25)
-    );
+    --font-size-base: var(--bui-font-size-body);
+    --font-size-sm: var(--bui-font-size-body-sm);
+    --font-size-lg: var(--bui-font-size-title);
+    --font-size-h3: var(--bui-font-size-h3);
+    --font-size-h2: var(--bui-font-size-h2);
+    --font-size-h1: var(--bui-font-size-h1);
     --line-height-ui: 1.5;
     --line-height: 1.5;
     --line-height-heading: 1.2;
@@ -68,45 +66,41 @@
     --word-spacing: normal;
     --paragraph-spacing: 1em;
     --measure: 80ch;
-    --space-2xs: 4px;
-    --space-xs: 8px;
-    --space-s: 12px;
-    --space-m: 16px;
-    --space-l: 24px;
+    --space-2xs: var(--bui-space-1);
+    --space-xs: var(--bui-space-2);
+    --space-s: var(--bui-space-3);
+    --space-m: var(--bui-space-4);
+    --space-l: var(--bui-space-6);
     --space-xl: 40px;
     --space-2xl: 64px;
-    --container-max: 1440px;
+    --container-max: var(--bui-container-content);
     --gutter: 16px;
-    --tap-target: 44px;
-    --radius: 8px;
-    --radius-pill: 999px;
-    --color-bg: light-dark(oklch(99% 0.003 265deg), oklch(19% 0.02 265deg));
-    --color-surface: light-dark(oklch(96.5% 0.008 265deg), oklch(25% 0.025 265deg));
-    --color-text: light-dark(oklch(23% 0.02 265deg), oklch(95% 0.01 265deg));
-    --color-text-muted: light-dark(oklch(43% 0.02 265deg), oklch(80% 0.015 265deg));
-    --color-primary: light-dark(oklch(48.8% 0.217 264deg), oklch(80% 0.11 264deg));
-    --color-on-primary: light-dark(oklch(100% 0 0deg), oklch(19% 0.02 265deg));
-    --color-danger: light-dark(oklch(50% 0.19 27deg), oklch(80% 0.12 25deg));
-    --color-success: light-dark(oklch(46% 0.12 150deg), oklch(82% 0.13 150deg));
-    --color-warning: light-dark(oklch(52% 0.13 70deg), oklch(82% 0.14 80deg));
-    --color-info: var(--color-primary);
-    --color-border: color-mix(in oklch, var(--color-text) 20%, var(--color-bg));
-    --color-border-strong: color-mix(in oklch, var(--color-text) 60%, var(--color-bg));
-    --color-backdrop: oklch(0% 0 0deg / 55%);
+    --tap-target: var(--bui-size-touch);
+    --radius: var(--bui-radius-md);
+    --radius-pill: var(--bui-radius-full);
+    --color-bg: var(--bui-color-surface);
+    --color-surface: var(--bui-color-surface-muted);
+    --color-text: var(--bui-color-text);
+    --color-text-muted: var(--bui-color-text-muted);
+    --color-primary: var(--bui-color-primary);
+    --color-on-primary: var(--bui-color-on-primary);
+    --color-danger: var(--bui-color-error);
+    --color-success: var(--bui-color-success);
+    --color-warning: var(--bui-color-warning);
+    --color-info: var(--bui-color-info);
+    --color-border: var(--bui-color-border-subtle);
+    --color-border-strong: var(--bui-color-border);
+    --color-backdrop: var(--bui-color-backdrop);
     --link-decoration: underline;
     --nav-link-decoration: none;
-    --focus-width: 3px;
-    --focus-offset: 2px;
+    --focus-width: var(--bui-focus-width);
+    --focus-offset: var(--bui-focus-offset);
     --focus-color: var(--color-primary);
-    --duration: 200ms;
+    --duration: var(--bui-motion-duration);
     --hero-overlay-start: 0.8;
     --hero-overlay-end: 0.62;
     --z-category-menu: 50;
     --z-skip-link: 100;
-
-    @media (prefers-reduced-motion: reduce) {
-      --duration: 0s;
-    }
 
     @media (width >= 640px) {
       --gutter: 24px;
@@ -121,29 +115,18 @@
   :root[data-a11y-mode='enhanced'] {
     color-scheme: light;
 
-    --font-size-base: 20px;
     --line-height: 1.8;
     --letter-spacing: 0.12em;
     --word-spacing: 0.16em;
     --paragraph-spacing: 2em;
     --measure: 70ch;
-    --color-bg: #fff;
     --color-surface: #fff;
-    --color-text: #000;
     --color-text-muted: #000;
-    --color-primary: oklch(32% 0.17 264deg);
-    --color-on-primary: #fff;
-    --color-danger: oklch(38% 0.15 27deg);
-    --color-success: oklch(35% 0.1 150deg);
-    --color-warning: oklch(38% 0.09 70deg);
     --color-border: #000;
     --color-border-strong: #000;
     --nav-link-decoration: underline;
     --hero-overlay-start: 0.85;
     --hero-overlay-end: 0.85;
-    --focus-width: 4px;
-    --focus-offset: 2px;
-    --duration: 0s;
   }
 }
 
