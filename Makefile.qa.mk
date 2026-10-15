@@ -2,7 +2,7 @@ qa: lint arch-selftest icons-check format-check test-unit ## QA rapide : HTML, C
 
 qa-full: qa test-e2e test-a11y metrics test-prod ## QA complète : QA rapide + e2e + a11y + Lighthouse + image de prod
 
-lint: ## html-validate, stylelint et règles d'architecture (dependency-cruiser)
+lint: ## html-validate, stylelint, ESLint (tri des imports) et règles d'architecture (dependency-cruiser)
 	$(RUN) yarn lint
 
 arch-selftest: ## Écrit des violations volontaires des règles d'architecture, exige leur détection, puis les retire
@@ -11,7 +11,7 @@ arch-selftest: ## Écrit des violations volontaires des règles d'architecture, 
 icons-check: ## Échoue si site/icons.svg ou la liste des noms ne correspondent plus à icons.json
 	$(RUN) node scripts/icons.js --check
 
-lint-fix: ## stylelint avec correction automatique
+lint-fix: ## stylelint et ESLint (tri des imports) avec correction automatique
 	$(RUN) yarn lint:fix
 
 format: ## Prettier (écriture)

@@ -2,8 +2,8 @@ import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
 import { breadcrumbTrail } from '../../lib/breadcrumb.js'
-import { listCategoryPaths } from '../../site/js/modules/catalog/domain/categoryPath.js'
 import { CATEGORIES } from '../../lib/categoryTree.js'
+import { listCategoryPaths } from '../../site/js/modules/catalog/domain/categoryPath.js'
 import { PAGES } from './renderedPages.js'
 
 describe('pages statiques du catalogue', () => {

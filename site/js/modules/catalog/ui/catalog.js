@@ -1,7 +1,5 @@
 import { latestOnly, STALE } from '/js/shared/latestOnly.js'
 
-import { loadCatalogPage } from '../application/loadCatalogPage.js'
-import { formatPrice } from '../domain/price.js'
 import {
   clearFilters,
   countActiveFilters,
@@ -12,6 +10,9 @@ import {
   SIZES,
   withFilters,
 } from '../domain/catalogQuery.js'
+import { formatPrice } from '../domain/price.js'
+import { loadCatalogPage } from '../application/loadCatalogPage.js'
+
 import { activeFilters } from './activeFilters.js'
 import { EXPOSURE_LABELS, formatResultsCount } from './labels.js'
 import { paginationWindow } from './pagination.js'

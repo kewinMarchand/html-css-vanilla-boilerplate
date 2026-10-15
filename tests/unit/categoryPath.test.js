@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
+import { CATEGORIES } from '../../lib/categoryTree.js'
 import {
   categoryHref,
   listCategoryPaths,
   parseCategorySlugs,
   resolveCategoryPath,
 } from '../../site/js/modules/catalog/domain/categoryPath.js'
-import { CATEGORIES } from '../../lib/categoryTree.js'
 
 describe('chemin de catégorie', () => {
   it('construit l’URL d’une suite de slugs', () => {

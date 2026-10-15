@@ -1,6 +1,6 @@
+import { validateField } from '../domain/contactSchema.js'
 import { ContactRejectedError } from '../infrastructure/http/contactTranslation.js'
 import { sendContactMessage } from '../infrastructure/http/sendContactMessage.js'
-import { validateField } from '../domain/contactSchema.js'
 
 const form = document.querySelector('[data-contact-form]')
 const status = form.querySelector('[data-contact-status]')

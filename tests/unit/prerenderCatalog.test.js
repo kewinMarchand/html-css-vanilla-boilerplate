@@ -2,7 +2,6 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, it } from 'node:test'
-
 import { FileSystemConfigLoader, HtmlValidate } from 'html-validate'
 
 import { prerenderCatalogPage } from '../../scripts/prerender-catalog.js'

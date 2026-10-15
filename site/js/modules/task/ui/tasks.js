@@ -1,6 +1,6 @@
+import { filterTasks, formatDoneCount, formatVisibleCount, splitOnMatch } from '../domain/tasks.js'
 import { findAllTasks } from '../infrastructure/http/tasksRepository.js'
 import { TasksLoadError } from '../infrastructure/TasksLoadError.js'
-import { filterTasks, formatDoneCount, formatVisibleCount, splitOnMatch } from '../domain/tasks.js'
 
 const state = document.querySelector('[data-tasks-state]')
 

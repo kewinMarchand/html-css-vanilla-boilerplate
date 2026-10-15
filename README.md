@@ -23,6 +23,7 @@ Point de départ pour un site en **HTML, CSS et JavaScript natifs**, sans framew
 | Embla Carousel 8                   | Seule dépendance d'exécution, servie depuis `site/vendor/`          |
 | `scripts/serve.js`                 | Serveur statique de développement, sans dépendance                  |
 | html-validate, stylelint, Prettier | Validation HTML, CSS et format                                      |
+| ESLint + simple-import-sort        | Ordre des imports                                                   |
 | dependency-cruiser                 | Règles de dépendance entre modules et couches                       |
 | `node:test`                        | Tests unitaires, sans dépendance                                    |
 | Playwright + axe-core              | Tests end-to-end et accessibilité, desktop et mobile, deux modes    |
@@ -153,7 +154,7 @@ Le serveur de développement lit les mêmes variables, par exemple `GLITCHTIP_DS
 | Commande                               | Effet                                                                                                                |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `make up`                              | Serveur de développement sur le port 3130                                                                            |
-| `make qa`                              | QA rapide : html-validate, stylelint, règles d'architecture et leur auto-test, Prettier, tests unitaires             |
+| `make qa`                              | QA rapide : html-validate, stylelint, ESLint, règles d'architecture et leur auto-test, Prettier, tests unitaires     |
 | `make icons`                           | Génère `site/icons.svg` et la liste des noms depuis `icons.json`                                                     |
 | `make icons-check`                     | Échoue si le sprite est périmé ou si le site cite une icône absente de `icons.json`                                  |
 | `make arch-selftest`                   | Écrit une violation de chaque règle d'architecture, exige sa détection, puis la retire                               |

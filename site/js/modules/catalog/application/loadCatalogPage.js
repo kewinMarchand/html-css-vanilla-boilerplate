@@ -1,4 +1,5 @@
 import { searchProducts } from '../infrastructure/http/catalogRepository.js'
+
 import { CatalogLoadError } from './CatalogLoadError.js'
 
 /**
