@@ -443,13 +443,6 @@
     border: 0;
   }
 
-  .icon {
-    flex-shrink: 0;
-    inline-size: 1.25em;
-    block-size: 1.25em;
-    fill: currentcolor;
-  }
-
   .button-light {
     color: oklch(30% 0.17 264deg);
     background-color: #fff;
@@ -487,11 +480,11 @@
     background: none;
     border: 0;
 
-    & .icon {
+    & .bui-icon {
       transition: rotate var(--duration);
     }
 
-    &[aria-expanded='true'] .icon {
+    &[aria-expanded='true'] .bui-icon {
       rotate: 180deg;
     }
   }

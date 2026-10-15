@@ -119,7 +119,7 @@ const iconNode = (name) => {
   const svg = document.createElementNS(SVG_NS, 'svg')
   const use = document.createElementNS(SVG_NS, 'use')
   use.setAttribute('href', `/icons.svg#${name}`)
-  svg.setAttribute('class', 'icon')
+  svg.setAttribute('class', 'bui-icon bui-icon--md')
   svg.setAttribute('aria-hidden', 'true')
   svg.setAttribute('width', '20')
   svg.setAttribute('height', '20')
