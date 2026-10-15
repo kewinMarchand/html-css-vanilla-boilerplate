@@ -134,8 +134,9 @@
                 <summary>Exposition</summary>
                 <fieldset>
                   <legend class="visually-hidden">Exposition</legend>
-                  <div class="check">
+                  <div class="bui-checkbox">
                     <input
+                      class="bui-checkbox__input"
                       type="checkbox"
                       id="filter-exposures-soleil"
                       name="exposition"
@@ -143,12 +144,13 @@
                       data-facet="exposures"
                       data-testid="catalog-filter-exposure-soleil"
                     />
-                    <label for="filter-exposures-soleil"
+                    <label class="bui-checkbox__label" for="filter-exposures-soleil"
                       >Soleil <span class="facet-count" data-count="exposures-soleil"></span
                     ></label>
                   </div>
-                  <div class="check">
+                  <div class="bui-checkbox">
                     <input
+                      class="bui-checkbox__input"
                       type="checkbox"
                       id="filter-exposures-mi-ombre"
                       name="exposition"
@@ -156,12 +158,13 @@
                       data-facet="exposures"
                       data-testid="catalog-filter-exposure-mi-ombre"
                     />
-                    <label for="filter-exposures-mi-ombre"
+                    <label class="bui-checkbox__label" for="filter-exposures-mi-ombre"
                       >Mi-ombre <span class="facet-count" data-count="exposures-mi-ombre"></span
                     ></label>
                   </div>
-                  <div class="check">
+                  <div class="bui-checkbox">
                     <input
+                      class="bui-checkbox__input"
                       type="checkbox"
                       id="filter-exposures-ombre"
                       name="exposition"
@@ -169,7 +172,7 @@
                       data-facet="exposures"
                       data-testid="catalog-filter-exposure-ombre"
                     />
-                    <label for="filter-exposures-ombre"
+                    <label class="bui-checkbox__label" for="filter-exposures-ombre"
                       >Ombre <span class="facet-count" data-count="exposures-ombre"></span
                     ></label>
                   </div>
@@ -179,8 +182,9 @@
                 <summary>Taille</summary>
                 <fieldset>
                   <legend class="visually-hidden">Taille</legend>
-                  <div class="check">
+                  <div class="bui-checkbox">
                     <input
+                      class="bui-checkbox__input"
                       type="checkbox"
                       id="filter-sizes-S"
                       name="taille"
@@ -188,12 +192,13 @@
                       data-facet="sizes"
                       data-testid="catalog-filter-size-S"
                     />
-                    <label for="filter-sizes-S"
+                    <label class="bui-checkbox__label" for="filter-sizes-S"
                       >Petite (S) <span class="facet-count" data-count="sizes-S"></span
                     ></label>
                   </div>
-                  <div class="check">
+                  <div class="bui-checkbox">
                     <input
+                      class="bui-checkbox__input"
                       type="checkbox"
                       id="filter-sizes-M"
                       name="taille"
@@ -201,12 +206,13 @@
                       data-facet="sizes"
                       data-testid="catalog-filter-size-M"
                     />
-                    <label for="filter-sizes-M"
+                    <label class="bui-checkbox__label" for="filter-sizes-M"
                       >Moyenne (M) <span class="facet-count" data-count="sizes-M"></span
                     ></label>
                   </div>
-                  <div class="check">
+                  <div class="bui-checkbox">
                     <input
+                      class="bui-checkbox__input"
                       type="checkbox"
                       id="filter-sizes-L"
                       name="taille"
@@ -214,7 +220,7 @@
                       data-facet="sizes"
                       data-testid="catalog-filter-size-L"
                     />
-                    <label for="filter-sizes-L"
+                    <label class="bui-checkbox__label" for="filter-sizes-L"
                       >Grande (L) <span class="facet-count" data-count="sizes-L"></span
                     ></label>
                   </div>
@@ -224,9 +230,10 @@
                 <summary>Prix</summary>
                 <fieldset class="price-fields">
                   <legend class="visually-hidden">Prix en euros</legend>
-                  <div class="field">
-                    <label for="filter-price-min">Minimum (€)</label>
+                  <div class="bui-field">
+                    <label class="bui-field__label" for="filter-price-min">Minimum (€)</label>
                     <input
+                      class="bui-field__input"
                       type="number"
                       id="filter-price-min"
                       name="prix_min"
@@ -237,9 +244,10 @@
                       data-testid="catalog-filter-price-min"
                     />
                   </div>
-                  <div class="field">
-                    <label for="filter-price-max">Maximum (€)</label>
+                  <div class="bui-field">
+                    <label class="bui-field__label" for="filter-price-max">Maximum (€)</label>
                     <input
+                      class="bui-field__input"
                       type="number"
                       id="filter-price-max"
                       name="prix_max"
@@ -252,8 +260,9 @@
                   </div>
                 </fieldset>
               </details>
-              <div class="switch">
+              <div class="bui-switch">
                 <input
+                  class="bui-switch__input"
                   type="checkbox"
                   role="switch"
                   id="filter-in-stock"
@@ -262,7 +271,7 @@
                   data-facet="inStock"
                   data-testid="catalog-filter-in-stock"
                 />
-                <label for="filter-in-stock">En stock uniquement</label>
+                <label class="bui-switch__label" for="filter-in-stock">En stock uniquement</label>
               </div>
               <button
                 type="submit"

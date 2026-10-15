@@ -66,6 +66,7 @@ Le serveur de développement est `scripts/serve.js` (Node, zéro dépendance) pl
     Les imports absolus du navigateur (`/js/...`, `/vendor/...`) sont résolus par l'alias de `scripts/depcruise-resolve.cjs`, au format de configuration webpack que dependency-cruiser sait lire (webpack n'est pas installé).
 - `make arch-selftest` (`scripts/arch-selftest.js`, lancé par `make qa`) : écrit une violation volontaire de chaque règle à son emplacement réel, exige l'échec de dependency-cruiser avec le nom de la règle, puis retire le fichier.
 - `stylelint` ignore `site/vendor/` (`.stylelintignore`) : la feuille de boilerplates-ui y est générée par `scripts/vendor.js`, au format de la bibliothèque, et se contrôle dans son propre dépôt.
+- `stylelint` : `selector-class-pattern` admet, en plus du kebab-case, les classes `bui-*` en BEM (`bui-field__error`, `bui-button--outline`) : le site surcharge parfois un élément de boilerplates-ui, dont les classes suivent ce format.
 - `stylelint` : `no-descending-specificity` désactivée. Avec l'imbrication et les couches de cascade, la règle signale des sélecteurs sans lien entre eux (lien du footer et lien du fil d'Ariane, état `:active` et `:disabled`) : l'ordre est géré par `@layer`.
 
 ## Pièges connus

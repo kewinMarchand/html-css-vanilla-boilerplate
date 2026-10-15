@@ -131,6 +131,36 @@
 }
 
 @layer base {
+  /* Champs non convertis en bui-field (recherche, tri) : sous la couche bui, qui l'emporte sur les champs de la bibliothèque. */
+  input:not([type='checkbox'], [type='radio']),
+  textarea {
+    inline-size: 100%;
+    min-block-size: var(--tap-target);
+    padding: var(--space-xs) var(--space-s);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius);
+
+    &[aria-invalid='true'] {
+      border-color: var(--color-danger);
+      border-width: 2px;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  select {
+    min-block-size: var(--tap-target);
+    padding-inline: var(--space-s);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius);
+  }
+
   body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
@@ -1543,51 +1573,9 @@
     font-weight: 700;
   }
 
-  .form-hint {
-    color: var(--color-text-muted);
-  }
-
-  .field {
-    display: grid;
-    gap: var(--space-2xs);
-
-    & label {
-      font-weight: 600;
-    }
-
-    &:has([aria-invalid='true']) label {
-      color: var(--color-danger);
-    }
-  }
-
-  input,
-  textarea {
-    inline-size: 100%;
-    min-block-size: var(--tap-target);
-    padding: var(--space-xs) var(--space-s);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius);
-
-    &[aria-invalid='true'] {
-      border-color: var(--color-danger);
-      border-width: 2px;
-    }
-  }
-
-  textarea {
-    resize: vertical;
-  }
-
-  .field-error {
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    color: var(--color-danger);
-
-    &:empty {
-      display: none;
-    }
+  /* Champs, cases, boutons radio et interrupteur : composants bui-* de boilerplates-ui. */
+  .bui-field__error:empty {
+    display: none;
   }
 
   .form-status:empty {
@@ -1608,71 +1596,6 @@
 
     & address {
       font-style: normal;
-    }
-  }
-
-  select {
-    min-block-size: var(--tap-target);
-    padding-inline: var(--space-s);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius);
-  }
-
-  .field-help {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
-  }
-
-  .check,
-  .switch {
-    display: flex;
-    gap: var(--space-xs);
-    align-items: center;
-    min-block-size: var(--tap-target);
-
-    & input {
-      inline-size: 20px;
-      min-block-size: 20px;
-      margin: 0;
-      accent-color: var(--color-primary);
-    }
-
-    & input:disabled + label {
-      color: var(--color-text-muted);
-    }
-  }
-
-  .switch input {
-    position: relative;
-    inline-size: 44px;
-    block-size: 24px;
-    min-block-size: 24px;
-    appearance: none;
-    cursor: pointer;
-    background-color: var(--color-border-strong);
-    border-radius: var(--radius-pill);
-    transition: background-color var(--duration);
-
-    &::before {
-      position: absolute;
-      inset-block-start: 3px;
-      inset-inline-start: 3px;
-      inline-size: 18px;
-      block-size: 18px;
-      content: '';
-      background-color: var(--color-bg);
-      border-radius: 50%;
-      transition: translate var(--duration);
-    }
-
-    &:checked {
-      background-color: var(--color-primary);
-
-      &::before {
-        translate: 20px 0;
-      }
     }
   }
 }

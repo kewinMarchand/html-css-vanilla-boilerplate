@@ -121,12 +121,14 @@
         </noscript>
         <div class="contact-layout">
           <form class="contact-form" method="post" data-contact-form data-testid="contact-form">
-            <p class="form-hint">Tous les champs sont obligatoires.</p>
             <fieldset>
               <legend>Vos coordonnées</legend>
-              <div class="field">
-                <label for="contact-name">Nom</label>
+              <div class="bui-field">
+                <label class="bui-field__label" for="contact-name"
+                  >Nom<span class="bui-field__required"> (obligatoire)</span></label
+                >
                 <input
+                  class="bui-field__input"
                   id="contact-name"
                   name="name"
                   type="text"
@@ -136,11 +138,18 @@
                   aria-describedby="contact-name-error"
                   data-testid="contact-name"
                 />
-                <p class="field-error" id="contact-name-error" data-testid="contact-name-error"></p>
+                <p
+                  class="bui-field__error"
+                  id="contact-name-error"
+                  data-testid="contact-name-error"
+                ></p>
               </div>
-              <div class="field">
-                <label for="contact-email">E-mail</label>
+              <div class="bui-field">
+                <label class="bui-field__label" for="contact-email"
+                  >E-mail<span class="bui-field__required"> (obligatoire)</span></label
+                >
                 <input
+                  class="bui-field__input"
                   id="contact-email"
                   name="email"
                   type="email"
@@ -150,7 +159,7 @@
                   data-testid="contact-email"
                 />
                 <p
-                  class="field-error"
+                  class="bui-field__error"
                   id="contact-email-error"
                   data-testid="contact-email-error"
                 ></p>
@@ -158,9 +167,12 @@
             </fieldset>
             <fieldset>
               <legend>Votre demande</legend>
-              <div class="field">
-                <label for="contact-message">Message</label>
+              <div class="bui-field">
+                <label class="bui-field__label" for="contact-message"
+                  >Message<span class="bui-field__required"> (obligatoire)</span></label
+                >
                 <textarea
+                  class="bui-field__input bui-field__input--multiline"
                   id="contact-message"
                   name="message"
                   rows="5"
@@ -170,7 +182,7 @@
                   data-testid="contact-message"
                 ></textarea>
                 <p
-                  class="field-error"
+                  class="bui-field__error"
                   id="contact-message-error"
                   data-testid="contact-message-error"
                 ></p>

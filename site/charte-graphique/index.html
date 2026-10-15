@@ -256,14 +256,21 @@
         <section aria-labelledby="sg-forms" data-testid="styleguide-forms">
           <h2 id="sg-forms">Formulaires</h2>
           <form class="sg-form" action="#" method="get">
-            <div class="field">
-              <label for="sg-text">Champ texte</label
-              ><input id="sg-text" name="texte" type="text" aria-describedby="sg-text-help" />
-              <p class="field-help" id="sg-text-help">Aide : 2 caractères minimum.</p>
-            </div>
-            <div class="field">
-              <label for="sg-email">E-mail</label
+            <div class="bui-field">
+              <label class="bui-field__label" for="sg-text">Champ texte</label
               ><input
+                class="bui-field__input"
+                id="sg-text"
+                name="texte"
+                type="text"
+                aria-describedby="sg-text-help"
+              />
+              <p class="bui-field__hint" id="sg-text-help">Aide : 2 caractères minimum.</p>
+            </div>
+            <div class="bui-field">
+              <label class="bui-field__label" for="sg-email">E-mail</label
+              ><input
+                class="bui-field__input"
                 id="sg-email"
                 name="email"
                 type="email"
@@ -272,17 +279,25 @@
                 aria-describedby="sg-email-error"
                 value="ada"
               />
-              <p class="field-error" id="sg-email-error">
+              <p class="bui-field__error" id="sg-email-error">
                 Indiquez une adresse e-mail valide, par exemple nom@domaine.fr.
               </p>
             </div>
-            <div class="field">
-              <label for="sg-number">Nombre</label
-              ><input id="sg-number" name="nombre" type="number" inputmode="numeric" min="0" />
-            </div>
-            <div class="field">
-              <label for="sg-disabled">Champ désactivé</label
+            <div class="bui-field">
+              <label class="bui-field__label" for="sg-number">Nombre</label
               ><input
+                class="bui-field__input"
+                id="sg-number"
+                name="nombre"
+                type="number"
+                inputmode="numeric"
+                min="0"
+              />
+            </div>
+            <div class="bui-field">
+              <label class="bui-field__label" for="sg-disabled">Champ désactivé</label
+              ><input
+                class="bui-field__input"
                 id="sg-disabled"
                 name="desactive"
                 type="text"
@@ -290,38 +305,58 @@
                 value="Non modifiable"
               />
             </div>
-            <div class="field">
-              <label for="sg-textarea">Zone de texte</label
-              ><textarea id="sg-textarea" name="message" rows="3"></textarea>
+            <div class="bui-field">
+              <label class="bui-field__label" for="sg-textarea">Zone de texte</label
+              ><textarea
+                class="bui-field__input bui-field__input--multiline"
+                id="sg-textarea"
+                name="message"
+                rows="3"
+              ></textarea>
             </div>
-            <div class="field">
-              <label for="sg-select">Liste</label
-              ><select id="sg-select" name="liste">
-                <option>Soleil</option>
-                <option>Mi-ombre</option>
-                <option>Ombre</option>
-              </select>
+            <div class="bui-field">
+              <label class="bui-field__label" for="sg-select">Liste</label>
+              <div class="bui-select">
+                <select class="bui-field__input bui-select__control" id="sg-select" name="liste">
+                  <option>Soleil</option>
+                  <option>Mi-ombre</option>
+                  <option>Ombre</option></select
+                ><svg class="bui-icon bui-select__icon" aria-hidden="true" focusable="false">
+                  <use href="/icons.svg#chevron-down"></use>
+                </svg>
+              </div>
             </div>
-            <div class="check">
-              <input type="checkbox" id="sg-check" name="case" /><label for="sg-check"
+            <div class="bui-checkbox">
+              <input class="bui-checkbox__input" type="checkbox" id="sg-check" name="case" /><label
+                class="bui-checkbox__label"
+                for="sg-check"
                 >Case à cocher</label
               >
             </div>
-            <div class="switch">
-              <input type="checkbox" role="switch" id="sg-switch" name="interrupteur" /><label
-                for="sg-switch"
-                >Interrupteur</label
-              >
+            <div class="bui-switch">
+              <input
+                class="bui-switch__input"
+                type="checkbox"
+                role="switch"
+                id="sg-switch"
+                name="interrupteur"
+              /><label for="sg-switch">Interrupteur</label>
             </div>
             <fieldset>
               <legend>Boutons radio</legend>
-              <div class="check">
-                <input type="radio" id="sg-radio-1" name="radio" checked /><label for="sg-radio-1"
-                  >Option A</label
-                >
+              <div class="bui-radio">
+                <input
+                  class="bui-radio__input"
+                  type="radio"
+                  id="sg-radio-1"
+                  name="radio"
+                  checked
+                /><label class="bui-radio__label" for="sg-radio-1">Option A</label>
               </div>
-              <div class="check">
-                <input type="radio" id="sg-radio-2" name="radio" /><label for="sg-radio-2"
+              <div class="bui-radio">
+                <input class="bui-radio__input" type="radio" id="sg-radio-2" name="radio" /><label
+                  class="bui-radio__label"
+                  for="sg-radio-2"
                   >Option B</label
                 >
               </div>
