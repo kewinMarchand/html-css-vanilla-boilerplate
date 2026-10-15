@@ -102,9 +102,19 @@
             </div>
           </div>
           <noscript
-            ><p class="alert alert-info">
-              Cette démo charge les tâches en JavaScript. Activez-le pour afficher la liste.
-            </p></noscript
+            ><div class="bui-alert bui-alert--info">
+              <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#info"></use>
+              </svg>
+              <div class="bui-alert__content">
+                <span class="bui-visually-hidden">Information :</span>
+                <div class="bui-alert__body">
+                  <p>
+                    Cette démo charge les tâches en JavaScript. Activez-le pour afficher la liste.
+                  </p>
+                </div>
+              </div>
+            </div></noscript
           >
         </div>
         <template id="tasks-loading-template">
@@ -116,22 +126,38 @@
           </div>
         </template>
         <template id="tasks-error-template">
-          <div class="alert alert-error" role="alert" data-testid="tasks-error">
-            <p data-tasks-error-message></p>
-            <button
-              type="button"
-              class="button button-secondary"
-              data-tasks-retry
-              data-testid="tasks-retry"
-            >
-              Réessayer
-            </button>
+          <div class="bui-alert bui-alert--error" role="alert" data-testid="tasks-error">
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#circle-alert"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Erreur :</span>
+              <div class="bui-alert__body"><p data-tasks-error-message></p></div>
+            </div>
+            <div class="bui-alert__action">
+              <button
+                type="button"
+                class="bui-button bui-button--outline"
+                data-tasks-retry
+                data-testid="tasks-retry"
+              >
+                Réessayer
+              </button>
+            </div>
           </div>
         </template>
         <template id="tasks-empty-template">
-          <p class="alert alert-info" data-testid="tasks-empty">
-            Aucune tâche pour l'instant. Tout est à jour.
-          </p>
+          <div class="bui-alert bui-alert--info" data-testid="tasks-empty">
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#info"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Information :</span>
+              <div class="bui-alert__body">
+                <p>Aucune tâche pour l'instant. Tout est à jour.</p>
+              </div>
+            </div>
+          </div>
         </template>
         <template id="tasks-list-template">
           <search class="tasks-search">
@@ -147,7 +173,20 @@
             <output for="tasks-filter" data-tasks-count data-testid="tasks-count"></output>
           </search>
           <ul class="task-list" data-tasks-list data-testid="tasks-list"></ul>
-          <p class="alert alert-info" data-tasks-no-match data-testid="tasks-no-match" hidden></p>
+          <div
+            class="bui-alert bui-alert--info"
+            data-tasks-no-match
+            data-testid="tasks-no-match"
+            hidden
+          >
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#info"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Information :</span>
+              <div class="bui-alert__body"><p data-tasks-no-match-message></p></div>
+            </div>
+          </div>
           <p class="tasks-progress">
             <label for="tasks-progress">Avancement</label>
             <progress

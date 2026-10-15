@@ -142,7 +142,11 @@ const renderLevel = () => {
     tabIndex: -1,
     textContent: level.label,
   })
-  const close = element('button', { type: 'button', className: 'icon-button' }, [iconNode('x')])
+  const close = element(
+    'button',
+    { type: 'button', className: 'bui-button bui-button--ghost bui-button--icon' },
+    [iconNode('x')],
+  )
   close.setAttribute('aria-label', 'Fermer le menu')
   close.addEventListener('click', () => mobileMenu.close())
 

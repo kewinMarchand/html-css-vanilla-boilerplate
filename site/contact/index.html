@@ -103,11 +103,21 @@
           </button>
         </p>
         <noscript>
-          <p class="alert alert-info" data-testid="contact-noscript">
-            Sans JavaScript, ce formulaire ne peut pas être envoyé : ce site n'a pas de serveur pour
-            le traiter. Écrivez-nous directement à
-            <a href="mailto:contact@example.com">contact@example.com</a>.
-          </p>
+          <div class="bui-alert bui-alert--info" data-testid="contact-noscript">
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#info"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Information :</span>
+              <div class="bui-alert__body">
+                <p>
+                  Sans JavaScript, ce formulaire ne peut pas être envoyé : ce site n'a pas de
+                  serveur pour le traiter. Écrivez-nous directement à
+                  <a href="mailto:contact@example.com">contact@example.com</a>.
+                </p>
+              </div>
+            </div>
+          </div>
         </noscript>
         <div class="contact-layout">
           <form class="contact-form" method="post" data-contact-form data-testid="contact-form">
@@ -166,9 +176,7 @@
                 ></p>
               </div>
             </fieldset>
-            <button type="submit" class="button button-primary" data-testid="contact-submit">
-              Envoyer
-            </button>
+            <button type="submit" class="bui-button" data-testid="contact-submit">Envoyer</button>
             <div class="form-status" aria-live="polite" data-contact-status></div>
           </form>
           <aside class="contact-aside" aria-labelledby="contact-aside-title">
@@ -181,14 +189,28 @@
           </aside>
         </div>
         <template id="contact-success-template">
-          <p class="alert alert-success" data-testid="contact-success">
-            Merci, votre message a bien été envoyé.
-          </p>
+          <div class="bui-alert bui-alert--success" data-testid="contact-success">
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#circle-check"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Succès :</span>
+              <div class="bui-alert__body"><p>Merci, votre message a bien été envoyé.</p></div>
+            </div>
+          </div>
         </template>
         <template id="contact-error-template">
-          <p class="alert alert-error" data-testid="contact-error">
-            L'envoi a échoué. Réessayez dans quelques instants.
-          </p>
+          <div class="bui-alert bui-alert--error" data-testid="contact-error">
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#circle-alert"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Erreur :</span>
+              <div class="bui-alert__body">
+                <p>L'envoi a échoué. Réessayez dans quelques instants.</p>
+              </div>
+            </div>
+          </div>
         </template>
         <dialog
           class="dialog"
@@ -203,7 +225,7 @@
           </p>
           <p><a href="/donnees-personnelles">Lire la politique de données personnelles</a></p>
           <form method="dialog">
-            <button type="submit" class="button button-primary" data-testid="contact-privacy-close">
+            <button type="submit" class="bui-button" data-testid="contact-privacy-close">
               Fermer
             </button>
           </form>

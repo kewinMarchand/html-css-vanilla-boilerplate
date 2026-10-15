@@ -43,7 +43,8 @@ const renderItems = (tasks, query) => {
   )
   state.querySelector('[data-tasks-count]').value = formatVisibleCount(visible.length, tasks.length)
   noMatch.hidden = visible.length > 0
-  noMatch.textContent = `Aucune tâche ne correspond à « ${query.trim()} ».`
+  noMatch.querySelector('[data-tasks-no-match-message]').textContent =
+    `Aucune tâche ne correspond à « ${query.trim()} ».`
 }
 
 const renderList = (tasks) => {

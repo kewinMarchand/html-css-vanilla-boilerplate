@@ -104,7 +104,7 @@ export const prerenderCatalogPage = (html, result) => {
       `$1${formatResultsCount(result.total)}`,
     )
     .replace(
-      /(data-testid="catalog-noscript">)[\s\S]*?(<\/p>)/,
+      /(data-testid="catalog-noscript">[\s\S]*?<div class="bui-alert__body"><p>)[\s\S]*?(<\/p>)/,
       "$1Sans JavaScript, seule la première page s'affiche, sans filtre ni tri.$2",
     )
     .replace('</head>', `${next}${jsonLd}</head>`)

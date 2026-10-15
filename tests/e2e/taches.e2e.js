@@ -59,7 +59,7 @@ test.describe('Tâches', () => {
 
     await page.getByTestId('tasks-filter').fill('zzz')
     await expect(page.getByTestId('tasks-item')).toHaveCount(0)
-    await expect(page.getByTestId('tasks-no-match')).toHaveText(
+    await expect(page.getByTestId('tasks-no-match')).toContainText(
       'Aucune tâche ne correspond à « zzz ».',
     )
   })

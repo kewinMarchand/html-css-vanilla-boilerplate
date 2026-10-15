@@ -226,26 +226,30 @@
         <section aria-labelledby="sg-buttons" data-testid="styleguide-buttons">
           <h2 id="sg-buttons">Boutons</h2>
           <p class="sg-row">
-            <button type="button" class="button button-primary">Défaut</button>
-            <button type="button" class="button button-primary is-hover">Survol</button>
-            <button type="button" class="button button-primary is-focus">Focus</button>
-            <button type="button" class="button button-primary is-active">Actif</button>
-            <button type="button" class="button button-primary" disabled>Désactivé</button>
-            <button type="button" class="button button-primary" aria-busy="true">Chargement</button>
+            <button type="button" class="bui-button">Défaut</button>
+            <button type="button" class="bui-button bui-is-hover">Survol</button>
+            <button type="button" class="bui-button bui-is-focus">Focus</button>
+            <button type="button" class="bui-button bui-is-active">Actif</button>
+            <button type="button" class="bui-button" disabled>Désactivé</button>
+            <button type="button" class="bui-button" aria-busy="true">Chargement</button>
           </p>
           <p class="sg-row">
-            <button type="button" class="button button-secondary">Défaut</button>
-            <button type="button" class="button button-secondary is-hover">Survol</button>
-            <button type="button" class="button button-secondary is-focus">Focus</button>
-            <button type="button" class="button button-secondary is-active">Actif</button>
-            <button type="button" class="button button-secondary" disabled>Désactivé</button>
-            <button type="button" class="button button-secondary" aria-busy="true">
+            <button type="button" class="bui-button bui-button--outline">Défaut</button>
+            <button type="button" class="bui-button bui-button--outline bui-is-hover">
+              Survol
+            </button>
+            <button type="button" class="bui-button bui-button--outline bui-is-focus">Focus</button>
+            <button type="button" class="bui-button bui-button--outline bui-is-active">
+              Actif
+            </button>
+            <button type="button" class="bui-button bui-button--outline" disabled>Désactivé</button>
+            <button type="button" class="bui-button bui-button--outline" aria-busy="true">
               Chargement
             </button>
           </p>
           <div class="sg-dark sg-row">
-            <a class="button button-light" href="/taches">Bouton plein clair</a>
-            <a class="button button-outline-light" href="/contact">Bouton contour clair</a>
+            <a class="bui-button button-light" href="/taches">Bouton plein clair</a>
+            <a class="bui-button button-outline-light" href="/contact">Bouton contour clair</a>
           </div>
         </section>
 
@@ -322,32 +326,84 @@
                 >
               </div>
             </fieldset>
-            <button type="submit" class="button button-primary">Valider</button>
+            <button type="submit" class="bui-button">Valider</button>
           </form>
         </section>
 
         <section aria-labelledby="sg-feedback" data-testid="styleguide-feedback">
           <h2 id="sg-feedback">Retours</h2>
           <div class="sg-stack">
-            <p class="alert alert-info">
-              Information : le catalogue est mis à jour chaque semaine.
-            </p>
-            <p class="alert alert-success">Succès : votre message a bien été envoyé.</p>
-            <p class="alert alert-warning">Avertissement : ce produit est bientôt en rupture.</p>
-            <p class="alert alert-error">Erreur : l'envoi a échoué.</p>
+            <div class="bui-alert bui-alert--info">
+              <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#info"></use>
+              </svg>
+              <div class="bui-alert__content">
+                <span class="bui-visually-hidden">Information :</span>
+                <div class="bui-alert__body">
+                  <p>le catalogue est mis à jour chaque semaine.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bui-alert bui-alert--success">
+              <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#circle-check"></use>
+              </svg>
+              <div class="bui-alert__content">
+                <span class="bui-visually-hidden">Succès :</span>
+                <div class="bui-alert__body"><p>votre message a bien été envoyé.</p></div>
+              </div>
+            </div>
+            <div class="bui-alert bui-alert--warning">
+              <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#triangle-alert"></use>
+              </svg>
+              <div class="bui-alert__content">
+                <span class="bui-visually-hidden">Attention :</span>
+                <div class="bui-alert__body"><p>ce produit est bientôt en rupture.</p></div>
+              </div>
+            </div>
+            <div class="bui-alert bui-alert--error">
+              <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#circle-alert"></use>
+              </svg>
+              <div class="bui-alert__content">
+                <span class="bui-visually-hidden">Erreur :</span>
+                <div class="bui-alert__body"><p>l'envoi a échoué.</p></div>
+              </div>
+            </div>
             <div class="skeleton-list">
               <span class="skeleton" aria-hidden="true"></span
               ><span class="skeleton" aria-hidden="true"></span>
             </div>
-            <p class="alert alert-info">Aucune tâche pour l'instant. Tout est à jour.</p>
-            <div class="alert alert-error">
-              <p>Impossible de charger les produits pour le moment.</p>
-              <button type="button" class="button button-secondary">
-                <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
-                  <use href="/icons.svg#rotate-cw"></use>
-                </svg>
-                Réessayer
-              </button>
+            <div class="bui-alert bui-alert--info">
+              <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#info"></use>
+              </svg>
+              <div class="bui-alert__content">
+                <span class="bui-visually-hidden">Information :</span>
+                <div class="bui-alert__body">
+                  <p>Aucune tâche pour l'instant. Tout est à jour.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bui-alert bui-alert--error">
+              <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#circle-alert"></use>
+              </svg>
+              <div class="bui-alert__content">
+                <span class="bui-visually-hidden">Erreur :</span>
+                <div class="bui-alert__body">
+                  <p>Impossible de charger les produits pour le moment.</p>
+                </div>
+              </div>
+              <div class="bui-alert__action">
+                <button type="button" class="bui-button bui-button--outline">
+                  <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+                    <use href="/icons.svg#rotate-cw"></use>
+                  </svg>
+                  Réessayer
+                </button>
+              </div>
             </div>
           </div>
         </section>

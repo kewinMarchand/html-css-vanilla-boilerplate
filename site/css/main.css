@@ -395,52 +395,17 @@
 
 /* Boutons */
 @layer components {
-  .button {
-    display: inline-flex;
-    gap: var(--space-xs);
-    align-items: center;
-    justify-content: center;
-    min-block-size: var(--tap-target);
-    padding-inline: var(--space-m);
-    font-weight: 600;
-    line-height: 1.2;
-    text-align: center;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-decoration-line: none;
-    cursor: pointer;
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius);
-    transition:
-      background-color var(--duration),
-      color var(--duration);
+  /* Boutons : composant bui-button de boilerplates-ui. Ici, ce qui est propre au site. */
+  .bui-button[aria-busy='true']::after {
+    inline-size: 1em;
+    block-size: 1em;
+    content: '';
+    border: 2px solid currentcolor;
+    border-inline-end-color: transparent;
+    border-radius: 50%;
 
-    &:active:not(:disabled),
-    &.is-active {
-      translate: 0 1px;
-    }
-
-    &.is-focus {
-      outline: var(--focus-width) solid var(--focus-color);
-      outline-offset: var(--focus-offset);
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.55;
-    }
-
-    &[aria-busy='true']::after {
-      inline-size: 1em;
-      block-size: 1em;
-      content: '';
-      border: 2px solid currentcolor;
-      border-inline-end-color: transparent;
-      border-radius: 50%;
-
-      @media (prefers-reduced-motion: no-preference) {
-        animation: button-spin 0.8s linear infinite;
-      }
+    @media (prefers-reduced-motion: no-preference) {
+      animation: button-spin 0.8s linear infinite;
     }
   }
 
@@ -450,29 +415,8 @@
     }
   }
 
-  a.button {
+  a.bui-button {
     text-decoration-line: var(--nav-link-decoration);
-  }
-
-  .button-primary {
-    color: var(--color-on-primary);
-    background-color: var(--color-primary);
-
-    &:hover:not(:disabled),
-    &.is-hover {
-      background-color: color-mix(in oklch, var(--color-primary) 82%, var(--color-text));
-      border-color: color-mix(in oklch, var(--color-primary) 82%, var(--color-text));
-    }
-  }
-
-  .button-secondary {
-    color: var(--color-primary);
-    background-color: var(--color-bg);
-
-    &:hover:not(:disabled),
-    &.is-hover {
-      background-color: color-mix(in oklch, var(--color-primary) 10%, var(--color-bg));
-    }
   }
 
   .a11y-toggle[aria-pressed='true'] {
@@ -702,22 +646,9 @@
     padding: var(--space-s) var(--space-m);
     border-block-start: 1px solid var(--color-border);
 
-    & .button {
+    & .bui-button {
       inline-size: 100%;
     }
-  }
-
-  .icon-button {
-    display: inline-grid;
-    place-items: center;
-    inline-size: var(--tap-target);
-    block-size: var(--tap-target);
-    padding: 0;
-    color: var(--color-text);
-    cursor: pointer;
-    background: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
   }
 
   .mobile-menu-list {
@@ -1201,41 +1132,6 @@
       gap: var(--space-2xs);
       justify-items: center;
     }
-  }
-}
-
-/* Alertes */
-@layer components {
-  .alert {
-    --alert-color: var(--color-info);
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-s);
-    align-items: center;
-    justify-content: space-between;
-    max-inline-size: none;
-    padding: var(--space-s) var(--space-m);
-    background-color: color-mix(in oklch, var(--alert-color) 8%, var(--color-bg));
-    border: 1px solid var(--alert-color);
-    border-inline-start-width: 6px;
-    border-radius: var(--radius);
-
-    & > p {
-      margin: 0;
-    }
-  }
-
-  .alert-error {
-    --alert-color: var(--color-danger);
-  }
-
-  .alert-success {
-    --alert-color: var(--color-success);
-  }
-
-  .alert-warning {
-    --alert-color: var(--color-warning);
   }
 }
 

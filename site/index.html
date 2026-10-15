@@ -112,10 +112,13 @@
             pour la validation, les tests end-to-end et l'accessibilité.
           </p>
           <p class="hero-actions">
-            <a class="button button-light" href="/taches" data-testid="home-tasks-link"
+            <a class="bui-button button-light" href="/taches" data-testid="home-tasks-link"
               >Voir la démo des tâches</a
             >
-            <a class="button button-outline-light" href="/contact" data-testid="home-contact-link"
+            <a
+              class="bui-button button-outline-light"
+              href="/contact"
+              data-testid="home-contact-link"
               >Voir le formulaire</a
             >
           </p>
@@ -133,7 +136,7 @@
           <div class="carousel-controls" data-carousel-controls>
             <button
               type="button"
-              class="button button-secondary"
+              class="bui-button bui-button--outline"
               aria-controls="carousel-track"
               data-carousel-prev
               data-testid="carousel-prev"
@@ -146,7 +149,7 @@
             </button>
             <button
               type="button"
-              class="button button-secondary"
+              class="bui-button bui-button--outline"
               aria-controls="carousel-track"
               data-carousel-next
               data-testid="carousel-next"
@@ -375,9 +378,19 @@
           </div>
         </div>
         <noscript>
-          <p class="alert alert-info" data-testid="home-blog-noscript">
-            Les articles sont lus dans l'API par JavaScript. Activez-le pour les afficher.
-          </p>
+          <div class="bui-alert bui-alert--info" data-testid="home-blog-noscript">
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#info"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Information :</span>
+              <div class="bui-alert__body">
+                <p>
+                  Les articles sont lus dans l'API par JavaScript. Activez-le pour les afficher.
+                </p>
+              </div>
+            </div>
+          </div>
         </noscript>
         <div class="blog-grid" data-blog-grid></div>
         <template id="blog-card-template">
@@ -411,16 +424,24 @@
           </article>
         </template>
         <template id="blog-error-template">
-          <div class="alert alert-error" role="alert" data-testid="home-blog-error">
-            <p data-blog-error-message></p>
-            <button
-              type="button"
-              class="button button-secondary"
-              data-blog-retry
-              data-testid="home-blog-retry"
-            >
-              Réessayer
-            </button>
+          <div class="bui-alert bui-alert--error" role="alert" data-testid="home-blog-error">
+            <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
+              <use href="/icons.svg#circle-alert"></use>
+            </svg>
+            <div class="bui-alert__content">
+              <span class="bui-visually-hidden">Erreur :</span>
+              <div class="bui-alert__body"><p data-blog-error-message></p></div>
+            </div>
+            <div class="bui-alert__action">
+              <button
+                type="button"
+                class="bui-button bui-button--outline"
+                data-blog-retry
+                data-testid="home-blog-retry"
+              >
+                Réessayer
+              </button>
+            </div>
           </div>
         </template>
         <template id="blog-empty-template">
