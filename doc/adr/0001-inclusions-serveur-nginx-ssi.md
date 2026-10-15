@@ -1,7 +1,7 @@
 # 0001 — Header et footer partagés par inclusions côté serveur (SSI)
 
 - **Statut** : Acceptée
-- **Date** : 2026-10-12
+- **Introduite par** : commit `052c63d`
 - **Décideurs** : Kewin Marchand
 
 ## Contexte

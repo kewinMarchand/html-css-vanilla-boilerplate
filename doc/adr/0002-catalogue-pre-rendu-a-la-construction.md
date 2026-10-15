@@ -1,7 +1,7 @@
 # 0002 — Catalogue pré-rendu à la construction de l'image
 
 - **Statut** : Acceptée
-- **Date** : 2026-10-14
+- **Introduite par** : commit `84fe494`
 - **Décideurs** : Kewin Marchand
 - **Complète** : ADR 0001, sur un point de son contexte (« aucune étape de build »). Les inclusions côté serveur ne changent pas.
 
