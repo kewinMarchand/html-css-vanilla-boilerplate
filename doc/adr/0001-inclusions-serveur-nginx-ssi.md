@@ -6,9 +6,9 @@
 
 ## Contexte
 
-Le site est en HTML, CSS et JavaScript natifs, sans framework ni étape de build. Jusqu'ici, `site/` était servi tel quel, et chacune des 27 pages contenait sa propre copie du lien d'évitement, du header (logo, navigation, menu de catégories en trois niveaux, boutons Menu et mode renforcé) et du footer. Soit environ 270 lignes recopiées par page.
+Le site est en HTML, CSS et JavaScript natifs, sans framework ni étape de build. Servi tel quel, `site/` impose à chacune des 27 pages sa propre copie du lien d'évitement, du header (logo, navigation, menu de catégories en trois niveaux, boutons Menu et mode renforcé) et du footer. Soit environ 270 lignes recopiées par page.
 
-Un test unitaire vérifiait que ces copies restaient identiques à l'état `aria-current` près, mais toute modification du header imposait de toucher les 27 fichiers, et la dernière (header mobile compact) en a modifié 27 d'un coup. Le coût grandit avec chaque page et chaque évolution du layout.
+Un test unitaire peut vérifier que ces copies restent identiques à l'état `aria-current` près, mais toute modification du header impose de toucher les 27 fichiers (le header mobile compact, par exemple, en modifie 27 d'un coup). Le coût grandit avec chaque page et chaque évolution du layout.
 
 Les contraintes restent les mêmes : aucune étape de build, aucune dépendance d'exécution ajoutée, le même HTML servi, et une CSP sans `unsafe-inline`. La production tourne déjà sur nginx, qui sait faire des inclusions côté serveur (module `ngx_http_ssi_module`, compilé dans l'image officielle).
 
@@ -38,7 +38,7 @@ On sert le site par nginx avec les inclusions côté serveur, toujours sans buil
   - le HTML servi est identique à celui d'avant, aux commentaires SSI près, en développement comme en production (diff normalisé sur toutes les pages) ;
   - aucune dépendance ajoutée, la CSP est inchangée, et le site reste lisible et servable sans build.
 - **Négatives / coûts** :
-  - `site/` n'est plus servi tel quel : un serveur statique sans SSI (ouverture directe du fichier, hébergement purement statique) afficherait des pages sans header ni footer. L'hébergement doit savoir faire des SSI (nginx, Apache) ;
+  - `site/` n'est pas servi tel quel : un serveur statique sans SSI (ouverture directe du fichier, hébergement purement statique) afficherait des pages sans header ni footer. L'hébergement doit savoir faire des SSI (nginx, Apache) ;
   - le serveur de développement maintient sa propre implémentation du sous-ensemble utilisé, qu'il faut faire évoluer si une nouvelle directive est employée (elle échoue explicitement sinon) ;
   - nginx retire les `Content-Length`, `Last-Modified` et `ETag` des pages traitées, donc plus de réponse 304 sur le HTML. Les feuilles de style, scripts et images ne sont pas concernés ;
   - les lignes des directives laissent des espaces en fin de ligne dans le HTML servi, d'où la règle html-validate `no-trailing-whitespace` coupée sur le rendu (les sources restent contrôlées par Prettier).
