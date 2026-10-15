@@ -1,4 +1,4 @@
-import { cpSync, readFileSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
 const SENTRY_VERSION = '11.6.0'
@@ -26,3 +26,7 @@ writeFileSync(
   'site/vendor/boilerplates-ui.css',
   `@layer bui {\n${readFileSync(join(UI, 'packages/tokens/generated/tokens.css'), 'utf8')}\n${inlineImports('packages/css/index.css')}\n}\n`,
 )
+
+// Comportements JavaScript de boilerplates-ui (modale, menu, onglets…), chargés par le seul wrapper du socle
+mkdirSync('site/vendor/boilerplates-ui', { recursive: true })
+cpSync(join(UI, 'packages/vanilla/src'), 'site/vendor/boilerplates-ui', { recursive: true })

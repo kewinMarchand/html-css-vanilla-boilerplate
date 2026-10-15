@@ -72,6 +72,11 @@ const VIOLATIONS = [
     source: "import '/vendor/embla-carousel.esm.js'\n",
   },
   {
+    rule: 'boilerplates-ui-hors-wrapper',
+    file: 'site/js/shared/archSelftestViolation.js',
+    source: "import '/vendor/boilerplates-ui/modal.js'\n",
+  },
+  {
     rule: 'outillage-vers-interface',
     file: 'lib/archSelftestViolation.js',
     source: "import '../site/js/modules/arch-selftest-a/ui/fixture.js'\n",

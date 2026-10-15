@@ -607,54 +607,9 @@
     }
   }
 
-  .drawer {
-    inline-size: min(400px, 100%);
-    max-inline-size: 100%;
-    block-size: 100dvh;
-    max-block-size: 100dvh;
-    padding: 0;
-    margin: 0 0 0 auto;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    border: 0;
-    border-inline-start: 1px solid var(--color-border);
-
-    &[open] {
-      display: flex;
-      flex-direction: column;
-    }
-
-    &::backdrop {
-      background-color: var(--color-backdrop);
-    }
-  }
-
-  .drawer-header {
-    display: flex;
-    gap: var(--space-s);
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--space-s) var(--space-m);
-    border-block-end: 1px solid var(--color-border);
-
-    & h2 {
-      font-size: var(--font-size-h3);
-    }
-  }
-
-  .drawer-body {
-    flex-grow: 1;
-    padding: var(--space-m);
-    overflow-y: auto;
-  }
-
-  .drawer-footer {
-    padding: var(--space-s) var(--space-m);
-    border-block-start: 1px solid var(--color-border);
-
-    & .bui-button {
-      inline-size: 100%;
-    }
+  /* Tiroirs et modales : composant bui-modal de boilerplates-ui. Ici, le bouton du pied en pleine largeur. */
+  .bui-modal--drawer .bui-modal__footer .bui-button {
+    inline-size: 100%;
   }
 
   .mobile-menu-list {
@@ -1506,39 +1461,6 @@
 
     & address {
       font-style: normal;
-    }
-  }
-}
-
-/* Modale */
-@layer components {
-  .dialog {
-    max-inline-size: min(560px, calc(100% - 2 * var(--space-m)));
-    padding: var(--space-l);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-
-    & > * + * {
-      margin-block-start: var(--space-m);
-    }
-
-    &::backdrop {
-      background-color: var(--color-backdrop);
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      &[open] {
-        animation: dialog-in var(--duration) ease-out;
-      }
-    }
-  }
-
-  @keyframes dialog-in {
-    from {
-      opacity: 0;
-      translate: 0 8px;
     }
   }
 }

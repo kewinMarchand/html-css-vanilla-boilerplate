@@ -142,15 +142,13 @@ const renderLevel = () => {
     tabIndex: -1,
     textContent: level.label,
   })
-  const close = element(
-    'button',
-    { type: 'button', className: 'bui-button bui-button--ghost bui-button--icon' },
-    [iconNode('x')],
-  )
+  const close = element('button', { type: 'button', className: 'bui-modal__close' }, [
+    iconNode('x'),
+  ])
   close.setAttribute('aria-label', 'Fermer le menu')
   close.addEventListener('click', () => mobileMenu.close())
 
-  const body = element('div', { className: 'drawer-body' })
+  const body = element('div', { className: 'bui-modal__body' })
   if (parent) {
     const back = element('button', { type: 'button', className: 'mobile-menu-back' }, [
       iconNode('chevron-left'),
@@ -191,7 +189,7 @@ const renderLevel = () => {
   body.append(list)
 
   mobileMenu.setAttribute('aria-labelledby', 'mobile-menu-title')
-  mobileMenu.replaceChildren(element('div', { className: 'drawer-header' }, [close]), body)
+  mobileMenu.replaceChildren(element('div', { className: 'bui-modal__header' }, [close]), body)
   title.focus()
 }
 

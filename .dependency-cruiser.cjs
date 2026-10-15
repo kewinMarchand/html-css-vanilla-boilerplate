@@ -87,6 +87,14 @@ module.exports = {
       to: { path: '^site/vendor/embla-carousel' },
     },
     {
+      name: 'boilerplates-ui-hors-wrapper',
+      comment:
+        'Les comportements de boilerplates-ui ne sont importés que par leur wrapper, shared/modals.js.',
+      severity: 'error',
+      from: { pathNot: '^site/js/shared/modals\\.js$' },
+      to: { path: '^site/vendor/boilerplates-ui/' },
+    },
+    {
       name: 'outillage-vers-interface',
       comment:
         'L’outillage de test lit le domaine et les données des modules, jamais leur interface.',

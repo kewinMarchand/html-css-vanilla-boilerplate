@@ -55,7 +55,7 @@
     <script type="module" src="/js/shared/a11yModeToggle.js"></script>
     <script type="module" src="/js/shared/categoryMenu.js"></script>
     <script type="module" src="/js/modules/contact/ui/contactForm.js"></script>
-    <script type="module" src="/js/shared/dialog.js"></script>
+    <script type="module" src="/js/shared/modals.js"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -98,7 +98,7 @@
             class="link-button"
             aria-haspopup="dialog"
             aria-controls="privacy-dialog"
-            data-dialog-open="privacy-dialog"
+            data-bui-modal-open="privacy-dialog"
             data-testid="contact-privacy-open"
           >
             Comment vos données sont-elles utilisées ?
@@ -227,22 +227,37 @@
           </div>
         </template>
         <dialog
-          class="dialog"
+          class="bui-modal"
           id="privacy-dialog"
           aria-labelledby="privacy-dialog-title"
           data-testid="contact-privacy-dialog"
         >
-          <h2 id="privacy-dialog-title">Utilisation de vos données</h2>
-          <p>
-            Votre nom, votre e-mail et votre message servent uniquement à répondre à votre demande.
-            Ils sont conservés trois ans au plus après notre dernier échange, puis supprimés.
-          </p>
-          <p><a href="/donnees-personnelles">Lire la politique de données personnelles</a></p>
-          <form method="dialog">
-            <button type="submit" class="bui-button" data-testid="contact-privacy-close">
+          <div class="bui-modal__header">
+            <h2 class="bui-modal__title" id="privacy-dialog-title">Utilisation de vos données</h2>
+            <button type="button" class="bui-modal__close" aria-label="Fermer" data-bui-modal-close>
+              <svg class="bui-icon" aria-hidden="true" focusable="false">
+                <use href="/icons.svg#x"></use>
+              </svg>
+            </button>
+          </div>
+          <div class="bui-modal__body">
+            <p>
+              Votre nom, votre e-mail et votre message servent uniquement à répondre à votre
+              demande. Ils sont conservés trois ans au plus après notre dernier échange, puis
+              supprimés.
+            </p>
+            <p><a href="/donnees-personnelles">Lire la politique de données personnelles</a></p>
+          </div>
+          <div class="bui-modal__footer">
+            <button
+              type="button"
+              class="bui-button"
+              data-bui-modal-close
+              data-testid="contact-privacy-close"
+            >
               Fermer
             </button>
-          </form>
+          </div>
         </dialog>
       </div>
     </main>

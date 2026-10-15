@@ -475,26 +475,26 @@
           </div>
         </div>
         <dialog
-          class="drawer"
+          class="bui-modal bui-modal--drawer"
           id="catalog-filters-dialog"
           aria-labelledby="catalog-filters-dialog-title"
           data-catalog-filters-dialog
         >
-          <div class="drawer-header">
-            <h2 id="catalog-filters-dialog-title">Filtres</h2>
+          <div class="bui-modal__header">
+            <h2 class="bui-modal__title" id="catalog-filters-dialog-title">Filtres</h2>
             <button
               type="button"
-              class="bui-button bui-button--ghost bui-button--icon"
+              class="bui-modal__close"
               aria-label="Fermer les filtres"
               data-catalog-dialog-close
             >
-              <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20">
+              <svg class="bui-icon" aria-hidden="true" focusable="false">
                 <use href="/icons.svg#x"></use>
               </svg>
             </button>
           </div>
-          <div class="drawer-body" data-catalog-dialog-body></div>
-          <div class="drawer-footer">
+          <div class="bui-modal__body" data-catalog-dialog-body></div>
+          <div class="bui-modal__footer">
             <button
               type="button"
               class="bui-button"
