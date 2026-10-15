@@ -112,9 +112,11 @@ const renderChips = () => {
   activeCount.textContent = filters.length ? `(${countActiveFilters(query)})` : ''
   chips.replaceChildren(
     ...filters.map((filter) => {
-      const button = element('button', { type: 'button', className: 'chip' }, [
-        element('span', { className: 'visually-hidden', textContent: 'Retirer le filtre : ' }),
+      // Balisage bui-chip de boilerplates-ui, puce de filtre retirable
+      const button = element('button', { type: 'button', className: 'bui-chip' }, [
+        element('span', { className: 'bui-visually-hidden', textContent: 'Retirer le filtre : ' }),
         filter.label,
+        icon('x'),
       ])
       button.dataset.testid = 'catalog-active-filter'
       button.addEventListener('click', () =>

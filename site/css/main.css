@@ -203,7 +203,8 @@
 
   main
     :where(p, li, dt, dd, td, th, figcaption, blockquote, address, summary):not(
-      :where(nav, form, dialog, .catalog-toolbar, .chip-list, .subcategory-links, .product-list) *
+      :where(nav, form, dialog, .catalog-toolbar, .bui-chip-list, .subcategory-links, .product-list)
+        *
     ) {
     line-height: var(--line-height);
     letter-spacing: var(--letter-spacing);
@@ -429,43 +430,6 @@
     color: var(--color-on-primary);
     background-color: var(--color-primary);
   }
-
-  .link-button {
-    display: inline;
-    text-align: start;
-    min-block-size: var(--tap-target);
-    padding: 0;
-    color: var(--color-primary);
-    text-decoration-line: underline;
-    text-underline-offset: 0.2em;
-    cursor: pointer;
-    background: none;
-    border: 0;
-  }
-
-  .button-light {
-    color: oklch(30% 0.17 264deg);
-    background-color: #fff;
-    border-color: #fff;
-
-    &:hover {
-      background-color: oklch(92% 0.03 264deg);
-    }
-  }
-
-  .button-outline-light {
-    color: #fff;
-    background-color: transparent;
-    border-color: #fff;
-
-    &:hover {
-      background-color: oklch(100% 0 0deg / 15%);
-    }
-  }
-
-  .hero :focus-visible {
-    outline-color: #fff;
-  }
 }
 
 /* Menu de catégories et panneaux latéraux */
@@ -658,36 +622,8 @@
 
 /* Catalogue */
 @layer components {
-  .subcategory-links,
-  .chip-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    padding: 0;
-    list-style: none;
-  }
-
   .subcategory-links {
     margin-block-end: var(--space-m);
-  }
-
-  .chip {
-    display: inline-flex;
-    gap: var(--space-2xs);
-    align-items: center;
-    min-block-size: var(--tap-target);
-    padding-inline: var(--space-s);
-    font: inherit;
-    color: var(--color-primary);
-    text-decoration-line: var(--nav-link-decoration);
-    cursor: pointer;
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-primary);
-    border-radius: var(--radius-pill);
-
-    &:hover {
-      background-color: color-mix(in oklch, var(--color-primary) 10%, var(--color-bg));
-    }
   }
 
   .catalog-layout {
