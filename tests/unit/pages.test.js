@@ -56,7 +56,7 @@ describe('pages statiques', () => {
           assert.equal(nav, undefined)
           return
         }
-        const labels = [...nav.matchAll(/<li>([\s\S]*?)<\/li>/g)].map(([, item]) => text(item))
+        const labels = [...nav.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)].map(([, item]) => text(item))
         assert.deepEqual(
           labels,
           trail.map((item) => item.label),

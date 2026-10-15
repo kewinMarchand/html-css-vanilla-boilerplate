@@ -99,12 +99,18 @@
     <!--# include virtual="/partials/header.html" -->
     <main id="main">
       <div class="container page catalog" data-catalog data-category="arbustes-a-fleurs">
-        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
-          <ol>
-            <li><a href="/">Accueil</a></li>
-            <li><a href="/catalogue">Catalogue</a></li>
-            <li><a href="/catalogue/plantes-exterieur">Plantes d’extérieur</a></li>
-            <li><span aria-current="page">Arbustes à fleurs</span></li>
+        <nav class="bui-breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
+          <ol class="bui-breadcrumb__list">
+            <li class="bui-breadcrumb__item"><a class="bui-link" href="/">Accueil</a></li>
+            <li class="bui-breadcrumb__item">
+              <a class="bui-link" href="/catalogue">Catalogue</a>
+            </li>
+            <li class="bui-breadcrumb__item">
+              <a class="bui-link" href="/catalogue/plantes-exterieur">Plantes d’extérieur</a>
+            </li>
+            <li class="bui-breadcrumb__item">
+              <span class="bui-breadcrumb__current" aria-current="page">Arbustes à fleurs</span>
+            </li>
           </ol>
         </nav>
         <h1 id="catalog-title" tabindex="-1">Arbustes à fleurs</h1>
@@ -379,18 +385,18 @@
             <div class="catalog-state" data-catalog-state>
               <div class="product-skeletons" role="status" data-testid="catalog-loading">
                 <span class="visually-hidden">Chargement des produits…</span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
-                <span class="skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+                <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
               </div>
             </div>
             <noscript>
@@ -450,19 +456,21 @@
                         <dd data-product-size></dd>
                       </div>
                     </dl>
-                    <p class="badge" data-product-out-of-stock>Rupture de stock</p>
+                    <p data-product-out-of-stock>
+                      <span class="bui-badge bui-badge--error">Rupture de stock</span>
+                    </p>
                   </div>
                 </article>
               </li>
             </template>
             <nav
-              class="pagination"
+              class="bui-pagination"
               aria-label="Pagination"
               data-catalog-pagination
               data-testid="catalog-pagination"
               hidden
             >
-              <ul></ul>
+              <ul class="bui-pagination__list"></ul>
             </nav>
           </div>
         </div>
@@ -500,18 +508,18 @@
         <template id="catalog-loading-template">
           <div class="product-skeletons" role="status" data-testid="catalog-loading">
             <span class="visually-hidden">Chargement des produits…</span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
-            <span class="skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
+            <span class="bui-skeleton skeleton-card" aria-hidden="true"></span>
           </div>
         </template>
         <template id="catalog-error-template">

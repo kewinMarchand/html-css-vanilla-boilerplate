@@ -81,10 +81,12 @@
     <!--# include virtual="/partials/header.html" -->
     <main id="main">
       <div class="container page">
-        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
-          <ol>
-            <li><a href="/">Accueil</a></li>
-            <li><span aria-current="page">Tâches</span></li>
+        <nav class="bui-breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
+          <ol class="bui-breadcrumb__list">
+            <li class="bui-breadcrumb__item"><a class="bui-link" href="/">Accueil</a></li>
+            <li class="bui-breadcrumb__item">
+              <span class="bui-breadcrumb__current" aria-current="page">Tâches</span>
+            </li>
           </ol>
         </nav>
         <h1>Tâches</h1>
@@ -96,9 +98,9 @@
           <div class="tasks-state" data-tasks-state tabindex="-1">
             <div class="skeleton-list" role="status" data-testid="tasks-loading">
               <span class="visually-hidden">Chargement des tâches…</span>
-              <span class="skeleton" aria-hidden="true"></span>
-              <span class="skeleton" aria-hidden="true"></span>
-              <span class="skeleton" aria-hidden="true"></span>
+              <span class="bui-skeleton" aria-hidden="true"></span>
+              <span class="bui-skeleton" aria-hidden="true"></span>
+              <span class="bui-skeleton" aria-hidden="true"></span>
             </div>
           </div>
           <noscript
@@ -120,9 +122,9 @@
         <template id="tasks-loading-template">
           <div class="skeleton-list" role="status" data-testid="tasks-loading">
             <span class="visually-hidden">Chargement des tâches…</span>
-            <span class="skeleton" aria-hidden="true"></span>
-            <span class="skeleton" aria-hidden="true"></span>
-            <span class="skeleton" aria-hidden="true"></span>
+            <span class="bui-skeleton" aria-hidden="true"></span>
+            <span class="bui-skeleton" aria-hidden="true"></span>
+            <span class="bui-skeleton" aria-hidden="true"></span>
           </div>
         </template>
         <template id="tasks-error-template">

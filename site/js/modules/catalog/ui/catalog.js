@@ -125,11 +125,25 @@ const renderChips = () => {
   )
 }
 
-const pageItem = (page, label, rel) => {
-  const link = element('a', { className: 'pagination-link', href: urlFor({ ...query, page }) })
+const SVG_NS = 'http://www.w3.org/2000/svg'
+
+const icon = (name) => {
+  const svg = document.createElementNS(SVG_NS, 'svg')
+  svg.setAttribute('class', 'bui-icon')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.setAttribute('focusable', 'false')
+  const use = document.createElementNS(SVG_NS, 'use')
+  use.setAttribute('href', `/icons.svg#${name}`)
+  svg.append(use)
+  return svg
+}
+
+// Balisage bui-pagination de boilerplates-ui : flèches seulement quand elles mènent quelque part, page courante en lien
+const pageItem = (page, content, { rel, current = false } = {}) => {
+  const link = element('a', { className: 'bui-pagination__link', href: urlFor({ ...query, page }) })
   if (rel) link.rel = rel
-  if (typeof label === 'string') link.textContent = label
-  else link.append(...label)
+  if (current) link.setAttribute('aria-current', 'page')
+  link.append(...content)
   link.addEventListener('click', (event) => {
     event.preventDefault()
     navigate({ ...query, page }, { focusTitle: true })
@@ -137,34 +151,32 @@ const pageItem = (page, label, rel) => {
   return element('li', {}, [link])
 }
 
-const disabledItem = (label) => {
-  const span = element('span', { className: 'pagination-link', textContent: label })
-  span.setAttribute('aria-disabled', 'true')
-  return element('li', {}, [span])
-}
-
 const pageLabel = (page) => [
-  element('span', { className: 'visually-hidden', textContent: 'Page ' }),
+  element('span', { className: 'bui-visually-hidden', textContent: 'Page ' }),
   String(page),
 ]
+
+const arrowLabel = (text) =>
+  element('span', { className: 'bui-pagination__label', textContent: text })
 
 const renderPagination = (result) => {
   pagination.hidden = result.pageCount <= 1
   const { page, pageCount } = result
   pagination.querySelector('ul').replaceChildren(
-    page > 1 ? pageItem(page - 1, 'Précédent', 'prev') : disabledItem('Précédent'),
+    ...(page > 1
+      ? [pageItem(page - 1, [icon('chevron-left'), arrowLabel('Précédent')], { rel: 'prev' })]
+      : []),
     ...paginationWindow(page, pageCount).map((item) => {
       if (item === '…') {
-        const ellipsis = element('span', { textContent: '…' })
+        const ellipsis = element('li', { className: 'bui-pagination__ellipsis', textContent: '…' })
         ellipsis.setAttribute('aria-hidden', 'true')
-        return element('li', {}, [ellipsis])
+        return ellipsis
       }
-      if (item !== page) return pageItem(item, pageLabel(item))
-      const current = element('span', { className: 'pagination-link' }, pageLabel(item))
-      current.setAttribute('aria-current', 'page')
-      return element('li', {}, [current])
+      return pageItem(item, pageLabel(item), { current: item === page })
     }),
-    page < pageCount ? pageItem(page + 1, 'Suivant', 'next') : disabledItem('Suivant'),
+    ...(page < pageCount
+      ? [pageItem(page + 1, [arrowLabel('Suivant'), icon('chevron-right')], { rel: 'next' })]
+      : []),
   )
 }
 

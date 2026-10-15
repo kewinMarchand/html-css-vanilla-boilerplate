@@ -55,10 +55,12 @@
     <!--# include virtual="/partials/header.html" -->
     <main id="main">
       <div class="container page styleguide" data-styleguide>
-        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
-          <ol>
-            <li><a href="/">Accueil</a></li>
-            <li><span aria-current="page">Charte graphique</span></li>
+        <nav class="bui-breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
+          <ol class="bui-breadcrumb__list">
+            <li class="bui-breadcrumb__item"><a class="bui-link" href="/">Accueil</a></li>
+            <li class="bui-breadcrumb__item">
+              <span class="bui-breadcrumb__current" aria-current="page">Charte graphique</span>
+            </li>
           </ol>
         </nav>
         <h1>Charte graphique</h1>
@@ -407,8 +409,8 @@
               </div>
             </div>
             <div class="skeleton-list">
-              <span class="skeleton" aria-hidden="true"></span
-              ><span class="skeleton" aria-hidden="true"></span>
+              <span class="bui-skeleton" aria-hidden="true"></span
+              ><span class="bui-skeleton" aria-hidden="true"></span>
             </div>
             <div class="bui-alert bui-alert--info">
               <svg class="bui-icon bui-alert__icon" aria-hidden="true" focusable="false">
@@ -445,27 +447,37 @@
 
         <section aria-labelledby="sg-nav" data-testid="styleguide-navigation">
           <h2 id="sg-nav">Navigation</h2>
-          <nav class="breadcrumb" aria-label="Exemple de fil d'Ariane">
-            <ol>
-              <li><a href="/">Accueil</a></li>
-              <li><a href="/catalogue">Catalogue</a></li>
-              <li><span aria-current="page">Feuillages</span></li>
+          <nav class="bui-breadcrumb" aria-label="Exemple de fil d'Ariane">
+            <ol class="bui-breadcrumb__list">
+              <li class="bui-breadcrumb__item"><a class="bui-link" href="/">Accueil</a></li>
+              <li class="bui-breadcrumb__item">
+                <a class="bui-link" href="/catalogue">Catalogue</a>
+              </li>
+              <li class="bui-breadcrumb__item">
+                <span class="bui-breadcrumb__current" aria-current="page">Feuillages</span>
+              </li>
             </ol>
           </nav>
-          <nav class="pagination" aria-label="Exemple de pagination">
-            <ul>
-              <li><span class="pagination-link" aria-disabled="true">Précédent</span></li>
+          <nav class="bui-pagination" aria-label="Exemple de pagination">
+            <ul class="bui-pagination__list">
               <li>
-                <span class="pagination-link" aria-current="page"
-                  ><span class="visually-hidden">Page </span>1</span
+                <a class="bui-pagination__link" href="/catalogue" aria-current="page"
+                  ><span class="bui-visually-hidden">Page </span>1</a
                 >
               </li>
               <li>
-                <a class="pagination-link" href="/catalogue?page=2"
-                  ><span class="visually-hidden">Page </span>2</a
+                <a class="bui-pagination__link" href="/catalogue?page=2"
+                  ><span class="bui-visually-hidden">Page </span>2</a
                 >
               </li>
-              <li><a class="pagination-link" href="/catalogue?page=2" rel="next">Suivant</a></li>
+              <li class="bui-pagination__ellipsis" aria-hidden="true">…</li>
+              <li>
+                <a class="bui-pagination__link" href="/catalogue?page=2" rel="next"
+                  ><span class="bui-pagination__label">Suivant</span
+                  ><svg class="bui-icon" aria-hidden="true" focusable="false">
+                    <use href="/icons.svg#chevron-right"></use></svg
+                ></a>
+              </li>
             </ul>
           </nav>
           <ul class="chip-list">
@@ -495,7 +507,8 @@
               <h3>Carte de blog</h3>
               <p>Illustration, titre, extrait et date.</p>
               <footer class="blog-card-meta">
-                <span class="tag">Exemple</span><time datetime="2026-10-08">8 octobre 2026</time>
+                <span class="bui-badge">Exemple</span
+                ><time datetime="2026-10-08">8 octobre 2026</time>
               </footer>
             </article>
           </div>
@@ -582,7 +595,7 @@
                       <dd>L</dd>
                     </div>
                   </dl>
-                  <p class="badge">Rupture de stock</p>
+                  <p><span class="bui-badge bui-badge--error">Rupture de stock</span></p>
                 </div>
               </article>
             </li>

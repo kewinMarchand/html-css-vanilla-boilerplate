@@ -53,10 +53,14 @@
     <!--# include virtual="/partials/header.html" -->
     <main id="main">
       <div class="container page prose">
-        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
-          <ol>
-            <li><a href="/">Accueil</a></li>
-            <li><span aria-current="page">Envoi impossible sans JavaScript</span></li>
+        <nav class="bui-breadcrumb" aria-label="Fil d'Ariane" data-testid="layout-breadcrumb">
+          <ol class="bui-breadcrumb__list">
+            <li class="bui-breadcrumb__item"><a class="bui-link" href="/">Accueil</a></li>
+            <li class="bui-breadcrumb__item">
+              <span class="bui-breadcrumb__current" aria-current="page"
+                >Envoi impossible sans JavaScript</span
+              >
+            </li>
           </ol>
         </nav>
         <h1>Envoi impossible sans JavaScript</h1>
