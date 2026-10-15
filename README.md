@@ -179,7 +179,7 @@ site/                        racine servie par nginx, avec inclusions côté ser
       infrastructure/http/   lecture de l'API et traduction validée vers le domaine
       ui/                    point d'entrée chargé par la page, libellés, branchement au DOM
     views/styleguide/        charte graphique (développement seulement)
-    shared/                  socle : mode renforcé, menu de catégories, modale, latestOnly
+    shared/                  socle : mode renforcé, menu de catégories, modales (boilerplates-ui), latestOnly
       carousel/              seul fichier qui importe Embla
   vendor/                    Embla, copié par `yarn install` (non versionné)
   icons.svg                  sprite d'icônes Lucide, généré par `make icons`
